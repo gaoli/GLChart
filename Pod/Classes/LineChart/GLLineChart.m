@@ -80,13 +80,17 @@
             
             [self.layer addSublayer:fillLayer];
             
-            [pathLayer addAnimation:[self fillAnimationWithFromValue:(__bridge id)(pathFrom.CGPath) toValue:(__bridge id)(pathTo.CGPath)]
-                             forKey:@"path"];
-            [fillLayer addAnimation:[self fillAnimationWithFromValue:(__bridge id)(fillFrom.CGPath) toValue:(__bridge id)(fillTo.CGPath)]
-                             forKey:@"path"];
+            if (self.data.animated) {
+                [pathLayer addAnimation:[self fillAnimationWithFromValue:(__bridge id)(pathFrom.CGPath) toValue:(__bridge id)(pathTo.CGPath)]
+                                 forKey:@"path"];
+                [fillLayer addAnimation:[self fillAnimationWithFromValue:(__bridge id)(fillFrom.CGPath) toValue:(__bridge id)(fillTo.CGPath)]
+                                 forKey:@"path"];
+            }
         } else {
-            [pathLayer addAnimation:[self pathAnimationWithFromValue:@0 toValue:@1]
-                             forKey:@"path"];
+            if (self.data.animated) {
+                [pathLayer addAnimation:[self pathAnimationWithFromValue:@0 toValue:@1]
+                                 forKey:@"path"];
+            }
         }
     }
 }
@@ -125,7 +129,7 @@
 - (CABasicAnimation *)fillAnimationWithFromValue:(id)fromValue toValue:(id)toValue {
     CABasicAnimation *fillAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
     
-    fillAnimation.duration       = 0.5;
+    fillAnimation.duration       = self.data.duration;
     fillAnimation.fromValue      = fromValue;
     fillAnimation.toValue        = toValue;
     fillAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
@@ -136,7 +140,7 @@
 - (CABasicAnimation *)pathAnimationWithFromValue:(id)fromValue toValue:(id)toValue {
     CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
     
-    pathAnimation.duration       = 0.5;
+    pathAnimation.duration       = self.data.duration;
     pathAnimation.fromValue      = fromValue;
     pathAnimation.toValue        = toValue;
     pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];

@@ -21,6 +21,9 @@
         
         self.labelFontSize = 9.0f;
         self.labelColor    = @"#999999";
+        
+        self.animated      = YES;
+        self.duration      = 0.5;
     }
     
     return self;
