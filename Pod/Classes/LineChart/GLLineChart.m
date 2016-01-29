@@ -16,8 +16,6 @@
     
     if (self) {
         
-        // 添加子类视图
-        [self addSubview:self.gridView];
     }
     
     return self;
@@ -47,7 +45,7 @@
 }
 
 - (void)drawLineChart {
-    CGFloat scale = self.frame.size.height / (self.data.max - self.data.min);
+    CGFloat scale = (self.frame.size.height - self.data.margin * 2) / (self.data.max - self.data.min);
     
     for (NSDictionary *dict in self.data.yValues) {
         NSArray *value = dict[@"value"];
@@ -62,6 +60,7 @@
         UIBezierPath *pathTo    = [self getPathWithValue:value scale:scale close:NO];
         
         pathLayer.path        = pathTo.CGPath;
+        pathLayer.frame       = [self getFrameWithMargin:self.data.margin];
         pathLayer.fillColor   = nil;
         pathLayer.lineWidth   = self.data.lineWidth;
         pathLayer.strokeColor = color.CGColor;
@@ -74,6 +73,7 @@
             UIBezierPath *fillTo    = [self getPathWithValue:value scale:scale close:YES];
             
             fillLayer.path        = fillTo.CGPath;
+            fillLayer.frame       = [self getFrameWithMargin:self.data.margin];
             fillLayer.fillColor   = [color colorWithAlphaComponent:0.25f].CGColor;
             fillLayer.lineWidth   = 0.0f;
             fillLayer.strokeColor = color.CGColor;
@@ -95,9 +95,16 @@
     }
 }
 
+- (CGRect)getFrameWithMargin:(CGFloat)margin {
+    return CGRectMake(self.data.margin,
+                      self.data.margin,
+                      self.frame.size.width  - self.data.margin * 2,
+                      self.frame.size.height - self.data.margin * 2);
+}
+
 - (CGPoint)getPointWithValue:(NSArray *)value index:(NSUInteger)index scale:(CGFloat)scale {
-    CGFloat w = self.frame.size.width;
-    CGFloat h = self.frame.size.height;
+    CGFloat w = self.frame.size.width  - self.data.margin * 2;
+    CGFloat h = self.frame.size.height - self.data.margin * 2;
     CGFloat x = w / (value.count - 1) * index;
     CGFloat y = h - scale * [value[index] floatValue];
     
@@ -152,7 +159,7 @@
 
 - (GLGridView *)gridView {
     if (_gridView == nil) {
-        _gridView = [[GLGridView alloc] initWithFrame:self.bounds];
+        _gridView = [[GLGridView alloc] initWithFrame:[self getFrameWithMargin:self.data.margin]];
     }
     
     return _gridView;
@@ -163,6 +170,8 @@
     
     [self getValueRange];
     [self drawLineChart];
+    
+    [self addSubview:self.gridView];
     
     self.gridView.data = data;
 }

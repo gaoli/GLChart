@@ -12,6 +12,8 @@
         self.min           = 0.0f;
         self.max           = 0.0f;
         
+        self.margin        = 15.0f;
+        
         self.xStep         = 5;
         self.yStep         = 5;
         

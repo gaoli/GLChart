@@ -8,6 +8,8 @@
 @property (nonatomic, assign) CGFloat        min;
 @property (nonatomic, assign) CGFloat        max;
 
+@property (nonatomic, assign) CGFloat        margin;
+
 @property (nonatomic, assign) NSUInteger     xStep;
 @property (nonatomic, assign) NSUInteger     yStep;
 
