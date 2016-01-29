@@ -1,6 +1,6 @@
 #import "GLLineChart.h"
+#import "GLLineChartData.h"
 #import "UIColor+Helper.h"
-#import "GLChartData.h"
 #import "GLGridView.h"
 
 @interface GLLineChart ()
@@ -57,40 +57,91 @@
             continue;
         }
         
-        CAShapeLayer *lineLayer = [[CAShapeLayer alloc] init];
+        CAShapeLayer *pathLayer = [[CAShapeLayer alloc] init];
+        UIBezierPath *pathFrom  = [self getPathWithValue:value scale:0.0f  close:NO];
+        UIBezierPath *pathTo    = [self getPathWithValue:value scale:scale close:NO];
         
-        lineLayer.path        = [self getPathWithValue:value scale:scale close:YES].CGPath;
-        lineLayer.lineWidth   = self.data.lineWidth;
-        lineLayer.fillColor   = nil;
-        lineLayer.strokeColor = color.CGColor;
+        pathLayer.path        = pathTo.CGPath;
+        pathLayer.fillColor   = nil;
+        pathLayer.lineWidth   = self.data.lineWidth;
+        pathLayer.strokeColor = color.CGColor;
         
-        [self.layer addSublayer:lineLayer];
+        [self.layer addSublayer:pathLayer];
+        
+        if (self.data.isFill) {
+            CAShapeLayer *fillLayer = [[CAShapeLayer alloc] init];
+            UIBezierPath *fillFrom  = [self getPathWithValue:value scale:0.0f  close:YES];
+            UIBezierPath *fillTo    = [self getPathWithValue:value scale:scale close:YES];
+            
+            fillLayer.path        = fillTo.CGPath;
+            fillLayer.fillColor   = [color colorWithAlphaComponent:0.25f].CGColor;
+            fillLayer.lineWidth   = 0.0f;
+            fillLayer.strokeColor = color.CGColor;
+            
+            [self.layer addSublayer:fillLayer];
+            
+            [pathLayer addAnimation:[self fillAnimationWithFromValue:(__bridge id)(pathFrom.CGPath) toValue:(__bridge id)(pathTo.CGPath)]
+                             forKey:@"path"];
+            [fillLayer addAnimation:[self fillAnimationWithFromValue:(__bridge id)(fillFrom.CGPath) toValue:(__bridge id)(fillTo.CGPath)]
+                             forKey:@"path"];
+        } else {
+            [pathLayer addAnimation:[self pathAnimationWithFromValue:@0 toValue:@1]
+                             forKey:@"path"];
+        }
     }
+}
+
+- (CGPoint)getPointWithValue:(NSArray *)value index:(NSUInteger)index scale:(CGFloat)scale {
+    CGFloat w = self.frame.size.width;
+    CGFloat h = self.frame.size.height;
+    CGFloat x = w / (value.count - 1) * index;
+    CGFloat y = h - scale * [value[index] floatValue];
+    
+    return CGPointMake(x, y);
 }
 
 - (UIBezierPath *)getPathWithValue:(NSArray *)value scale:(CGFloat)scale close:(BOOL)close {
     UIBezierPath *path = [[UIBezierPath alloc] init];
     
-    CGFloat w = self.frame.size.width;
-    CGFloat h = self.frame.size.height;
-    
     for (int i = 0; i < value.count; i++) {
-        CGFloat x = w / (value.count - 1) * i;
-        CGFloat y = h - scale * [value[i] floatValue];
-        CGPoint p = {x, y};
+        CGPoint point = [self getPointWithValue:value index:i scale:scale];
         
         if (i == 0) {
-            [path moveToPoint:p];
+            [path moveToPoint:point];
         } else {
-            [path addLineToPoint:p];
+            [path addLineToPoint:point];
         }
     }
     
     if (close) {
-        
+        [path addLineToPoint:[self getPointWithValue:value index:value.count - 1 scale:0.0f]];
+        [path addLineToPoint:[self getPointWithValue:value index:0 scale:0.0f]];
+        [path addLineToPoint:[self getPointWithValue:value index:0 scale:scale]];
     }
     
     return path;
+}
+
+- (CABasicAnimation *)fillAnimationWithFromValue:(id)fromValue toValue:(id)toValue {
+    CABasicAnimation *fillAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
+    
+    fillAnimation.duration       = 0.5;
+    fillAnimation.fromValue      = fromValue;
+    fillAnimation.toValue        = toValue;
+    fillAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    
+    return fillAnimation;
+}
+
+- (CABasicAnimation *)pathAnimationWithFromValue:(id)fromValue toValue:(id)toValue {
+    CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+    
+    pathAnimation.duration       = 0.5;
+    pathAnimation.fromValue      = fromValue;
+    pathAnimation.toValue        = toValue;
+    pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    
+    return pathAnimation;
 }
 
 #pragma mark - getters and setters
@@ -103,7 +154,7 @@
     return _gridView;
 }
 
-- (void)setData:(GLChartData *)data {
+- (void)setData:(GLLineChartData *)data {
     _data = data;
     
     [self getValueRange];
