@@ -2,7 +2,7 @@
 
 @class GLChartData;
 
-@interface GLGridView : UIView
+@interface GLLineChart : UIView
 
 @property (nonatomic, strong) GLChartData *data;
 

@@ -1,4 +1,6 @@
 #import "GLGridView.h"
+#import "UIColor+Helper.h"
+#import "GLChartData.h"
 
 @interface GLGridView ()
 
@@ -12,16 +14,6 @@
     self = [super initWithFrame:frame];
     
     if (self) {
-        
-        // 设置默认参数
-        self.min        =  FLT_MAX;
-        self.max        = -FLT_MAX;
-        self.lineWidth  = 0.5f;
-        self.lineColor  = [UIColor lightGrayColor];
-        self.labelFont  = [UIFont systemFontOfSize:9.0f];
-        self.labelColor = [UIColor lightGrayColor];
-        
-        // 添加子类图层
         [self.layer addSublayer:self.gridLayer];
     }
     
@@ -30,52 +22,44 @@
 
 #pragma mark - private methods
 
-- (void)getYValueRange {
-    for (id item in self.data) {
-        CGFloat value = [item floatValue];
-        
-        if (self.min > value) {
-            self.min = value;
-        }
-        
-        if (self.max < value) {
-            self.max = value;
-        }
-    }
-}
-
 - (void)drawGrid {
     UIBezierPath *path = [[UIBezierPath alloc] init];
     
     CGFloat w = self.frame.size.width;
     CGFloat h = self.frame.size.height;
     
-    for (int i = 0; i <= self.step; i++) {
+    for (int i = 0; i <= self.data.yStep; i++) {
         CGFloat x = w;
-        CGFloat y = h / self.step * i;
+        CGFloat y = h / self.data.yStep * i;
         
         [path moveToPoint:CGPointMake(0.0f, y)];
         [path addLineToPoint:CGPointMake(x, y)];
     }
     
-    self.gridLayer.path = path.CGPath;
+    self.gridLayer.path        = path.CGPath;
+    self.gridLayer.lineWidth   = self.data.gridWidth;
+    self.gridLayer.strokeColor = [UIColor colorWithHexString:self.data.gridColor].CGColor;
+}
+
+- (void)drawXAxisLabel {
+    
 }
 
 - (void)drawYAxisLabel {
     CGFloat h = self.frame.size.height;
     
-    for (int i = 0; i < self.step; i++) {
+    for (int i = 0; i < self.data.yStep; i++) {
         UILabel *label = [[UILabel alloc] init];
         
-        CGFloat   value     = self.min + (self.max - self.min) / self.step * (self.step - i);
+        CGFloat   value     = self.data.min + (self.data.max - self.data.min) / self.data.yStep * (self.data.yStep - i);
         NSString *labelText = [[NSString alloc] initWithFormat:@"%.2f", value];
-        CGSize    labelSize = [labelText sizeWithAttributes:@{@"NSFontAttributeName": self.labelFont}];
-        CGRect    labelRect = {{0.0f, h / self.step * i}, labelSize};
+        CGSize    labelSize = [labelText sizeWithAttributes:@{@"NSFontAttributeName": [UIFont systemFontOfSize:self.data.labelFontSize]}];
+        CGRect    labelRect = {{0.0f, h / self.data.yStep * i}, labelSize};
         
         label.frame     = labelRect;
         label.text      = labelText;
-        label.font      = self.labelFont;
-        label.textColor = self.labelColor;
+        label.font      = [UIFont systemFontOfSize:self.data.labelFontSize];
+        label.textColor = [UIColor colorWithHexString:self.data.labelColor];
         
         [self addSubview:label];
     }
@@ -86,24 +70,16 @@
 - (CAShapeLayer *)gridLayer {
     if (_gridLayer == nil) {
         _gridLayer = [[CAShapeLayer alloc] init];
-        
-        _gridLayer.lineWidth   = self.lineWidth;
-        _gridLayer.strokeColor = self.lineColor.CGColor;
     }
     
     return _gridLayer;
 }
 
-- (void)setStep:(NSUInteger)step {
-    _step = step;
-    
-    [self drawGrid];
-}
-
-- (void)setData:(NSArray *)data {
+- (void)setData:(GLChartData *)data {
     _data = data;
     
-    [self getYValueRange];
+    [self drawGrid];
+    [self drawXAxisLabel];
     [self drawYAxisLabel];
 }
 
