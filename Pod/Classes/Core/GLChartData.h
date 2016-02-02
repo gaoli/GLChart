@@ -18,8 +18,9 @@
 @property (nonatomic,   copy) NSString      *gridColor;
 
 @property (nonatomic, assign) CGFloat        labelFontSize;
-@property (nonatomic,   copy) NSString      *labelColor;
+@property (nonatomic,   copy) NSString      *labelTextColor;
 
+@property (nonatomic, assign) BOOL           isFill;
 @property (nonatomic, assign) BOOL           animated;
 @property (nonatomic, assign) CFTimeInterval duration;
 

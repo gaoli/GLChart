@@ -1,11 +1,8 @@
 #import "GLLineChart.h"
-#import "GLLineChartData.h"
+#import "GLChartData.h"
 #import "UIColor+Helper.h"
-#import "GLGridView.h"
 
 @interface GLLineChart ()
-
-@property (nonatomic, strong) GLGridView *gridView;
 
 @end
 
@@ -23,8 +20,8 @@
 
 #pragma mark - private methods
 
-- (void)getValueRange {
-    for (NSDictionary *dict in self.data.yValues) {
+- (void)parseData {
+    for (NSDictionary *dict in self.chartData.yValues) {
         NSArray *value = dict[@"value"];
         UIColor *color = [UIColor colorWithHexString:dict[@"color"]];
         
@@ -33,21 +30,21 @@
         }
         
         for (NSNumber *item in value) {
-            if (self.data.min > item.floatValue) {
-                self.data.min = item.floatValue;
+            if (self.chartData.min > item.floatValue) {
+                self.chartData.min = item.floatValue;
             }
             
-            if (self.data.max < item.floatValue) {
-                self.data.max = item.floatValue;
+            if (self.chartData.max < item.floatValue) {
+                self.chartData.max = item.floatValue;
             }
         }
     }
 }
 
-- (void)drawLineChart {
-    CGFloat scale = (self.frame.size.height - self.data.margin * 2) / (self.data.max - self.data.min);
+- (void)drawChart {
+    CGFloat scale = self.chartView.contentSize.height / (self.chartData.max - self.chartData.min);
     
-    for (NSDictionary *dict in self.data.yValues) {
+    for (NSDictionary *dict in self.chartData.yValues) {
         NSArray *value = dict[@"value"];
         UIColor *color = [UIColor colorWithHexString:dict[@"color"]];
         
@@ -60,34 +57,32 @@
         UIBezierPath *pathTo    = [self getPathWithValue:value scale:scale close:NO];
         
         pathLayer.path        = pathTo.CGPath;
-        pathLayer.frame       = [self getFrameWithMargin:self.data.margin];
         pathLayer.fillColor   = nil;
-        pathLayer.lineWidth   = self.data.lineWidth;
+        pathLayer.lineWidth   = self.chartData.lineWidth;
         pathLayer.strokeColor = color.CGColor;
         
-        [self.layer addSublayer:pathLayer];
+        [self.chartView.layer addSublayer:pathLayer];
         
-        if (self.data.isFill) {
+        if (self.chartData.isFill) {
             CAShapeLayer *fillLayer = [[CAShapeLayer alloc] init];
             UIBezierPath *fillFrom  = [self getPathWithValue:value scale:0.0f  close:YES];
             UIBezierPath *fillTo    = [self getPathWithValue:value scale:scale close:YES];
             
             fillLayer.path        = fillTo.CGPath;
-            fillLayer.frame       = [self getFrameWithMargin:self.data.margin];
             fillLayer.fillColor   = [color colorWithAlphaComponent:0.25f].CGColor;
             fillLayer.lineWidth   = 0.0f;
             fillLayer.strokeColor = color.CGColor;
             
-            [self.layer addSublayer:fillLayer];
+            [self.chartView.layer addSublayer:fillLayer];
             
-            if (self.data.animated) {
+            if (self.chartData.animated) {
                 [pathLayer addAnimation:[self fillAnimationWithFromValue:(__bridge id)(pathFrom.CGPath) toValue:(__bridge id)(pathTo.CGPath)]
                                  forKey:@"path"];
                 [fillLayer addAnimation:[self fillAnimationWithFromValue:(__bridge id)(fillFrom.CGPath) toValue:(__bridge id)(fillTo.CGPath)]
                                  forKey:@"path"];
             }
         } else {
-            if (self.data.animated) {
+            if (self.chartData.animated) {
                 [pathLayer addAnimation:[self pathAnimationWithFromValue:@0 toValue:@1]
                                  forKey:@"path"];
             }
@@ -95,16 +90,9 @@
     }
 }
 
-- (CGRect)getFrameWithMargin:(CGFloat)margin {
-    return CGRectMake(self.data.margin,
-                      self.data.margin,
-                      self.frame.size.width  - self.data.margin * 2,
-                      self.frame.size.height - self.data.margin * 2);
-}
-
 - (CGPoint)getPointWithValue:(NSArray *)value index:(NSUInteger)index scale:(CGFloat)scale {
-    CGFloat w = self.frame.size.width  - self.data.margin * 2;
-    CGFloat h = self.frame.size.height - self.data.margin * 2;
+    CGFloat w = self.chartView.contentSize.width;
+    CGFloat h = self.chartView.contentSize.height;
     CGFloat x = w / (value.count - 1) * index;
     CGFloat y = h - scale * [value[index] floatValue];
     
@@ -136,7 +124,7 @@
 - (CABasicAnimation *)fillAnimationWithFromValue:(id)fromValue toValue:(id)toValue {
     CABasicAnimation *fillAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
     
-    fillAnimation.duration       = self.data.duration;
+    fillAnimation.duration       = self.chartData.duration;
     fillAnimation.fromValue      = fromValue;
     fillAnimation.toValue        = toValue;
     fillAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
@@ -147,33 +135,12 @@
 - (CABasicAnimation *)pathAnimationWithFromValue:(id)fromValue toValue:(id)toValue {
     CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
     
-    pathAnimation.duration       = self.data.duration;
+    pathAnimation.duration       = self.chartData.duration;
     pathAnimation.fromValue      = fromValue;
     pathAnimation.toValue        = toValue;
     pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     
     return pathAnimation;
-}
-
-#pragma mark - getters and setters
-
-- (GLGridView *)gridView {
-    if (_gridView == nil) {
-        _gridView = [[GLGridView alloc] initWithFrame:[self getFrameWithMargin:self.data.margin]];
-    }
-    
-    return _gridView;
-}
-
-- (void)setData:(GLLineChartData *)data {
-    _data = data;
-    
-    [self getValueRange];
-    [self drawLineChart];
-    
-    [self addSubview:self.gridView];
-    
-    self.gridView.data = data;
 }
 
 @end

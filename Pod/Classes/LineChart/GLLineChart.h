@@ -1,9 +1,5 @@
-#import <UIKit/UIKit.h>
+#import "GLChart.h"
 
-@class GLLineChartData;
-
-@interface GLLineChart : UIView
-
-@property (nonatomic, strong) GLLineChartData *data;
+@interface GLLineChart : GLChart
 
 @end
