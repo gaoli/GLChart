@@ -4,9 +4,10 @@
 
 @interface GLChart ()
 
-@property (nonatomic, strong) CAShapeLayer *gridLayer;
-@property (nonatomic, strong) UIView       *xAxisView;
-@property (nonatomic, strong) UIView       *yAxisView;
+@property (nonatomic, strong) CAShapeLayer   *gridLayer;
+@property (nonatomic, strong) UIScrollView   *container;
+@property (nonatomic, strong) NSMutableArray *xAxisLabels;
+@property (nonatomic, strong) NSMutableArray *yAxisLabels;
 
 @end
 
@@ -21,9 +22,7 @@
         [self.layer addSublayer:self.gridLayer];
         
         // 添加子类视图
-        [self addSubview:self.chartView];
-        [self addSubview:self.xAxisView];
-        [self addSubview:self.yAxisView];
+        [self addSubview:self.container];
     }
     
     return self;
@@ -38,7 +37,29 @@
 }
 
 - (void)drawChart {
+    CGFloat w = self.frame.size.width;
+    CGFloat h = self.frame.size.height;
     
+    CGFloat margin = self.chartData.margin;
+    
+    CGRect  gridLayerFrame = {{margin, margin}, {w - margin * 2, h - margin * 2}};
+    CGRect  containerFrame = {{margin, margin}, {w - margin * 2, h - margin}};
+    
+    self.gridLayer.frame = gridLayerFrame;
+    self.container.frame = containerFrame;
+    
+    if (self.chartData.xValues.count > self.chartData.xMaxVisibleRange) {
+        CGFloat scale = (CGFloat)self.chartData.xValues.count / (CGFloat)self.chartData.xMaxVisibleRange;
+        CGRect  frame = {{0.0f, 0.0f}, {(w - margin * 2) * scale, h - margin * 2}};
+        
+        self.chartView.frame       = frame;
+        self.container.contentSize = frame.size;
+    } else {
+        CGRect  frame = {{0.0f, 0.0f}, {w - margin * 2, h - margin * 2}};
+        
+        self.chartView.frame       = frame;
+        self.container.contentSize = frame.size;
+    }
 }
 
 - (void)drawGrid {
@@ -66,8 +87,8 @@
 }
 
 - (void)createXAxisLabels {
-    CGFloat     w = self.xAxisView.frame.size.width;
-    CGFloat     h = self.xAxisView.frame.size.height;
+    CGFloat     w = self.container.contentSize.width;
+    CGFloat     h = self.container.contentSize.height;
     
     NSUInteger  step   = self.chartData.xStep;
     NSArray    *values = self.chartData.xValues;
@@ -93,17 +114,18 @@
         label.textColor       = [UIColor colorWithHexString:labelTextColor];
         label.textAlignment   = NSTextAlignmentCenter;
         
-        [self.xAxisView addSubview:label];
+        [self.container addSubview:label];
     }
 }
 
 - (void)createYAxisLabels {
-    CGFloat     w = self.yAxisView.frame.size.width;
-    CGFloat     h = self.yAxisView.frame.size.height;
+    CGFloat     w = self.gridLayer.frame.size.width;
+    CGFloat     h = self.gridLayer.frame.size.height;
     
-    CGFloat     min  = self.chartData.min;
-    CGFloat     max  = self.chartData.max;
-    NSUInteger  step = self.chartData.yStep;
+    CGFloat     min    = self.chartData.min;
+    CGFloat     max    = self.chartData.max;
+    NSUInteger  step   = self.chartData.yStep;
+    CGFloat     margin = self.chartData.margin;
     
     CGFloat     labelFontSize  = self.chartData.labelFontSize;
     NSString   *labelTextColor = self.chartData.labelTextColor;
@@ -114,7 +136,7 @@
         
         NSString *labelText = [[NSString alloc] initWithFormat:@"%.2f", value];
         CGSize    labelSize = [labelText sizeWithAttributes:@{@"NSFontAttributeName": [UIFont systemFontOfSize:labelFontSize]}];
-        CGRect    labelRect = {{0.0f, h / step * i}, labelSize};
+        CGRect    labelRect = {{margin, h / step * i + margin}, labelSize};
 
         label.frame           = labelRect;
         label.text            = labelText;
@@ -126,27 +148,14 @@
         label.layer.cornerRadius  = 2.0f;
         label.layer.masksToBounds = YES;
         
-        [self.yAxisView addSubview:label];
+        [self addSubview:label];
     }
-}
-
-- (CGRect)getFrameWithMargin:(CGFloat)margin {
-    return CGRectMake(self.chartData.margin,
-                      self.chartData.margin,
-                      self.frame.size.width  - self.chartData.margin * 2,
-                      self.frame.size.height - self.chartData.margin * 2);
 }
 
 #pragma mark - getters and setters
 
 - (void)setChartData:(GLChartData *)chartData {
     _chartData = chartData;
-    
-    self.gridLayer.frame       = [self getFrameWithMargin:self.chartData.margin];
-    self.xAxisView.frame       = [self getFrameWithMargin:self.chartData.margin];
-    self.yAxisView.frame       = [self getFrameWithMargin:self.chartData.margin];
-    self.chartView.frame       = [self getFrameWithMargin:self.chartData.margin];
-    self.chartView.contentSize = self.chartView.frame.size;
     
     [self parseData];
     [self drawChart];
@@ -163,28 +172,22 @@
     return _gridLayer;
 }
 
-- (UIView *)xAxisView {
-    if (_xAxisView == nil) {
-        _xAxisView = [[UIView alloc] init];
-    }
-    
-    return _xAxisView;
-}
-
-- (UIView *)yAxisView {
-    if (_yAxisView == nil) {
-        _yAxisView = [[UIView alloc] init];
-    }
-    
-    return _yAxisView;
-}
-
-- (UIScrollView *)chartView {
-    if (_chartView == nil) {
-        _chartView = [[UIScrollView alloc] init];
+- (UIScrollView *)container {
+    if (_container == nil) {
+        _container = [[UIScrollView alloc] init];
         
-        _chartView.showsHorizontalScrollIndicator = NO;
-        _chartView.showsVerticalScrollIndicator   = NO;
+        [_container addSubview:self.chartView];
+        
+        _container.showsHorizontalScrollIndicator = NO;
+        _container.showsVerticalScrollIndicator   = NO;
+    }
+    
+    return _container;
+}
+
+- (UIView *)chartView {
+    if (_chartView == nil) {
+        _chartView = [[UIView alloc] init];
     }
     
     return _chartView;

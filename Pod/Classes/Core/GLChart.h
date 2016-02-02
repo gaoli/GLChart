@@ -5,8 +5,10 @@
 @interface GLChart : UIView
 
 @property (nonatomic, strong) GLChartData  *chartData;
-@property (nonatomic, strong) UIScrollView *chartView;
+@property (nonatomic, strong) UIView       *chartView;
 
 - (void)parseData;
+
+- (void)drawChart;
 
 @end

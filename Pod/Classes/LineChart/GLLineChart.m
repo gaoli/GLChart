@@ -44,7 +44,9 @@
 }
 
 - (void)drawChart {
-    CGFloat scale = self.chartView.contentSize.height / (self.chartData.max - self.chartData.min);
+    [super drawChart];
+    
+    CGFloat scale = self.chartView.frame.size.height / (self.chartData.max - self.chartData.min);
     
     for (NSDictionary *dict in self.chartData.yValues) {
         NSArray *value = dict[@"value"];
@@ -93,8 +95,8 @@
 }
 
 - (CGPoint)getPointWithValue:(NSArray *)value index:(NSUInteger)index scale:(CGFloat)scale {
-    CGFloat w = self.chartView.contentSize.width;
-    CGFloat h = self.chartView.contentSize.height;
+    CGFloat w = self.chartView.frame.size.width;
+    CGFloat h = self.chartView.frame.size.height;
     CGFloat x = w / (value.count - 1) * index;
     CGFloat y = h - scale * [value[index] floatValue];
     
