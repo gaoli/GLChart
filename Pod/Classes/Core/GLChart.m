@@ -77,7 +77,11 @@
     
     for (int i = 0; i < step; i++) {
         UILabel    *label = [[UILabel alloc] init];
-        NSUInteger  index = values.count / step * i;
+        NSUInteger  index = values.count / (step - 1) * i;
+        
+        if (index >= values.count) {
+            index =  values.count - 1;
+        }
         
         NSString *labelText = [[NSString alloc] initWithFormat:@"%@", values[index]];
         CGSize    labelSize = [labelText sizeWithAttributes:@{@"NSFontAttributeName": [UIFont systemFontOfSize:labelFontSize]}];
