@@ -7,4 +7,6 @@
 @property (nonatomic, strong) GLChartData  *chartData;
 @property (nonatomic, strong) UIScrollView *chartView;
 
+- (void)parseData;
+
 @end

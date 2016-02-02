@@ -21,6 +21,8 @@
 #pragma mark - private methods
 
 - (void)parseData {
+    [super parseData];
+    
     for (NSDictionary *dict in self.chartData.yValues) {
         NSArray *value = dict[@"value"];
         UIColor *color = [UIColor colorWithHexString:dict[@"color"]];

@@ -32,7 +32,9 @@
 #pragma mark - private methods
 
 - (void)parseData {
-    
+    if (self.chartData.xStep > self.chartData.xValues.count) {
+        self.chartData.xStep = self.chartData.xValues.count;
+    }
 }
 
 - (void)drawChart {
@@ -64,7 +66,31 @@
 }
 
 - (void)createXAxisLabels {
+    CGFloat     w = self.xAxisView.frame.size.width;
+    CGFloat     h = self.xAxisView.frame.size.height;
     
+    NSUInteger  step   = self.chartData.xStep;
+    NSArray    *values = self.chartData.xValues;
+    
+    CGFloat     labelFontSize  = self.chartData.labelFontSize;
+    NSString   *labelTextColor = self.chartData.labelTextColor;
+    
+    for (int i = 0; i < step; i++) {
+        UILabel    *label = [[UILabel alloc] init];
+        NSUInteger  index = values.count / step * i;
+        
+        NSString *labelText = [[NSString alloc] initWithFormat:@"%@", values[index]];
+        CGSize    labelSize = [labelText sizeWithAttributes:@{@"NSFontAttributeName": [UIFont systemFontOfSize:labelFontSize]}];
+        CGRect    labelRect = {{w / (step - 1) * i - labelSize.width / 2, h}, labelSize};
+        
+        label.frame           = labelRect;
+        label.text            = labelText;
+        label.font            = [UIFont systemFontOfSize   :labelFontSize];
+        label.textColor       = [UIColor colorWithHexString:labelTextColor];
+        label.textAlignment   = NSTextAlignmentCenter;
+        
+        [self.xAxisView addSubview:label];
+    }
 }
 
 - (void)createYAxisLabels {
@@ -77,7 +103,6 @@
     
     CGFloat     labelFontSize  = self.chartData.labelFontSize;
     NSString   *labelTextColor = self.chartData.labelTextColor;
-
     
     for (int i = 0; i < step; i++) {
         UILabel *label = [[UILabel alloc] init];
