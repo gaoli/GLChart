@@ -6,6 +6,8 @@
 
 @property (nonatomic, strong) CAShapeLayer   *gridLayer;
 @property (nonatomic, strong) UIScrollView   *container;
+@property (nonatomic, strong) UIView         *maskLView;
+@property (nonatomic, strong) UIView         *maskRView;
 @property (nonatomic, strong) NSMutableArray *xAxisLabels;
 @property (nonatomic, strong) NSMutableArray *yAxisLabels;
 
@@ -18,11 +20,16 @@
     
     if (self) {
         
+        // 设置背景颜色
+        self.backgroundColor = [UIColor whiteColor];
+        
         // 添加子类图层
         [self.layer addSublayer:self.gridLayer];
         
         // 添加子类视图
         [self addSubview:self.container];
+        [self addSubview:self.maskLView];
+        [self addSubview:self.maskRView];
     }
     
     return self;
@@ -42,11 +49,16 @@
     
     CGFloat margin = self.chartData.margin;
     
-    CGRect  gridLayerFrame = {{margin, margin}, {w - margin * 2, h - margin * 2}};
-    CGRect  containerFrame = {{margin, margin}, {w - margin * 2, h - margin}};
+    CGRect  gridLayerFrame = {{margin,     margin}, {w - margin * 2, h - margin * 2}};
+    CGRect  containerFrame = {{0.0f,       margin}, {w,              h - margin}};
+    CGRect  maskLViewFrame = {{0.0f,       0.0f},   {margin,         h - margin}};
+    CGRect  maskRViewFrame = {{w - margin, 0.0f},   {margin,         h - margin}};
     
-    self.gridLayer.frame = gridLayerFrame;
-    self.container.frame = containerFrame;
+    self.gridLayer.frame        = gridLayerFrame;
+    self.maskLView.frame        = maskLViewFrame;
+    self.maskRView.frame        = maskRViewFrame;
+    self.container.frame        = containerFrame;
+    self.container.contentInset = UIEdgeInsetsMake(0.0f, margin, 0.0f, margin);
     
     if (self.chartData.xValues.count > self.chartData.xMaxVisibleRange) {
         CGFloat scale = (CGFloat)self.chartData.xValues.count / (CGFloat)self.chartData.xMaxVisibleRange;
@@ -191,6 +203,26 @@
     }
     
     return _chartView;
+}
+
+- (UIView *)maskLView {
+    if (_maskLView == nil) {
+        _maskLView = [[UIView alloc] init];
+        
+        _maskLView.backgroundColor = [UIColor whiteColor];
+    }
+    
+    return _maskLView;
+}
+
+- (UIView *)maskRView {
+    if (_maskRView == nil) {
+        _maskRView = [[UIView alloc] init];
+        
+        _maskRView.backgroundColor = [UIColor whiteColor];
+    }
+    
+    return _maskRView;
 }
 
 @end
