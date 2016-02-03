@@ -1,15 +1,17 @@
 #import "GLChart.h"
 #import "GLChartData.h"
 #import "UIColor+Helper.h"
+#import "GLChartIndicator.h"
 
 @interface GLChart ()
 
-@property (nonatomic, strong) CAShapeLayer   *gridLayer;
-@property (nonatomic, strong) UIScrollView   *container;
-@property (nonatomic, strong) UIView         *maskLView;
-@property (nonatomic, strong) UIView         *maskRView;
-@property (nonatomic, strong) NSMutableArray *xAxisLabels;
-@property (nonatomic, strong) NSMutableArray *yAxisLabels;
+@property (nonatomic, strong) CAShapeLayer     *gridLayer;
+@property (nonatomic, strong) UIScrollView     *container;
+@property (nonatomic, strong) UIView           *maskLView;
+@property (nonatomic, strong) UIView           *maskRView;
+@property (nonatomic, strong) GLChartIndicator *indicator;
+@property (nonatomic, strong) NSMutableArray   *xAxisLabels;
+@property (nonatomic, strong) NSMutableArray   *yAxisLabels;
 
 @end
 
@@ -20,16 +22,17 @@
     
     if (self) {
         
-        // 设置背景颜色
-        self.backgroundColor = [UIColor whiteColor];
-        
-        // 添加子类图层
-        [self.layer addSublayer:self.gridLayer];
-        
         // 添加子类视图
         [self addSubview:self.container];
         [self addSubview:self.maskLView];
         [self addSubview:self.maskRView];
+        [self addSubview:self.indicator];
+        
+        // 添加子类图层
+        [self.layer addSublayer:self.gridLayer];
+        
+        // 设置背景颜色
+        self.backgroundColor = [UIColor whiteColor];
     }
     
     return self;
@@ -60,17 +63,28 @@
     self.container.frame        = containerFrame;
     self.container.contentInset = UIEdgeInsetsMake(0.0f, margin, 0.0f, margin);
     
-    if (self.chartData.xValues.count > self.chartData.xMaxVisibleRange) {
-        CGFloat scale = (CGFloat)self.chartData.xValues.count / (CGFloat)self.chartData.xMaxVisibleRange;
+    if (self.chartData.isEnabledIndicator == NO &&
+        self.chartData.visibleRangeMaxNum != 0  &&
+        self.chartData.visibleRangeMaxNum < self.chartData.xValues.count) {
+        CGFloat scale = (CGFloat)self.chartData.xValues.count / (CGFloat)self.chartData.visibleRangeMaxNum;
         CGRect  frame = {{0.0f, 0.0f}, {(w - margin * 2) * scale, h - margin * 2}};
         
         self.chartView.frame       = frame;
         self.container.contentSize = frame.size;
     } else {
-        CGRect  frame = {{0.0f, 0.0f}, {w - margin * 2, h - margin * 2}};
+        CGRect frame = {{0.0f, 0.0f}, {w - margin * 2, h - margin * 2}};
         
         self.chartView.frame       = frame;
         self.container.contentSize = frame.size;
+    }
+    
+    if (self.chartData.isEnabledIndicator) {
+        CGRect frame = {{margin, margin}, {w - margin * 2, h - margin * 2}};
+        
+        self.indicator.frame  = frame;
+        self.indicator.hidden = NO;
+    } else {
+        self.indicator.hidden = YES;
     }
 }
 
@@ -89,8 +103,8 @@
     }
     
     self.gridLayer.path        = path.CGPath;
-    self.gridLayer.lineWidth   = self.chartData.gridWidth;
-    self.gridLayer.strokeColor = [UIColor colorWithHexString:self.chartData.gridColor].CGColor;
+    self.gridLayer.lineWidth   = self.chartData.gridLineWidth;
+    self.gridLayer.strokeColor = [UIColor colorWithHexString:self.chartData.gridLineColor].CGColor;
 }
 
 - (void)drawAxis {
@@ -169,6 +183,8 @@
 - (void)setChartData:(GLChartData *)chartData {
     _chartData = chartData;
     
+    self.indicator.chartData = chartData;
+    
     [self parseData];
     [self drawChart];
     
@@ -223,6 +239,14 @@
     }
     
     return _maskRView;
+}
+
+- (GLChartIndicator *)indicator {
+    if (_indicator == nil) {
+        _indicator = [[GLChartIndicator alloc] init];
+    }
+    
+    return _indicator;
 }
 
 @end

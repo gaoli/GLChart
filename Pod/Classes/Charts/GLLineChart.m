@@ -46,7 +46,7 @@
 - (void)drawChart {
     [super drawChart];
     
-    CGFloat scale = self.chartView.frame.size.height / (self.chartData.max - self.chartData.min);
+    self.chartData.scale = self.chartView.frame.size.height / (self.chartData.max - self.chartData.min);
     
     for (NSDictionary *dict in self.chartData.yValues) {
         NSArray *value = dict[@"value"];
@@ -57,8 +57,8 @@
         }
         
         CAShapeLayer *pathLayer = [[CAShapeLayer alloc] init];
-        UIBezierPath *pathFrom  = [self getPathWithValue:value scale:0.0f  close:NO];
-        UIBezierPath *pathTo    = [self getPathWithValue:value scale:scale close:NO];
+        UIBezierPath *pathFrom  = [self getPathWithValue:value scale:0.0f                 close:NO];
+        UIBezierPath *pathTo    = [self getPathWithValue:value scale:self.chartData.scale close:NO];
         
         pathLayer.path        = pathTo.CGPath;
         pathLayer.fillColor   = nil;
@@ -69,8 +69,8 @@
         
         if (self.chartData.isFill) {
             CAShapeLayer *fillLayer = [[CAShapeLayer alloc] init];
-            UIBezierPath *fillFrom  = [self getPathWithValue:value scale:0.0f  close:YES];
-            UIBezierPath *fillTo    = [self getPathWithValue:value scale:scale close:YES];
+            UIBezierPath *fillFrom  = [self getPathWithValue:value scale:0.0f                 close:YES];
+            UIBezierPath *fillTo    = [self getPathWithValue:value scale:self.chartData.scale close:YES];
             
             fillLayer.path        = fillTo.CGPath;
             fillLayer.fillColor   = [color colorWithAlphaComponent:0.25f].CGColor;

@@ -6,31 +6,41 @@
     self = [super init];
     
     if (self) {
-        self.margin           = 15.0f;
         
-        self.xValues          = [NSArray array];
-        self.yValues          = [NSArray array];
+        // 通用属性
         
-        self.min              = 0.0f;
-        self.max              = 0.0f;
+        self.margin              = 15.0f;
         
-        self.xStep            = 5;
-        self.yStep            = 5;
+        self.xValues             = [NSArray array];
+        self.yValues             = [NSArray array];
         
-        self.lineWidth        = 0.5f;
+        self.min                 = 0.0f;
+        self.max                 = 0.0f;
+        self.scale               = 0.0f;
         
-        self.gridWidth        = 0.5f;
-        self.gridColor        = @"#DDDDDD";
+        self.xStep               = 5;
+        self.yStep               = 5;
         
-        self.labelFontSize    = 9.0f;
-        self.labelTextColor   = @"#999999";
+        self.lineWidth           = 0.5f;
         
-        self.animated         = YES;
-        self.duration         = 0.5;
+        self.gridLineWidth       = 0.5f;
+        self.gridLineColor       = @"#DDDDDD";
         
-        self.xMaxVisibleRange = 30;
+        self.labelFontSize       = 9.0f;
+        self.labelTextColor      = @"#999999";
         
-        self.isFill           = YES;
+        self.animated            = YES;
+        self.duration            = 0.5;
+        
+        self.visibleRangeMaxNum  = 0;
+        
+        // 折线属性
+        
+        self.isFill              = YES;
+        self.isEnabledIndicator  = NO;
+
+        self.indicatorLineWidth  = 0.5f;
+        self.indicatorLineColor  = @"#999999";
     }
     
     return self;

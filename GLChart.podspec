@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '7.0'
   s.requires_arc = true
 
-  s.default_subspec = 'Core', 'LineChart'
+  s.default_subspec = 'Core', 'Components', 'Charts'
 
   s.subspec 'Core' do |core|
 
@@ -22,9 +22,15 @@ Pod::Spec.new do |s|
 
   end
 
-  s.subspec 'LineChart' do |lineChart|
+  s.subspec 'Components' do |components|
 
-    lineChart.source_files = 'Pod/Classes/LineChart/*.{h,m}'
+  components.source_files = 'Pod/Classes/Components/*.{h,m}'
+
+  end
+
+  s.subspec 'Charts' do |charts|
+
+    charts.source_files = 'Pod/Classes/Charts/*.{h,m}'
 
   end
 

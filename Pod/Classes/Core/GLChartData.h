@@ -11,14 +11,15 @@
 
 @property (nonatomic, assign) CGFloat        min;
 @property (nonatomic, assign) CGFloat        max;
+@property (nonatomic, assign) CGFloat        scale;
 
 @property (nonatomic, assign) NSUInteger     xStep;
 @property (nonatomic, assign) NSUInteger     yStep;
 
 @property (nonatomic, assign) CGFloat        lineWidth;
 
-@property (nonatomic, assign) CGFloat        gridWidth;
-@property (nonatomic,   copy) NSString      *gridColor;
+@property (nonatomic, assign) CGFloat        gridLineWidth;
+@property (nonatomic,   copy) NSString      *gridLineColor;
 
 @property (nonatomic, assign) CGFloat        labelFontSize;
 @property (nonatomic,   copy) NSString      *labelTextColor;
@@ -26,10 +27,14 @@
 @property (nonatomic, assign) BOOL           animated;
 @property (nonatomic, assign) CFTimeInterval duration;
 
-@property (nonatomic, assign) NSUInteger     xMaxVisibleRange;
+@property (nonatomic, assign) NSUInteger     visibleRangeMaxNum;
 
 // 折线属性
 
 @property (nonatomic, assign) BOOL           isFill;
+@property (nonatomic, assign) BOOL           isEnabledIndicator;
+
+@property (nonatomic, assign) CGFloat        indicatorLineWidth;
+@property (nonatomic,   copy) NSString      *indicatorLineColor;
 
 @end
