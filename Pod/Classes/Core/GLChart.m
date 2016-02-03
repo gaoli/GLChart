@@ -22,14 +22,14 @@
     
     if (self) {
         
+        // 添加子类图层
+        [self.layer addSublayer:self.gridLayer];
+        
         // 添加子类视图
         [self addSubview:self.container];
         [self addSubview:self.maskLView];
         [self addSubview:self.maskRView];
         [self addSubview:self.indicator];
-        
-        // 添加子类图层
-        [self.layer addSublayer:self.gridLayer];
         
         // 设置背景颜色
         self.backgroundColor = [UIColor whiteColor];
