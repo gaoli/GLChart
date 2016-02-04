@@ -207,8 +207,13 @@ static CGFloat const kTipsRectH   = 4.0f;
     
     CGRect frame = self.tipsView.frame;
     
-    frame.origin.x   = kTipsPadding + x;
     frame.size.width = kTipsPadding * 2 + kTipsRectW + labelMaxWidth;
+    
+    if (self.frame.size.width - x > frame.size.width) {
+        frame.origin.x = x + kTipsPadding;
+    } else {
+        frame.origin.x = x - kTipsPadding - frame.size.width;
+    }
     
     self.tipsView.frame = frame;
 }
