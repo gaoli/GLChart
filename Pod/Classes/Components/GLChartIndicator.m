@@ -46,7 +46,11 @@ static CGFloat const kTipsRectH   = 4.0f;
     
     NSString *labelText = @"11:11";
     CGSize    labelSize = [labelText sizeWithAttributes:@{@"NSFontAttributeName": [UIFont systemFontOfSize:labelFontSize]}];
-    CGFloat   tipsViewH = kTipsPadding * 2 + labelSize.height * self.chartData.yValues.count;
+    CGFloat   tipsViewH = kTipsPadding * 2 + labelSize.height * (self.chartData.yValues.count + 1);
+    
+    self.timeLabel.frame = CGRectMake(kTipsPadding, kTipsPadding, 0.0f, labelSize.height);
+    
+    [self.tipsView addSubview:self.timeLabel];
     
     for (int i = 0; i < self.chartData.yValues.count; i++) {
         NSDictionary *dict  = self.chartData.yValues[i];
@@ -57,9 +61,9 @@ static CGFloat const kTipsRectH   = 4.0f;
             continue;
         }
         
-        CGRect   rectViewFrame = {{kTipsPadding, kTipsPadding + labelSize.height * i + (labelSize.height - kTipsRectH) / 2},
+        CGRect   rectViewFrame = {{kTipsPadding, kTipsPadding + labelSize.height * (i + 1) + (labelSize.height - kTipsRectH) / 2},
                                   {kTipsRectW, kTipsRectH}};
-        CGRect   numLabelFrame = {{kTipsPadding * 2 + kTipsRectW, kTipsPadding + labelSize.height * i},
+        CGRect   numLabelFrame = {{kTipsPadding * 2 + kTipsRectW, kTipsPadding + labelSize.height * (i + 1)},
                                   {0.0f, labelSize.height}};
         
         UIView  *rectView = [[UIView  alloc] initWithFrame:rectViewFrame];
@@ -149,7 +153,9 @@ static CGFloat const kTipsRectH   = 4.0f;
 - (void)drawDots:(CGFloat)x {
     CGFloat         w    = self.frame.size.width;
     CGFloat         h    = self.frame.size.height;
-    NSMutableArray *data = [NSMutableArray array];
+    
+    NSUInteger      index = 0;
+    NSMutableArray *array = [NSMutableArray array];
     
     for (int i = 0; i < self.chartData.yValues.count; i++) {
         NSDictionary *dict  = self.chartData.yValues[i];
@@ -160,8 +166,7 @@ static CGFloat const kTipsRectH   = 4.0f;
             continue;
         }
         
-        NSUInteger count = value.count;
-        NSUInteger index = x / (w / count);
+        index = x / (w / value.count);
         
         if (index < value.count) {
             UIBezierPath *path = [[UIBezierPath alloc] init];
@@ -172,23 +177,37 @@ static CGFloat const kTipsRectH   = 4.0f;
                           endAngle:2 * M_PI
                          clockwise:YES];
             
-            [data addObject:value[index]];
+            [array addObject:value[index]];
             
             [(CAShapeLayer *)self.dotLayers[i] setPath:path.CGPath];
         }
     }
     
-    [self drawTipsWithData:data x:x];
+    [self drawTipsWithData:@{@"index": @(index), @"value": array}
+                         x:x];
 }
 
-- (void)drawTipsWithData:(NSArray *)data x:(CGFloat)x {
-    CGFloat   labelMaxWidth  = 0.0f;
-    CGFloat   labelFontSize  = self.chartData.labelFontSize;
+- (void)drawTipsWithData:(NSDictionary *)data x:(CGFloat)x {
+    NSNumber  *index = data[@"index"];
+    NSArray   *value = data[@"value"];
     
-    for (int i = 0; i < data.count; i++) {
-        NSNumber *value = data[i];
-        
-        NSString *labelText = [[NSString alloc] initWithFormat:@"%.2f", value.floatValue];
+    CGFloat   labelMaxWidth = 0.0f;
+    CGFloat   labelFontSize = self.chartData.labelFontSize;
+    
+    NSString *timeLabelText = self.chartData.xValues[index.integerValue];
+    CGSize    timeLabelSize = [timeLabelText sizeWithAttributes:@{@"NSFontAttributeName": [UIFont systemFontOfSize:labelFontSize]}];
+    
+    labelMaxWidth = timeLabelSize.width;
+    
+    self.timeLabel.frame = CGRectMake(self.timeLabel.frame.origin.x,
+                                      self.timeLabel.frame.origin.y,
+                                      timeLabelSize.width,
+                                      timeLabelSize.height);
+    
+    self.timeLabel.text  = timeLabelText;
+    
+    for (int i = 0; i < value.count; i++) {
+        NSString *labelText = [[NSString alloc] initWithFormat:@"%.2f", [value[i] floatValue]];
         CGSize    labelSize = [labelText sizeWithAttributes:@{@"NSFontAttributeName": [UIFont systemFontOfSize:labelFontSize]}];
         
         if (labelMaxWidth < labelSize.width) {
@@ -260,6 +279,17 @@ static CGFloat const kTipsRectH   = 4.0f;
     }
     
     return _lineLayer;
+}
+
+- (UILabel *)timeLabel {
+    if (_timeLabel == nil) {
+        _timeLabel = [[UILabel alloc] init];
+        
+        _timeLabel.font      = [UIFont  systemFontOfSize  :self.chartData.labelFontSize];
+        _timeLabel.textColor = [UIColor colorWithHexString:self.chartData.labelTextColor];
+    }
+    
+    return _timeLabel;
 }
 
 - (UIPanGestureRecognizer *)panGestureRecognizer {
