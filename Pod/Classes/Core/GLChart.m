@@ -183,13 +183,13 @@
 - (void)setChartData:(GLChartData *)chartData {
     _chartData = chartData;
     
-    self.indicator.chartData = chartData;
-    
     [self parseData];
     [self drawChart];
     
     [self drawGrid];
     [self drawAxis];
+    
+    self.indicator.chartData = chartData;
 }
 
 - (CAShapeLayer *)gridLayer {
