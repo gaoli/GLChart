@@ -112,6 +112,7 @@ static CGFloat const kTipsRectH   = 4.0f;
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer {
+    CGFloat w = self.frame.size.width;
     
     // 拖拽已经开始
     if (recognizer.state == UIGestureRecognizerStateBegan) {
@@ -122,15 +123,22 @@ static CGFloat const kTipsRectH   = 4.0f;
     } else if (recognizer.state == UIGestureRecognizerStateChanged) {
         
         // 获取偏移数值
-        CGFloat w = self.frame.size.width;
         CGFloat x = [recognizer locationInView:self].x;
         
         // 纠正偏移数值
         x = x < 0 ? 0 : x;
         x = x > w ? w : x;
         
-        [self drawLine:x];
-        [self drawDots:x];
+        NSUInteger count = self.chartData.count;
+        CGFloat    width = w / (count - 1);
+        NSUInteger index = x / width;
+        
+        if (index < count) {
+            x = index * width;
+            
+            [self drawLine:x index:index];
+            [self drawDots:x index:index];
+        }
         
     // 拖拽已经结束
     } else if (recognizer.state == UIGestureRecognizerStateEnded) {
@@ -139,7 +147,7 @@ static CGFloat const kTipsRectH   = 4.0f;
     }
 }
 
-- (void)drawLine:(CGFloat)x {
+- (void)drawLine:(CGFloat)x index:(NSUInteger)index {
     CGFloat h = self.frame.size.height;
     
     UIBezierPath *path = [[UIBezierPath alloc] init];
@@ -150,11 +158,9 @@ static CGFloat const kTipsRectH   = 4.0f;
     self.lineLayer.path = path.CGPath;
 }
 
-- (void)drawDots:(CGFloat)x {
-    CGFloat         w    = self.frame.size.width;
-    CGFloat         h    = self.frame.size.height;
+- (void)drawDots:(CGFloat)x index:(NSUInteger)index {
+    CGFloat h = self.frame.size.height;
     
-    NSUInteger      index = 0;
     NSMutableArray *array = [NSMutableArray array];
     
     for (int i = 0; i < self.chartData.yValues.count; i++) {
@@ -165,8 +171,6 @@ static CGFloat const kTipsRectH   = 4.0f;
         if (value == nil || color == nil) {
             continue;
         }
-        
-        index = x / (w / value.count);
         
         if (index < value.count) {
             UIBezierPath *path = [[UIBezierPath alloc] init];

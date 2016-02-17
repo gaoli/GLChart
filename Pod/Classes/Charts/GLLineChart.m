@@ -31,6 +31,10 @@
             continue;
         }
         
+        if (self.chartData.count == 0) {
+            self.chartData.count = value.count;
+        }
+        
         for (NSNumber *item in value) {
             if (self.chartData.min > item.floatValue) {
                 self.chartData.min = item.floatValue;

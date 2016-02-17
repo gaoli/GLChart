@@ -16,6 +16,7 @@
         
         self.min                 = 0.0f;
         self.max                 = 0.0f;
+        self.count               = 0;
         self.scale               = 0.0f;
         
         self.xStep               = 5;

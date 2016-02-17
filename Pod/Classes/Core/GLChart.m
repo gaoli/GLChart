@@ -145,7 +145,6 @@
 }
 
 - (void)createYAxisLabels {
-    CGFloat     w = self.gridLayer.frame.size.width;
     CGFloat     h = self.gridLayer.frame.size.height;
     
     CGFloat     min    = self.chartData.min;

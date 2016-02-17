@@ -11,6 +11,7 @@
 
 @property (nonatomic, assign) CGFloat        min;
 @property (nonatomic, assign) CGFloat        max;
+@property (nonatomic, assign) NSUInteger     count;
 @property (nonatomic, assign) CGFloat        scale;
 
 @property (nonatomic, assign) NSUInteger     xStep;
