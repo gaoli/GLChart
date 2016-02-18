@@ -1,5 +1,5 @@
-source 'https://github.com/CocoaPods/Specs.git'
-use_frameworks!
+# source 'https://github.com/CocoaPods/Specs.git'
+# use_frameworks!
 
 target 'GLChart_Example', :exclusive => true do
   pod "GLChart", :path => "../"
