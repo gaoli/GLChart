@@ -1,6 +1,6 @@
 # GLChart
 
-[![CI Status](http://img.shields.io/travis/高力/GLChart.svg?style=flat)](https://travis-ci.org/高力/GLChart)
+[![CI Status](http://img.shields.io/travis/gaoli/GLChart.svg?style=flat)](https://travis-ci.org/gaoli/GLChart)
 [![Version](https://img.shields.io/cocoapods/v/GLChart.svg?style=flat)](http://cocoapods.org/pods/GLChart)
 [![License](https://img.shields.io/cocoapods/l/GLChart.svg?style=flat)](http://cocoapods.org/pods/GLChart)
 [![Platform](https://img.shields.io/cocoapods/p/GLChart.svg?style=flat)](http://cocoapods.org/pods/GLChart)
@@ -22,7 +22,7 @@ pod "GLChart"
 
 ## Author
 
-高力, 3071730@qq.com
+gaoli, 3071730@qq.com
 
 ## License
 
