@@ -11,4 +11,6 @@
 
 - (void)drawChart;
 
+- (void)loadComponents;
+
 @end

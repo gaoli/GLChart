@@ -1,7 +1,6 @@
 #import "GLChart.h"
 #import "GLChartData.h"
 #import "UIColor+Helper.h"
-#import "GLChartIndicator.h"
 
 @interface GLChart ()
 
@@ -9,7 +8,6 @@
 @property (nonatomic, strong) UIScrollView     *container;
 @property (nonatomic, strong) UIView           *maskLView;
 @property (nonatomic, strong) UIView           *maskRView;
-@property (nonatomic, strong) GLChartIndicator *indicator;
 @property (nonatomic, strong) NSMutableArray   *xAxisLabels;
 @property (nonatomic, strong) NSMutableArray   *yAxisLabels;
 
@@ -29,7 +27,6 @@
         [self addSubview:self.container];
         [self addSubview:self.maskLView];
         [self addSubview:self.maskRView];
-        [self addSubview:self.indicator];
         
         // 设置背景颜色
         self.backgroundColor = [UIColor whiteColor];
@@ -77,15 +74,10 @@
         self.chartView.frame       = frame;
         self.container.contentSize = frame.size;
     }
+}
+
+- (void)loadComponents {
     
-    if (self.chartData.isEnabledIndicator) {
-        CGRect frame = {{margin, margin}, {w - margin * 2, h - margin * 2}};
-        
-        self.indicator.frame  = frame;
-        self.indicator.hidden = NO;
-    } else {
-        self.indicator.hidden = YES;
-    }
 }
 
 - (void)drawGrid {
@@ -184,11 +176,10 @@
     
     [self parseData];
     [self drawChart];
+    [self loadComponents];
     
     [self drawGrid];
     [self drawAxis];
-    
-    self.indicator.chartData = chartData;
 }
 
 - (CAShapeLayer *)gridLayer {
@@ -238,14 +229,6 @@
     }
     
     return _maskRView;
-}
-
-- (GLChartIndicator *)indicator {
-    if (_indicator == nil) {
-        _indicator = [[GLChartIndicator alloc] init];
-    }
-    
-    return _indicator;
 }
 
 @end

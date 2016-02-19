@@ -1,8 +1,11 @@
 #import "GLLineChart.h"
 #import "GLChartData.h"
 #import "UIColor+Helper.h"
+#import "GLChartIndicator.h"
 
 @interface GLLineChart ()
+
+@property (nonatomic, strong) GLChartIndicator *indicator;
 
 @end
 
@@ -12,7 +15,7 @@
     self = [super initWithFrame:frame];
     
     if (self) {
-        
+        [self addSubview:self.indicator];
     }
     
     return self;
@@ -98,6 +101,25 @@
     }
 }
 
+- (void)loadComponents {
+    [super loadComponents];
+    
+    CGFloat w = self.frame.size.width;
+    CGFloat h = self.frame.size.height;
+    
+    CGFloat margin = self.chartData.margin;
+    
+    if (self.chartData.isEnabledIndicator) {
+        CGRect frame = {{margin, margin}, {w - margin * 2, h - margin * 2}};
+        
+        self.indicator.frame     = frame;
+        self.indicator.hidden    = NO;
+        self.indicator.chartData = self.chartData;
+    } else {
+        self.indicator.hidden = YES;
+    }
+}
+
 - (CGPoint)getPointWithValue:(NSArray *)value index:(NSUInteger)index scale:(CGFloat)scale {
     CGFloat w = self.chartView.frame.size.width;
     CGFloat h = self.chartView.frame.size.height;
@@ -149,6 +171,16 @@
     pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     
     return pathAnimation;
+}
+
+#pragma mark - getters and setters
+
+- (GLChartIndicator *)indicator {
+    if (_indicator == nil) {
+        _indicator = [[GLChartIndicator alloc] init];
+    }
+    
+    return _indicator;
 }
 
 @end
