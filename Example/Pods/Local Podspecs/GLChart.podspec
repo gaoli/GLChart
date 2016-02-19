@@ -4,6 +4,7 @@ Pod::Spec.new do |s|
   s.summary          = "A beautiful chart library for iOS"
 
   s.description      = <<-DESC
+                        GLChart is A beautiful chart library for iOS
                        DESC
 
   s.homepage         = "https://github.com/gaoli/GLChart.git"
