@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.homepage         = "https://github.com/gaoli/GLChart.git"
   s.license          = 'MIT'
   s.author           = { "gaoli" => "3071730@qq.com" }
-  s.source           = { :git => "git@github.com:gaoli/GLChart.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/gaoli/GLChart.git", :tag => s.version.to_s }
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true
