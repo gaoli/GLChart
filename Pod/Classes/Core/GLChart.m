@@ -19,6 +19,8 @@
     self = [super initWithFrame:frame];
     
     if (self) {
+        self.xAxisLabels = [NSMutableArray array];
+        self.yAxisLabels = [NSMutableArray array];
         
         // 添加子类图层
         [self.layer addSublayer:self.gridLayer];
@@ -43,7 +45,7 @@
     }
 }
 
-- (void)drawChart {
+- (void)initChart {
     CGFloat w = self.frame.size.width;
     CGFloat h = self.frame.size.height;
     
@@ -74,6 +76,21 @@
         self.chartView.frame       = frame;
         self.container.contentSize = frame.size;
     }
+    
+    for (UILabel *label in self.xAxisLabels) {
+        [label removeFromSuperview];
+    }
+    
+    for (UILabel *label in self.yAxisLabels) {
+        [label removeFromSuperview];
+    }
+    
+    self.xAxisLabels = [NSMutableArray array];
+    self.yAxisLabels = [NSMutableArray array];
+}
+
+- (void)drawChart {
+    
 }
 
 - (void)loadComponents {
@@ -118,6 +135,8 @@
         UILabel    *label = [[UILabel alloc] init];
         NSUInteger  index = values.count / (step - 1) * i;
         
+        [self.xAxisLabels addObject:label];
+        
         if (index >= values.count) {
             index =  values.count - 1;
         }
@@ -151,6 +170,8 @@
         UILabel *label = [[UILabel alloc] init];
         CGFloat  value = min + (max - min) / step * (step - i);
         
+        [self.yAxisLabels addObject:label];
+        
         NSString *labelText = [[NSString alloc] initWithFormat:@"%.2f", value];
         CGSize    labelSize = [labelText sizeWithAttributes:@{@"NSFontAttributeName": [UIFont systemFontOfSize:labelFontSize]}];
         CGRect    labelRect = {{margin, h / step * i + margin}, labelSize};
@@ -175,6 +196,7 @@
     _chartData = chartData;
     
     [self parseData];
+    [self initChart];
     [self drawChart];
     [self loadComponents];
     

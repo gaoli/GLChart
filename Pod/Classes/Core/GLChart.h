@@ -9,6 +9,8 @@
 
 - (void)parseData;
 
+- (void)initChart;
+
 - (void)drawChart;
 
 - (void)loadComponents;

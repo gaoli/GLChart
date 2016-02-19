@@ -40,6 +40,19 @@ static CGFloat const kTipsRectH   = 4.0f;
 
 #pragma mark - event response
 
+- (void)resetComponent {
+    for (UIView *view in self.tipsView.subviews) {
+        [view removeFromSuperview];
+    }
+    
+    self.wrapView.layer.sublayers = nil;
+    
+    self.lineLayer = nil;
+    self.timeLabel = nil;
+    self.dotLayers = [NSMutableArray array];
+    self.numLabels = [NSMutableArray array];
+}
+
 - (void)createTipsView {
     CGFloat   labelFontSize  = self.chartData.labelFontSize;
     NSString *labelTextColor = self.chartData.labelTextColor;
@@ -245,7 +258,8 @@ static CGFloat const kTipsRectH   = 4.0f;
 
 - (void)setChartData:(GLChartData *)chartData {
     _chartData = chartData;
-
+    
+    [self resetComponent];
     [self createTipsView];
     [self createLineLayer];
     [self createDotLayers];

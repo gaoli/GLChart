@@ -50,6 +50,12 @@
     }
 }
 
+- (void)initChart {
+    [super initChart];
+    
+    self.chartView.layer.sublayers = nil;
+}
+
 - (void)drawChart {
     [super drawChart];
     
