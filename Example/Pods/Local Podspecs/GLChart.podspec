@@ -33,6 +33,7 @@ Pod::Spec.new do |s|
 
     charts.source_files = 'Pod/Classes/Charts/*.{h,m}'
     charts.dependency 'GLChart/Core'
+    charts.dependency 'GLChart/Components'
 
   end
 
