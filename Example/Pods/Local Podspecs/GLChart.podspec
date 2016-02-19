@@ -24,13 +24,15 @@ Pod::Spec.new do |s|
 
   s.subspec 'Components' do |components|
 
-  components.source_files = 'Pod/Classes/Components/*.{h,m}'
+    components.source_files = 'Pod/Classes/Components/*.{h,m}'
+    components.dependency 'GLChart/Core'
 
   end
 
   s.subspec 'Charts' do |charts|
 
     charts.source_files = 'Pod/Classes/Charts/*.{h,m}'
+    charts.dependency 'GLChart/Core'
 
   end
 
