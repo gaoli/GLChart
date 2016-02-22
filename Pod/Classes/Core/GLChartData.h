@@ -28,9 +28,9 @@
 @property (nonatomic, assign) BOOL           animated;
 @property (nonatomic, assign) CFTimeInterval duration;
 
-@property (nonatomic, assign) NSUInteger     visibleRangeMaxNum;
+// 折线图属性
 
-// 折线属性
+@property (nonatomic, assign) NSUInteger     visibleRangeMaxNum;
 
 @property (nonatomic, assign) BOOL           isFill;
 @property (nonatomic, assign) BOOL           isEnabledIndicator;

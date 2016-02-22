@@ -5,6 +5,8 @@
 
 @interface GLLineChart ()
 
+@property (nonatomic, strong) UIView           *maskLView;
+@property (nonatomic, strong) UIView           *maskRView;
 @property (nonatomic, strong) GLChartIndicator *indicator;
 
 @end
@@ -15,6 +17,8 @@
     self = [super initWithFrame:frame];
     
     if (self) {
+        [self addSubview:self.maskLView];
+        [self addSubview:self.maskRView];
         [self addSubview:self.indicator];
     }
     
@@ -52,6 +56,37 @@
 
 - (void)initChart {
     [super initChart];
+    
+    CGFloat w = self.frame.size.width;
+    CGFloat h = self.frame.size.height;
+    
+    CGFloat margin = self.chartData.margin;
+    
+    CGRect  containerFrame = {{0.0f,     margin},   {w,              h - margin}};
+    CGRect  maskLViewFrame = {{0.0f,       0.0f},   {margin,         h - margin}};
+    CGRect  maskRViewFrame = {{w - margin, 0.0f},   {margin,         h - margin}};
+    CGRect  indicatorFrame = {{margin,     margin}, {w - margin * 2, h - margin * 2}};
+    
+    self.maskLView.frame        = maskLViewFrame;
+    self.maskRView.frame        = maskRViewFrame;
+    self.indicator.frame        = indicatorFrame;
+    self.container.frame        = containerFrame;
+    self.container.contentInset = UIEdgeInsetsMake(0.0f, margin, 0.0f, margin);
+    
+    if (self.chartData.isEnabledIndicator == NO &&
+        self.chartData.visibleRangeMaxNum != 0  &&
+        self.chartData.visibleRangeMaxNum < self.chartData.xValues.count) {
+        CGFloat scale = (CGFloat)self.chartData.xValues.count / (CGFloat)self.chartData.visibleRangeMaxNum;
+        CGRect  frame = {{0.0f, 0.0f}, {(w - margin * 2) * scale, h - margin * 2}};
+        
+        self.chartView.frame       = frame;
+        self.container.contentSize = frame.size;
+    } else {
+        CGRect frame = {{0.0f, 0.0f}, {w - margin * 2, h - margin * 2}};
+        
+        self.chartView.frame       = frame;
+        self.container.contentSize = frame.size;
+    }
     
     self.chartView.layer.sublayers = nil;
 }
@@ -110,15 +145,7 @@
 - (void)loadComponents {
     [super loadComponents];
     
-    CGFloat w = self.frame.size.width;
-    CGFloat h = self.frame.size.height;
-    
-    CGFloat margin = self.chartData.margin;
-    
     if (self.chartData.isEnabledIndicator) {
-        CGRect frame = {{margin, margin}, {w - margin * 2, h - margin * 2}};
-        
-        self.indicator.frame     = frame;
         self.indicator.hidden    = NO;
         self.indicator.chartData = self.chartData;
     } else {
@@ -180,6 +207,26 @@
 }
 
 #pragma mark - getters and setters
+
+- (UIView *)maskLView {
+    if (_maskLView == nil) {
+        _maskLView = [[UIView alloc] init];
+        
+        _maskLView.backgroundColor = [UIColor whiteColor];
+    }
+    
+    return _maskLView;
+}
+
+- (UIView *)maskRView {
+    if (_maskRView == nil) {
+        _maskRView = [[UIView alloc] init];
+        
+        _maskRView.backgroundColor = [UIColor whiteColor];
+    }
+    
+    return _maskRView;
+}
 
 - (GLChartIndicator *)indicator {
     if (_indicator == nil) {

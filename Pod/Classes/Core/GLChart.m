@@ -4,12 +4,7 @@
 
 @interface GLChart ()
 
-@property (nonatomic, strong) CAShapeLayer     *gridLayer;
-@property (nonatomic, strong) UIScrollView     *container;
-@property (nonatomic, strong) UIView           *maskLView;
-@property (nonatomic, strong) UIView           *maskRView;
-@property (nonatomic, strong) NSMutableArray   *xAxisLabels;
-@property (nonatomic, strong) NSMutableArray   *yAxisLabels;
+@property (nonatomic, strong) CAShapeLayer *gridLayer;
 
 @end
 
@@ -27,8 +22,6 @@
         
         // 添加子类视图
         [self addSubview:self.container];
-        [self addSubview:self.maskLView];
-        [self addSubview:self.maskRView];
         
         // 设置背景颜色
         self.backgroundColor = [UIColor whiteColor];
@@ -51,31 +44,11 @@
     
     CGFloat margin = self.chartData.margin;
     
-    CGRect  gridLayerFrame = {{margin,     margin}, {w - margin * 2, h - margin * 2}};
-    CGRect  containerFrame = {{0.0f,       margin}, {w,              h - margin}};
-    CGRect  maskLViewFrame = {{0.0f,       0.0f},   {margin,         h - margin}};
-    CGRect  maskRViewFrame = {{w - margin, 0.0f},   {margin,         h - margin}};
+    CGRect  gridLayerFrame = {{margin, margin}, {w - margin * 2, h - margin * 2}};
+    CGRect  containerFrame = {{margin, margin}, {w - margin * 2, h - margin * 2}};
     
-    self.gridLayer.frame        = gridLayerFrame;
-    self.maskLView.frame        = maskLViewFrame;
-    self.maskRView.frame        = maskRViewFrame;
-    self.container.frame        = containerFrame;
-    self.container.contentInset = UIEdgeInsetsMake(0.0f, margin, 0.0f, margin);
-    
-    if (self.chartData.isEnabledIndicator == NO &&
-        self.chartData.visibleRangeMaxNum != 0  &&
-        self.chartData.visibleRangeMaxNum < self.chartData.xValues.count) {
-        CGFloat scale = (CGFloat)self.chartData.xValues.count / (CGFloat)self.chartData.visibleRangeMaxNum;
-        CGRect  frame = {{0.0f, 0.0f}, {(w - margin * 2) * scale, h - margin * 2}};
-        
-        self.chartView.frame       = frame;
-        self.container.contentSize = frame.size;
-    } else {
-        CGRect frame = {{0.0f, 0.0f}, {w - margin * 2, h - margin * 2}};
-        
-        self.chartView.frame       = frame;
-        self.container.contentSize = frame.size;
-    }
+    self.gridLayer.frame = gridLayerFrame;
+    self.container.frame = containerFrame;
     
     for (UILabel *label in self.xAxisLabels) {
         [label removeFromSuperview];
@@ -231,26 +204,6 @@
     }
     
     return _chartView;
-}
-
-- (UIView *)maskLView {
-    if (_maskLView == nil) {
-        _maskLView = [[UIView alloc] init];
-        
-        _maskLView.backgroundColor = [UIColor whiteColor];
-    }
-    
-    return _maskLView;
-}
-
-- (UIView *)maskRView {
-    if (_maskRView == nil) {
-        _maskRView = [[UIView alloc] init];
-        
-        _maskRView.backgroundColor = [UIColor whiteColor];
-    }
-    
-    return _maskRView;
 }
 
 @end

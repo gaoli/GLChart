@@ -33,9 +33,9 @@
         self.animated            = YES;
         self.duration            = 0.5;
         
-        self.visibleRangeMaxNum  = 0;
+        // 折线图属性
         
-        // 折线属性
+        self.visibleRangeMaxNum  = 0;
         
         self.isFill              = YES;
         self.isEnabledIndicator  = NO;
