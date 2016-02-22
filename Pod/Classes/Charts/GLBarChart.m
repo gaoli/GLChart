@@ -1,5 +1,6 @@
 #import "GLBarChart.h"
 #import "GLChartData.h"
+#import "GLBar.h"
 #import "UIColor+Helper.h"
 
 @implementation GLBarChart
@@ -36,10 +37,32 @@
     
     self.chartView.frame       = frame;
     self.container.contentSize = frame.size;
+    
+    for (GLBar *bar in self.chartView.subviews) {
+        [bar removeFromSuperview];
+    }
 }
 
 - (void)drawChart {
     [super drawChart];
+    
+    CGFloat   h = self.container.contentSize.height;
+    
+    NSArray  *values = self.chartData.yValues;
+    
+    CGFloat   barWidth  = self.chartData.barWidth;
+    CGFloat   barMargin = self.chartData.barMargin;
+    
+    for (int i = 0; i < values.count; i++) {
+        GLBar *bar = [[GLBar alloc] init];
+        
+        CGRect frame = {{(barWidth + barMargin * 2) * i + barMargin, 0.0f}, {barWidth, h}};
+        
+        bar.frame = frame;
+        bar.data  = values[i];
+        
+        [self.chartView addSubview:bar];
+    }
 }
 
 - (void)getYValueRange {
@@ -91,7 +114,6 @@
 }
 
 - (void)createXAxisLabels {
-    CGFloat   w = self.container.contentSize.width;
     CGFloat   h = self.container.contentSize.height;
     
     NSArray  *values = self.chartData.xValues;
