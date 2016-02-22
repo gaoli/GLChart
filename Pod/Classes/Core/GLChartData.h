@@ -38,4 +38,9 @@
 @property (nonatomic, assign) CGFloat        indicatorLineWidth;
 @property (nonatomic,   copy) NSString      *indicatorLineColor;
 
+// 柱状图属性
+
+@property (nonatomic, assign) CGFloat        barWidth;
+@property (nonatomic, assign) CGFloat        barMargin;
+
 @end

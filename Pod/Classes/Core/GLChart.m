@@ -45,7 +45,7 @@
     CGFloat margin = self.chartData.margin;
     
     CGRect  gridLayerFrame = {{margin, margin}, {w - margin * 2, h - margin * 2}};
-    CGRect  containerFrame = {{margin, margin}, {w - margin * 2, h - margin * 2}};
+    CGRect  containerFrame = {{margin, margin}, {w - margin * 2, h - margin}};
     
     self.gridLayer.frame = gridLayerFrame;
     self.container.frame = containerFrame;

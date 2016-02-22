@@ -42,6 +42,11 @@
 
         self.indicatorLineWidth  = 0.5f;
         self.indicatorLineColor  = @"#999999";
+        
+        // 柱状图属性
+        
+        self.barWidth            = 20.0f;
+        self.barMargin           = 5.0f;
     }
     
     return self;
