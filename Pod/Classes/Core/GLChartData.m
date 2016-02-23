@@ -7,9 +7,7 @@
     
     if (self) {
         
-        // 通用属性
-        
-        self.margin              = 15.0f;
+        // ======= 通用属性 =======
         
         self.xValues             = [NSArray array];
         self.yValues             = [NSArray array];
@@ -19,10 +17,10 @@
         self.count               = 0;
         self.scale               = 0.0f;
         
+        self.margin              = 15.0f;
+        
         self.xStep               = 5;
         self.yStep               = 5;
-        
-        self.lineWidth           = 0.5f;
         
         self.gridLineWidth       = 0.5f;
         self.gridLineColor       = @"#DDDDDD";
@@ -33,19 +31,23 @@
         self.animated            = YES;
         self.duration            = 0.5;
         
-        // 折线图属性
+        // ======= 折线图表 =======
+        
+        self.lineWidth           = 0.5f;
         
         self.visibleRangeMaxNum  = 0;
         
         self.isFill              = YES;
+        
         self.isEnabledIndicator  = NO;
-
+        
         self.indicatorLineWidth  = 0.5f;
         self.indicatorLineColor  = @"#999999";
         
-        // 柱状图属性
+        // ======= 柱状图表 =======
         
         self.barWidth            = 20.0f;
+        
         self.barMargin           = 5.0f;
     }
     
