@@ -5,11 +5,14 @@
 [![License](https://img.shields.io/cocoapods/l/GLChart.svg?style=flat)](http://cocoapods.org/pods/GLChart)
 [![Platform](https://img.shields.io/cocoapods/p/GLChart.svg?style=flat)](http://cocoapods.org/pods/GLChart)
 
+## Screenshots
+
+<img src="Screenshots/lineChart.png" width="320px" /> &nbsp;
+<img src="Screenshots/barChart.png"  width="320px" />
+
 ## Usage
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
 
 ## Installation
 
