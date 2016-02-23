@@ -1,14 +1,14 @@
 PODS:
-  - GLChart (0.0.3):
-    - GLChart/Charts (= 0.0.3)
-    - GLChart/Components (= 0.0.3)
-    - GLChart/Core (= 0.0.3)
-  - GLChart/Charts (0.0.3):
+  - GLChart (0.0.4):
+    - GLChart/Charts (= 0.0.4)
+    - GLChart/Components (= 0.0.4)
+    - GLChart/Core (= 0.0.4)
+  - GLChart/Charts (0.0.4):
     - GLChart/Components
     - GLChart/Core
-  - GLChart/Components (0.0.3):
+  - GLChart/Components (0.0.4):
     - GLChart/Core
-  - GLChart/Core (0.0.3)
+  - GLChart/Core (0.0.4)
 
 DEPENDENCIES:
   - GLChart (from `../`)
@@ -18,6 +18,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  GLChart: 84befad4eb570bbce44451a547763c6389562aad
+  GLChart: 7961d4bad1cd731f78a0c76e2b5339e7f92e212b
 
 COCOAPODS: 0.35.0
