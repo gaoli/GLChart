@@ -22,6 +22,8 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		7446036AD009791114D97686 /* libPods-GLChart_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A42BBA39E4B31EEFDEE3DFAD /* libPods-GLChart_Tests.a */; };
+		F18870CA1C7C02CC007C0A28 /* GLLineChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F18870C91C7C02CC007C0A28 /* GLLineChartViewController.m */; };
+		F18870CD1C7C0860007C0A28 /* GLBarChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F18870CC1C7C0860007C0A28 /* GLBarChartViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,10 @@
 		B8BEC2EE42E85D7C2130A9B7 /* libPods-GLChart_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GLChart_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0E485CE735429F58890349C /* GLChart.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = GLChart.podspec; path = ../GLChart.podspec; sourceTree = "<group>"; };
 		C4EC208F87406293E43A2AA6 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		F18870C81C7C02CC007C0A28 /* GLLineChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLLineChartViewController.h; sourceTree = "<group>"; };
+		F18870C91C7C02CC007C0A28 /* GLLineChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLLineChartViewController.m; sourceTree = "<group>"; };
+		F18870CB1C7C0860007C0A28 /* GLBarChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLBarChartViewController.h; sourceTree = "<group>"; };
+		F18870CC1C7C0860007C0A28 /* GLBarChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLBarChartViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +138,10 @@
 				6003F59D195388D20070C39A /* GLAppDelegate.m */,
 				6003F5A5195388D20070C39A /* GLViewController.h */,
 				6003F5A6195388D20070C39A /* GLViewController.m */,
+				F18870CB1C7C0860007C0A28 /* GLBarChartViewController.h */,
+				F18870CC1C7C0860007C0A28 /* GLBarChartViewController.m */,
+				F18870C81C7C02CC007C0A28 /* GLLineChartViewController.h */,
+				F18870C91C7C02CC007C0A28 /* GLLineChartViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -142,9 +152,9 @@
 		6003F594195388D20070C39A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6003F595195388D20070C39A /* GLChart-Info.plist */,
-				6003F596195388D20070C39A /* InfoPlist.strings */,
 				6003F599195388D20070C39A /* main.m */,
+				6003F596195388D20070C39A /* InfoPlist.strings */,
+				6003F595195388D20070C39A /* GLChart-Info.plist */,
 				6003F59B195388D20070C39A /* GLChart-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -356,7 +366,9 @@
 			files = (
 				6003F59E195388D20070C39A /* GLAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* GLViewController.m in Sources */,
+				F18870CA1C7C02CC007C0A28 /* GLLineChartViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				F18870CD1C7C0860007C0A28 /* GLBarChartViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
