@@ -8,7 +8,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
     self.window.backgroundColor    = [UIColor whiteColor];
-    self.window.rootViewController = [[GLViewController alloc] init];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[GLViewController alloc] init]];
     
     [self.window makeKeyAndVisible];
     
