@@ -6,7 +6,7 @@ static CGFloat const kTipsPadding = 5.0f;
 static CGFloat const kTipsRectW   = 8.0f;
 static CGFloat const kTipsRectH   = 4.0f;
 
-@interface GLChartIndicator ()
+@interface GLChartIndicator () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UIView                 *wrapView;
 @property (nonatomic, strong) UIView                 *tipsView;
@@ -14,6 +14,8 @@ static CGFloat const kTipsRectH   = 4.0f;
 @property (nonatomic, strong) NSMutableArray         *dotLayers;
 @property (nonatomic, strong) UILabel                *timeLabel;
 @property (nonatomic, strong) NSMutableArray         *numLabels;
+@property (nonatomic, assign) CGFloat                 lastX;
+@property (nonatomic, assign) CGFloat                 lastY;
 @property (nonatomic, strong) UIPanGestureRecognizer *panGestureRecognizer;
 
 @end
@@ -24,9 +26,6 @@ static CGFloat const kTipsRectH   = 4.0f;
     self = [super init];
     
     if (self) {
-        self.dotLayers = [NSMutableArray array];
-        self.numLabels = [NSMutableArray array];
-        
         // 添加子类视图
         [self addSubview:self.wrapView];
         [self addSubview:self.tipsView];
@@ -47,6 +46,8 @@ static CGFloat const kTipsRectH   = 4.0f;
     
     self.wrapView.layer.sublayers = nil;
     
+    self.lastX     = 0.0f;
+    self.lastY     = 0.0f;
     self.lineLayer = nil;
     self.timeLabel = nil;
     self.dotLayers = [NSMutableArray array];
@@ -75,9 +76,9 @@ static CGFloat const kTipsRectH   = 4.0f;
         }
         
         CGRect   rectViewFrame = {{kTipsPadding, kTipsPadding + labelSize.height * (i + 1) + (labelSize.height - kTipsRectH) / 2},
-                                  {kTipsRectW, kTipsRectH}};
+            {kTipsRectW, kTipsRectH}};
         CGRect   numLabelFrame = {{kTipsPadding * 2 + kTipsRectW, kTipsPadding + labelSize.height * (i + 1)},
-                                  {0.0f, labelSize.height}};
+            {0.0f, labelSize.height}};
         
         UIView  *rectView = [[UIView  alloc] initWithFrame:rectViewFrame];
         UILabel *numLabel = [[UILabel alloc] initWithFrame:numLabelFrame];
@@ -132,7 +133,7 @@ static CGFloat const kTipsRectH   = 4.0f;
         self.wrapView.hidden = NO;
         self.tipsView.hidden = NO;
         
-    // 拖拽正在进行
+        // 拖拽正在进行
     } else if (recognizer.state == UIGestureRecognizerStateChanged) {
         
         // 获取偏移数值
@@ -153,7 +154,7 @@ static CGFloat const kTipsRectH   = 4.0f;
             [self drawDots:x index:index];
         }
         
-    // 拖拽已经结束
+        // 拖拽已经结束
     } else if (recognizer.state == UIGestureRecognizerStateEnded) {
         self.wrapView.hidden = YES;
         self.tipsView.hidden = YES;
@@ -254,6 +255,47 @@ static CGFloat const kTipsRectH   = 4.0f;
     self.tipsView.frame = frame;
 }
 
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    if ([gestureRecognizer isKindOfClass:NSClassFromString(@"UIGestureRecognizer")] &&
+        [gestureRecognizer isKindOfClass:NSClassFromString(@"UIScrollViewPanGestureRecognizer")] == NO) {
+        CGPoint p = [gestureRecognizer locationInView:self];
+        CGFloat x = p.x;
+        CGFloat y = p.y;
+        
+        CGFloat offsetX = fabs(self.lastX - x);
+        CGFloat offsetY = fabs(self.lastY - y);
+        
+        self.lastX = 0.0f;
+        self.lastY = 0.0f;
+        
+        if (offsetX > offsetY) {
+            return YES;
+        } else {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    CGPoint p = [gestureRecognizer locationInView:self];
+    CGFloat x = p.x;
+    CGFloat y = p.y;
+    
+    self.lastX = x;
+    self.lastY = y;
+    
+    if ([gestureRecognizer      isKindOfClass:NSClassFromString(@"UIGestureRecognizer")] &&
+        [otherGestureRecognizer isKindOfClass:NSClassFromString(@"UIScrollViewPanGestureRecognizer")]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 #pragma mark - getters and setters
 
 - (void)setChartData:(GLChartData *)chartData {
@@ -313,6 +355,8 @@ static CGFloat const kTipsRectH   = 4.0f;
 - (UIPanGestureRecognizer *)panGestureRecognizer {
     if (_panGestureRecognizer == nil) {
         _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+        
+        _panGestureRecognizer.delegate = self;
     }
     
     return _panGestureRecognizer;
