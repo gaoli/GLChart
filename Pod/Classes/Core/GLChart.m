@@ -5,6 +5,7 @@
 @interface GLChart ()
 
 @property (nonatomic, strong) CAShapeLayer *gridLayer;
+@property (nonatomic, strong) UIView       *yAxisView;
 
 @end
 
@@ -22,6 +23,7 @@
         
         // 添加子类视图
         [self addSubview:self.container];
+        [self addSubview:self.yAxisView];
         
         // 设置背景颜色
         self.backgroundColor = [UIColor whiteColor];
@@ -46,9 +48,11 @@
     
     CGRect  gridLayerFrame = {{margin, margin}, {w - margin * 2, h - margin * 2}};
     CGRect  containerFrame = {{margin, margin}, {w - margin * 2, h - margin}};
+    CGRect  yAxisViewFrame = {{margin, margin}, {w - margin * 2, h - margin * 2}};
     
     self.gridLayer.frame = gridLayerFrame;
     self.container.frame = containerFrame;
+    self.yAxisView.frame = yAxisViewFrame;
     
     for (UILabel *label in self.xAxisLabels) {
         [label removeFromSuperview];
@@ -131,10 +135,9 @@
 - (void)createYAxisLabels {
     CGFloat     h = self.gridLayer.frame.size.height;
     
-    CGFloat     min    = self.chartData.min;
-    CGFloat     max    = self.chartData.max;
-    NSUInteger  step   = self.chartData.yStep;
-    CGFloat     margin = self.chartData.margin;
+    CGFloat     min  = self.chartData.min;
+    CGFloat     max  = self.chartData.max;
+    NSUInteger  step = self.chartData.yStep;
     
     CGFloat     labelFontSize  = self.chartData.labelFontSize;
     NSString   *labelTextColor = self.chartData.labelTextColor;
@@ -147,8 +150,8 @@
         
         NSString *labelText = [[NSString alloc] initWithFormat:@"%.2f", value];
         CGSize    labelSize = [labelText sizeWithAttributes:@{@"NSFontAttributeName": [UIFont systemFontOfSize:labelFontSize]}];
-        CGRect    labelRect = {{margin, h / step * i + margin}, labelSize};
-
+        CGRect    labelRect = {{0.0f, h / step * i}, labelSize};
+        
         label.frame           = labelRect;
         label.text            = labelText;
         label.font            = [UIFont systemFontOfSize   :labelFontSize];
@@ -159,7 +162,7 @@
         label.layer.cornerRadius  = 2.0f;
         label.layer.masksToBounds = YES;
         
-        [self addSubview:label];
+        [self.yAxisView addSubview:label];
     }
 }
 
@@ -169,12 +172,14 @@
     _chartData = chartData;
     
     [self parseData];
+    
     [self initChart];
     [self drawChart];
-    [self loadComponents];
     
     [self drawGrid];
     [self drawAxis];
+    
+    [self loadComponents];
 }
 
 - (CAShapeLayer *)gridLayer {
@@ -196,6 +201,14 @@
     }
     
     return _container;
+}
+
+- (UIView *)yAxisView {
+    if (_yAxisView == nil) {
+        _yAxisView = [[UIView alloc] init];
+    }
+    
+    return _yAxisView;
 }
 
 - (UIView *)chartView {
