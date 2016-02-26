@@ -60,7 +60,10 @@ static CGFloat const kTipsRectH   = 4.0f;
     
     NSString *labelText = @"11:11";
     CGSize    labelSize = [labelText sizeWithAttributes:@{@"NSFontAttributeName": [UIFont systemFontOfSize:labelFontSize]}];
-    CGFloat   tipsViewH = kTipsPadding * 2 + labelSize.height * (self.chartData.yValues.count + 1);
+    CGFloat   tipsViewH = 0.0f;
+    
+    tipsViewH += kTipsPadding;
+    tipsViewH += labelSize.height;
     
     self.timeLabel.frame = CGRectMake(kTipsPadding, kTipsPadding, 0.0f, labelSize.height);
     
@@ -71,14 +74,14 @@ static CGFloat const kTipsRectH   = 4.0f;
         NSArray      *value = dict[@"value"];
         UIColor      *color = [UIColor colorWithHexString:dict[@"color"]];
         
-        if (value == nil || color == nil) {
+        if (value == nil || value.count == 0 || color == nil) {
             continue;
         }
         
-        CGRect   rectViewFrame = {{kTipsPadding, kTipsPadding + labelSize.height * (i + 1) + (labelSize.height - kTipsRectH) / 2},
-            {kTipsRectW, kTipsRectH}};
-        CGRect   numLabelFrame = {{kTipsPadding * 2 + kTipsRectW, kTipsPadding + labelSize.height * (i + 1)},
-            {0.0f, labelSize.height}};
+        CGRect   rectViewFrame = {{kTipsPadding, tipsViewH + (labelSize.height - kTipsRectH) / 2}, {kTipsRectW, kTipsRectH}};
+        CGRect   numLabelFrame = {{kTipsPadding * 2 + kTipsRectW, tipsViewH}, {0.0f, labelSize.height}};
+        
+        tipsViewH += labelSize.height;
         
         UIView  *rectView = [[UIView  alloc] initWithFrame:rectViewFrame];
         UILabel *numLabel = [[UILabel alloc] initWithFrame:numLabelFrame];
@@ -92,6 +95,8 @@ static CGFloat const kTipsRectH   = 4.0f;
         [self.tipsView addSubview:rectView];
         [self.tipsView addSubview:numLabel];
     }
+    
+    tipsViewH += kTipsPadding;
     
     self.tipsView.frame = CGRectMake(0.0f, (self.frame.size.height - tipsViewH) / 2, 0.0f, tipsViewH);
     
