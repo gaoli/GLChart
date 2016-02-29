@@ -39,6 +39,44 @@ static CGFloat const kTipsRectH   = 4.0f;
 
 #pragma mark - event response
 
+- (void)handlePan:(UIPanGestureRecognizer *)recognizer {
+    CGFloat w = self.frame.size.width;
+    
+    // 拖拽已经开始
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        self.wrapView.hidden = NO;
+        self.tipsView.hidden = NO;
+        
+        // 拖拽正在进行
+    } else if (recognizer.state == UIGestureRecognizerStateChanged) {
+        
+        // 获取偏移数值
+        CGFloat x = [recognizer locationInView:self].x;
+        
+        // 纠正偏移数值
+        x = x < 0 ? 0 : x;
+        x = x > w ? w : x;
+        
+        NSUInteger count = self.chartData.count;
+        CGFloat    width = w / (count - 1);
+        NSUInteger index = x / width;
+        
+        if (index < count) {
+            x = index * width;
+            
+            [self drawLine:x index:index];
+            [self drawDots:x index:index];
+        }
+        
+        // 拖拽已经结束
+    } else if (recognizer.state == UIGestureRecognizerStateEnded) {
+        self.wrapView.hidden = YES;
+        self.tipsView.hidden = YES;
+    }
+}
+
+#pragma mark - private methods
+
 - (void)resetComponent {
     for (UIView *view in self.tipsView.subviews) {
         [view removeFromSuperview];
@@ -130,42 +168,6 @@ static CGFloat const kTipsRectH   = 4.0f;
     }
 }
 
-- (void)handlePan:(UIPanGestureRecognizer *)recognizer {
-    CGFloat w = self.frame.size.width;
-    
-    // 拖拽已经开始
-    if (recognizer.state == UIGestureRecognizerStateBegan) {
-        self.wrapView.hidden = NO;
-        self.tipsView.hidden = NO;
-        
-        // 拖拽正在进行
-    } else if (recognizer.state == UIGestureRecognizerStateChanged) {
-        
-        // 获取偏移数值
-        CGFloat x = [recognizer locationInView:self].x;
-        
-        // 纠正偏移数值
-        x = x < 0 ? 0 : x;
-        x = x > w ? w : x;
-        
-        NSUInteger count = self.chartData.count;
-        CGFloat    width = w / (count - 1);
-        NSUInteger index = x / width;
-        
-        if (index < count) {
-            x = index * width;
-            
-            [self drawLine:x index:index];
-            [self drawDots:x index:index];
-        }
-        
-        // 拖拽已经结束
-    } else if (recognizer.state == UIGestureRecognizerStateEnded) {
-        self.wrapView.hidden = YES;
-        self.tipsView.hidden = YES;
-    }
-}
-
 - (void)drawLine:(CGFloat)x index:(NSUInteger)index {
     CGFloat h = self.frame.size.height;
     
@@ -230,7 +232,8 @@ static CGFloat const kTipsRectH   = 4.0f;
     self.timeLabel.text  = timeLabelText;
     
     for (int i = 0; i < value.count; i++) {
-        NSString *labelText = [[NSString alloc] initWithFormat:@"%.2f", [value[i] floatValue]];
+        
+        NSString *labelText = [[NSString alloc] initWithFormat:@"%@", value[i]];
         CGSize    labelSize = [labelText sizeWithAttributes:@{@"NSFontAttributeName": [UIFont systemFontOfSize:labelFontSize]}];
         
         if (labelMaxWidth < labelSize.width) {
