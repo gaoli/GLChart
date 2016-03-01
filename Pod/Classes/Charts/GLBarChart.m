@@ -38,7 +38,7 @@
     self.chartView.frame       = frame;
     self.container.contentSize = frame.size;
     
-    if (self.chartData.barChartDirection == GLBarChartDirectionLeft) {
+    if (self.chartData.chartInitDirection == GLChartInitDirectionLeft) {
         self.container.contentOffset = CGPointMake(0.0f, 0.0f);
     } else {
         self.container.contentOffset = CGPointMake(contentWidth - (w - margin * 2), 0.0f);

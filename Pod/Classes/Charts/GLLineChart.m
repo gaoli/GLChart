@@ -81,6 +81,12 @@
         
         self.chartView.frame       = frame;
         self.container.contentSize = frame.size;
+        
+        if (self.chartData.chartInitDirection == GLChartInitDirectionLeft) {
+            self.container.contentOffset = CGPointMake(-margin, 0.0f);
+        } else {
+            self.container.contentOffset = CGPointMake(frame.size.width - (w - margin), 0.0f);
+        }
     } else {
         CGRect frame = {{0.0f, 0.0f}, {w - margin * 2, h - margin * 2}};
         

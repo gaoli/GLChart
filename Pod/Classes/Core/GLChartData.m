@@ -31,6 +31,8 @@
         self.animated           = YES;
         self.duration           = 0.5;
         
+        self.chartInitDirection = GLChartInitDirectionLeft;
+        
         // ======= 折线图表 =======
         
         self.lineWidth          = 0.5f;
@@ -45,8 +47,6 @@
         self.indicatorLineColor = @"#999999";
         
         // ======= 柱状图表 =======
-        
-        self.barChartDirection  = GLBarChartDirectionLeft;
         
         self.barWidth           = 20.0f;
         
