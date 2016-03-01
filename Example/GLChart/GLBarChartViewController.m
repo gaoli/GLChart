@@ -73,11 +73,11 @@ static NSString *const kBarChartCellIdentifier = @"GLBarChartCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case 0:
-            self.chartData.barChartDirection = GLBarChartDirectionLeft;
+            self.chartData.chartInitDirection = GLChartInitDirectionLeft;
             break;
             
         case 1:
-            self.chartData.barChartDirection = GLBarChartDirectionRight;
+            self.chartData.chartInitDirection = GLChartInitDirectionRight;
             break;
     }
     

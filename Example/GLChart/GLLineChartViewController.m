@@ -89,6 +89,7 @@ static NSString *const kLineChartCellIdentifier = @"GLLineChartCell";
         case 0:
             self.chartData.isFill             = YES;
             self.chartData.visibleRangeMaxNum = 0;
+            self.chartData.chartInitDirection = GLChartInitDirectionLeft;
             self.chartData.isEnabledIndicator = NO;
             break;
             
@@ -102,6 +103,10 @@ static NSString *const kLineChartCellIdentifier = @"GLLineChartCell";
             break;
             
         case 3:
+            self.chartData.chartInitDirection = GLChartInitDirectionRight;
+            break;
+            
+        case 4:
             self.chartData.visibleRangeMaxNum = 0;
             self.chartData.isEnabledIndicator = YES;
             break;
@@ -117,7 +122,7 @@ static NSString *const kLineChartCellIdentifier = @"GLLineChartCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -141,6 +146,10 @@ static NSString *const kLineChartCellIdentifier = @"GLLineChartCell";
             break;
             
         case 3:
+            cell.textLabel.text = @"设置初始化向右";
+            break;
+            
+        case 4:
             cell.textLabel.text = @"显示图表指标器";
             break;
     }
