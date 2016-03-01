@@ -35,31 +35,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.chartData.xValues = @[@"10:01", @"10:02", @"10:03", @"10:04", @"10:05",
-                               @"10:06", @"10:07", @"10:08", @"10:09", @"10:10",
-                               @"10:11", @"10:12", @"10:13", @"10:14", @"10:15",
-                               @"10:16", @"10:17", @"10:18", @"10:19", @"10:20"];
+    self.chartData.xValues = @[@"10:01", @"10:02", @"10:03", @"10:04", @"10:05", @"10:06", @"10:07",
+                               @"10:08", @"10:09", @"10:10", @"10:11", @"10:12", @"10:13", @"10:14",
+                               @"10:15", @"10:16", @"10:17", @"10:18", @"10:19", @"10:20", @"10:21"];
     
-    self.chartData.yValues = @[@[@{@"value": @10, @"color": @"#7ED321"}, @{@"value": @5, @"color": @"#E74C3C"}],
-                               @[@{@"value": @10, @"color": @"#7ED321"}, @{@"value": @5, @"color": @"#E74C3C"}],
-                               @[@{@"value": @10, @"color": @"#7ED321"}, @{@"value": @5, @"color": @"#E74C3C"}],
-                               @[@{@"value": @10, @"color": @"#7ED321"}, @{@"value": @5, @"color": @"#E74C3C"}],
-                               @[@{@"value": @10, @"color": @"#7ED321"}, @{@"value": @5, @"color": @"#E74C3C"}],
-                               @[@{@"value": @10, @"color": @"#7ED321"}, @{@"value": @5, @"color": @"#E74C3C"}],
-                               @[@{@"value": @10, @"color": @"#7ED321"}, @{@"value": @5, @"color": @"#E74C3C"}],
-                               @[@{@"value": @10, @"color": @"#7ED321"}, @{@"value": @5, @"color": @"#E74C3C"}],
-                               @[@{@"value": @10, @"color": @"#7ED321"}, @{@"value": @5, @"color": @"#E74C3C"}],
-                               @[@{@"value": @10, @"color": @"#7ED321"}, @{@"value": @5, @"color": @"#E74C3C"}],
-                               @[@{@"value": @10, @"color": @"#7ED321"}, @{@"value": @5, @"color": @"#E74C3C"}],
-                               @[@{@"value": @10, @"color": @"#7ED321"}, @{@"value": @5, @"color": @"#E74C3C"}],
-                               @[@{@"value": @10, @"color": @"#7ED321"}, @{@"value": @5, @"color": @"#E74C3C"}],
-                               @[@{@"value": @10, @"color": @"#7ED321"}, @{@"value": @5, @"color": @"#E74C3C"}],
-                               @[@{@"value": @10, @"color": @"#7ED321"}, @{@"value": @5, @"color": @"#E74C3C"}],
-                               @[@{@"value": @10, @"color": @"#7ED321"}, @{@"value": @5, @"color": @"#E74C3C"}],
-                               @[@{@"value": @10, @"color": @"#7ED321"}, @{@"value": @5, @"color": @"#E74C3C"}],
-                               @[@{@"value": @10, @"color": @"#7ED321"}, @{@"value": @5, @"color": @"#E74C3C"}],
-                               @[@{@"value": @10, @"color": @"#7ED321"}, @{@"value": @5, @"color": @"#E74C3C"}],
-                               @[@{@"value": @10, @"color": @"#7ED321"}, @{@"value": @5, @"color": @"#E74C3C"}]];
+    self.chartData.yValues = @[@[@{@"value": @0,   @"color": @"#7CB5EC"}, @{@"value": @100, @"color": @"#F7A35C"}],
+                               @[@{@"value": @10,  @"color": @"#7CB5EC"}, @{@"value": @90,  @"color": @"#F7A35C"}],
+                               @[@{@"value": @20,  @"color": @"#7CB5EC"}, @{@"value": @80,  @"color": @"#F7A35C"}],
+                               @[@{@"value": @30,  @"color": @"#7CB5EC"}, @{@"value": @70,  @"color": @"#F7A35C"}],
+                               @[@{@"value": @40,  @"color": @"#7CB5EC"}, @{@"value": @60,  @"color": @"#F7A35C"}],
+                               @[@{@"value": @50,  @"color": @"#7CB5EC"}, @{@"value": @50,  @"color": @"#F7A35C"}],
+                               @[@{@"value": @60,  @"color": @"#7CB5EC"}, @{@"value": @40,  @"color": @"#F7A35C"}],
+                               @[@{@"value": @70,  @"color": @"#7CB5EC"}, @{@"value": @30,  @"color": @"#F7A35C"}],
+                               @[@{@"value": @80,  @"color": @"#7CB5EC"}, @{@"value": @20,  @"color": @"#F7A35C"}],
+                               @[@{@"value": @90,  @"color": @"#7CB5EC"}, @{@"value": @10,  @"color": @"#F7A35C"}],
+                               @[@{@"value": @100, @"color": @"#7CB5EC"}, @{@"value": @0,   @"color": @"#F7A35C"}],
+                               @[@{@"value": @90,  @"color": @"#7CB5EC"}, @{@"value": @10,  @"color": @"#F7A35C"}],
+                               @[@{@"value": @80,  @"color": @"#7CB5EC"}, @{@"value": @20,  @"color": @"#F7A35C"}],
+                               @[@{@"value": @70,  @"color": @"#7CB5EC"}, @{@"value": @30,  @"color": @"#F7A35C"}],
+                               @[@{@"value": @60,  @"color": @"#7CB5EC"}, @{@"value": @40,  @"color": @"#F7A35C"}],
+                               @[@{@"value": @50,  @"color": @"#7CB5EC"}, @{@"value": @50,  @"color": @"#F7A35C"}],
+                               @[@{@"value": @40,  @"color": @"#7CB5EC"}, @{@"value": @60,  @"color": @"#F7A35C"}],
+                               @[@{@"value": @30,  @"color": @"#7CB5EC"}, @{@"value": @70,  @"color": @"#F7A35C"}],
+                               @[@{@"value": @20,  @"color": @"#7CB5EC"}, @{@"value": @80,  @"color": @"#F7A35C"}],
+                               @[@{@"value": @10,  @"color": @"#7CB5EC"}, @{@"value": @90,  @"color": @"#F7A35C"}],
+                               @[@{@"value": @0,   @"color": @"#7CB5EC"}, @{@"value": @100, @"color": @"#F7A35C"}]];
     
     self.barChart.chartData = self.chartData;
 }
