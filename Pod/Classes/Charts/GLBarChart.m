@@ -38,6 +38,12 @@
     self.chartView.frame       = frame;
     self.container.contentSize = frame.size;
     
+    if (self.chartData.barChartDirection == GLBarChartDirectionLeft) {
+        self.container.contentOffset = CGPointMake(0.0f, 0.0f);
+    } else {
+        self.container.contentOffset = CGPointMake(contentWidth - (w - margin * 2), 0.0f);
+    }
+    
     for (GLBar *bar in self.chartView.subviews) {
         [bar removeFromSuperview];
     }

@@ -9,46 +9,48 @@
         
         // ======= 通用属性 =======
         
-        self.xValues             = [NSArray array];
-        self.yValues             = [NSArray array];
+        self.xValues            = [NSArray array];
+        self.yValues            = [NSArray array];
         
-        self.min                 =  MAXFLOAT;
-        self.max                 = -MAXFLOAT;
-        self.count               = 0;
-        self.scale               = 0.0f;
+        self.min                =  MAXFLOAT;
+        self.max                = -MAXFLOAT;
+        self.count              = 0;
+        self.scale              = 0.0f;
         
-        self.margin              = 15.0f;
+        self.margin             = 15.0f;
         
-        self.xStep               = 5;
-        self.yStep               = 5;
+        self.xStep              = 5;
+        self.yStep              = 5;
         
-        self.gridLineWidth       = 0.5f;
-        self.gridLineColor       = @"#DDDDDD";
+        self.gridLineWidth      = 0.5f;
+        self.gridLineColor      = @"#DDDDDD";
         
-        self.labelFontSize       = 9.0f;
-        self.labelTextColor      = @"#999999";
+        self.labelFontSize      = 9.0f;
+        self.labelTextColor     = @"#999999";
         
-        self.animated            = YES;
-        self.duration            = 0.5;
+        self.animated           = YES;
+        self.duration           = 0.5;
         
         // ======= 折线图表 =======
         
-        self.lineWidth           = 0.5f;
+        self.lineWidth          = 0.5f;
         
-        self.visibleRangeMaxNum  = 0;
+        self.visibleRangeMaxNum = 0;
         
-        self.isFill              = YES;
+        self.isFill             = YES;
         
-        self.isEnabledIndicator  = NO;
+        self.isEnabledIndicator = NO;
         
-        self.indicatorLineWidth  = 0.5f;
-        self.indicatorLineColor  = @"#999999";
+        self.indicatorLineWidth = 0.5f;
+        self.indicatorLineColor = @"#999999";
         
         // ======= 柱状图表 =======
         
-        self.barWidth            = 20.0f;
+        self.barChartDirection  = GLBarChartDirectionLeft;
         
-        self.barMargin           = 5.0f;
+        self.barWidth           = 20.0f;
+        
+        self.barMargin          = 5.0f;
     }
     
     return self;
