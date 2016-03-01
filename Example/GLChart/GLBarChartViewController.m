@@ -2,10 +2,13 @@
 #import "GLChartData.h"
 #import "GLBarChart.h"
 
-@interface GLBarChartViewController ()
+static NSString *const kBarChartCellIdentifier = @"GLBarChartCell";
+
+@interface GLBarChartViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) GLChartData *chartData;
 @property (nonatomic, strong) GLBarChart  *barChart;
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -30,6 +33,7 @@
     
     // 添加子类视图
     [self.view addSubview:self.barChart];
+    [self.view addSubview:self.tableView];
 }
 
 - (void)viewDidLoad {
@@ -64,6 +68,53 @@
     self.barChart.chartData = self.chartData;
 }
 
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.row) {
+        case 0:
+            self.chartData.barChartDirection = GLBarChartDirectionLeft;
+            break;
+            
+        case 1:
+            self.chartData.barChartDirection = GLBarChartDirectionRight;
+            break;
+    }
+    
+    self.barChart.chartData = self.chartData;
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 2;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kBarChartCellIdentifier];
+    
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kBarChartCellIdentifier];
+    }
+    
+    switch (indexPath.row) {
+        case 0:
+            cell.textLabel.text = @"恢复图表默认值";
+            break;
+            
+        case 1:
+            cell.textLabel.text = @"设置初始化向右";
+            break;
+    }
+    
+    return cell;
+}
+
+
 #pragma mark - getters and setters
 
 - (GLChartData *)chartData {
@@ -82,6 +133,20 @@
     }
     
     return _barChart;
+}
+
+- (UITableView *)tableView {
+    if (_tableView == nil) {
+        _tableView = [[UITableView alloc] init];
+        
+        _tableView.frame          = CGRectMake(0, 200.0f, self.view.frame.size.width, self.view.frame.size.height - 200.0f);
+        _tableView.delegate       = self;
+        _tableView.dataSource     = self;
+        _tableView.rowHeight      = 50.0f;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    
+    return _tableView;
 }
 
 @end
