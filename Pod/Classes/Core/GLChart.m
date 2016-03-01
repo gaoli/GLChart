@@ -34,10 +34,49 @@
 
 #pragma mark - private methods
 
+- (BOOL)isPureInt:(CGFloat)value {
+    NSString  *string  = [[NSString alloc] initWithFormat:@"%.2f", value];
+    NSScanner *scanner = [[NSScanner alloc] initWithString:string];
+    
+    int val;
+    
+    [scanner scanInt:&val];
+    
+    return val == value;
+}
+
 - (void)parseData {
+    self.chartData.min =  MAXFLOAT;
+    self.chartData.max = -MAXFLOAT;
+}
+
+- (void)checkData {
     if (self.chartData.xStep > self.chartData.xValues.count) {
         self.chartData.xStep = self.chartData.xValues.count;
     }
+    
+    // 优化Y轴增量
+    NSUInteger scale = 1;
+    
+    if (self.chartData.max < 10) {
+        scale = 100;
+    }
+    
+    NSUInteger max = (NSUInteger)(self.chartData.max * scale);
+    NSUInteger len = [[[NSString alloc] initWithFormat:@"%lu", max] length];
+    
+    NSUInteger cha = 5 * pow(10, len - 2);
+    NSUInteger mod = max % cha;
+    
+    if (mod != 0) {
+        max = max + (cha - mod);
+    }
+    
+    while ((max / 5) % cha != 0) {
+        max = max + cha;
+    }
+    
+    self.chartData.max = (CGFloat)max / (CGFloat)scale;
 }
 
 - (void)initChart {
@@ -144,11 +183,19 @@
     
     for (int i = 0; i < step; i++) {
         UILabel *label = [[UILabel alloc] init];
-        CGFloat  value = min + (max - min) / step * (step - i);
+        CGFloat  value = max / step * (step - i);
         
         [self.yAxisLabels addObject:label];
         
-        NSString *labelText = [[NSString alloc] initWithFormat:@"%.2f", value];
+        NSString *format = @"";
+        
+        if ([self isPureInt:value]) {
+            format = @"%.0f";
+        } else {
+            format = @"%.2f";
+        }
+        
+        NSString *labelText = [[NSString alloc] initWithFormat:format, value];
         CGSize    labelSize = [labelText sizeWithAttributes:@{@"NSFontAttributeName": [UIFont systemFontOfSize:labelFontSize]}];
         CGRect    labelRect = {{0.0f, h / step * i}, labelSize};
         
@@ -172,6 +219,7 @@
     _chartData = chartData;
     
     [self parseData];
+    [self checkData];
     
     [self initChart];
     [self drawChart];

@@ -12,8 +12,8 @@
         self.xValues             = [NSArray array];
         self.yValues             = [NSArray array];
         
-        self.min                 = 0.0f;
-        self.max                 = 0.0f;
+        self.min                 =  MAXFLOAT;
+        self.max                 = -MAXFLOAT;
         self.count               = 0;
         self.scale               = 0.0f;
         

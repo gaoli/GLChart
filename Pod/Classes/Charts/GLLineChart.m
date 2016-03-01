@@ -94,7 +94,7 @@
 - (void)drawChart {
     [super drawChart];
     
-    self.chartData.scale = self.chartView.frame.size.height / (self.chartData.max - self.chartData.min);
+    self.chartData.scale = self.chartView.frame.size.height / self.chartData.max;
     
     for (NSDictionary *dict in self.chartData.yValues) {
         NSArray *value = dict[@"value"];
