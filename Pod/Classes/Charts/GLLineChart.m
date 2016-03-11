@@ -87,11 +87,17 @@
         } else {
             self.container.contentOffset = CGPointMake(frame.size.width - (w - margin), 0.0f);
         }
+        
+        self.maskLView.hidden = NO;
+        self.maskRView.hidden = NO;
     } else {
         CGRect frame = {{0.0f, 0.0f}, {w - margin * 2, h - margin * 2}};
         
         self.chartView.frame       = frame;
         self.container.contentSize = frame.size;
+        
+        self.maskLView.hidden = YES;
+        self.maskRView.hidden = YES;
     }
     
     self.chartView.layer.sublayers = nil;
@@ -224,6 +230,7 @@
     if (_maskLView == nil) {
         _maskLView = [[UIView alloc] init];
         
+        _maskLView.hidden          = YES;
         _maskLView.backgroundColor = [UIColor whiteColor];
     }
     
@@ -234,6 +241,7 @@
     if (_maskRView == nil) {
         _maskRView = [[UIView alloc] init];
         
+        _maskRView.hidden          = YES;
         _maskRView.backgroundColor = [UIColor whiteColor];
     }
     
