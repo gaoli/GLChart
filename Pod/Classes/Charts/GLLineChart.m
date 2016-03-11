@@ -110,13 +110,19 @@
             continue;
         }
         
+        CGFloat width = [dict[@"width"] floatValue];
+        
+        if (width == 0.0f) {
+            width = self.chartData.lineWidth;
+        }
+        
         CAShapeLayer *pathLayer = [[CAShapeLayer alloc] init];
         UIBezierPath *pathFrom  = [self getPathWithValue:value scale:0.0f                 close:NO];
         UIBezierPath *pathTo    = [self getPathWithValue:value scale:self.chartData.scale close:NO];
         
         pathLayer.path        = pathTo.CGPath;
         pathLayer.fillColor   = nil;
-        pathLayer.lineWidth   = self.chartData.lineWidth;
+        pathLayer.lineWidth   = width;
         pathLayer.strokeColor = color.CGColor;
         
         [self.chartView.layer addSublayer:pathLayer];
