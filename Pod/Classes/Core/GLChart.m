@@ -34,17 +34,6 @@
 
 #pragma mark - private methods
 
-- (BOOL)isPureInt:(CGFloat)value {
-    NSString  *string  = [[NSString alloc] initWithFormat:@"%.2f", value];
-    NSScanner *scanner = [[NSScanner alloc] initWithString:string];
-    
-    int val;
-    
-    [scanner scanInt:&val];
-    
-    return val == value;
-}
-
 - (void)parseData {
     self.chartData.min =  MAXFLOAT;
     self.chartData.max = -MAXFLOAT;
@@ -56,27 +45,31 @@
     }
     
     // 优化Y轴增量
-    NSUInteger scale = 1;
-    
-    if (self.chartData.max < 10) {
-        scale = 100;
+    if (self.chartData.max > 0) {
+        NSUInteger scale = 1;
+        
+        while (self.chartData.max * scale < 10) {
+            scale = scale * 10;
+        }
+        
+        NSUInteger max = (NSUInteger)(self.chartData.max * scale);
+        NSUInteger len = [[[NSString alloc] initWithFormat:@"%lu", max] length];
+        
+        if (max > 0) {
+            NSUInteger cha = 5 * pow(10, len - 2);
+            NSUInteger mod = max % cha;
+            
+            if (mod != 0) {
+                max = max + (cha - mod);
+            }
+            
+            while ((max / 5) % cha != 0) {
+                max = max + cha;
+            }
+            
+            self.chartData.max = (CGFloat)max / (CGFloat)scale;
+        }
     }
-    
-    NSUInteger max = (NSUInteger)(self.chartData.max * scale);
-    NSUInteger len = [[[NSString alloc] initWithFormat:@"%lu", max] length];
-    
-    NSUInteger cha = 5 * pow(10, len - 2);
-    NSUInteger mod = max % cha;
-    
-    if (mod != 0) {
-        max = max + (cha - mod);
-    }
-    
-    while ((max / 5) % cha != 0) {
-        max = max + cha;
-    }
-    
-    self.chartData.max = (CGFloat)max / (CGFloat)scale;
 }
 
 - (void)initChart {
@@ -187,15 +180,7 @@
         
         [self.yAxisLabels addObject:label];
         
-        NSString *format = @"";
-        
-        if ([self isPureInt:value]) {
-            format = @"%.0f";
-        } else {
-            format = @"%.2f";
-        }
-        
-        NSString *labelText = [[NSString alloc] initWithFormat:format, value];
+        NSString *labelText = [[NSString alloc] initWithFormat:@"%g", value];
         CGSize    labelSize = [labelText sizeWithAttributes:@{@"NSFontAttributeName": [UIFont systemFontOfSize:labelFontSize]}];
         CGRect    labelRect = {{0.0f, h / step * i}, labelSize};
         
