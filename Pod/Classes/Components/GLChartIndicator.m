@@ -174,7 +174,8 @@ static CGFloat const kTipsRectH   = 4.0f;
                                     numLabel.frame.size.height);
     }
     
-    self.tipsView.frame = CGRectMake(0.0f, (self.frame.size.height - tipsViewH) / 2, 0.0f, tipsViewH);
+    self.tipsView.frame             = CGRectMake(0.0f, (self.frame.size.height - tipsViewH) / 2, 0.0f, tipsViewH);
+    self.tipsView.layer.borderColor = [UIColor colorWithHexString:self.chartData.indicatorBorderColor].CGColor;
     
     [self addSubview:self.tipsView];
 }
@@ -367,7 +368,6 @@ static CGFloat const kTipsRectH   = 4.0f;
         _tipsView.backgroundColor     = [UIColor whiteColor];
         
         _tipsView.layer.borderWidth   = 0.5f;
-        _tipsView.layer.borderColor   = [UIColor colorWithHexString:@"#7DB9FF"].CGColor;
         _tipsView.layer.cornerRadius  = 4.0f;
         _tipsView.layer.masksToBounds = YES;
     }

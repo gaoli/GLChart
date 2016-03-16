@@ -45,6 +45,7 @@
         
         self.indicatorLineWidth      = 0.5f;
         self.indicatorLineColor      = @"#999999";
+        self.indicatorBorderColor    = @"#999999";
         self.indicatorLabelFontSize  = 9.0f;
         self.indicatorLabelTextColor = @"#999999";
         
