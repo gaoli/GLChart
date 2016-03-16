@@ -93,8 +93,8 @@ static CGFloat const kTipsRectH   = 4.0f;
 }
 
 - (void)createTipsView {
-    CGFloat   labelFontSize  = self.chartData.labelFontSize;
-    NSString *labelTextColor = self.chartData.labelTextColor;
+    CGFloat   labelFontSize  = self.chartData.indicatorLabelFontSize;
+    NSString *labelTextColor = self.chartData.indicatorLabelTextColor;
     
     NSString *labelText = @"11:11";
     CGSize    labelSize = [labelText sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:labelFontSize]}];
@@ -255,7 +255,7 @@ static CGFloat const kTipsRectH   = 4.0f;
     NSArray   *value = data[@"value"];
     
     CGFloat   tipsViewWidth = 0.0f;
-    CGFloat   labelFontSize = self.chartData.labelFontSize;
+    CGFloat   labelFontSize = self.chartData.indicatorLabelFontSize;
     
     NSString *timeLabelText = self.chartData.xValues[index.integerValue];
     CGSize    timeLabelSize = [timeLabelText sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:labelFontSize]}];
@@ -387,8 +387,8 @@ static CGFloat const kTipsRectH   = 4.0f;
     if (_timeLabel == nil) {
         _timeLabel = [[UILabel alloc] init];
         
-        _timeLabel.font      = [UIFont  systemFontOfSize  :self.chartData.labelFontSize];
-        _timeLabel.textColor = [UIColor colorWithHexString:self.chartData.labelTextColor];
+        _timeLabel.font      = [UIFont  systemFontOfSize  :self.chartData.indicatorLabelFontSize];
+        _timeLabel.textColor = [UIColor colorWithHexString:self.chartData.indicatorLabelTextColor];
     }
     
     return _timeLabel;

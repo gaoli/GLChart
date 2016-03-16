@@ -56,6 +56,8 @@ typedef NS_ENUM(NSUInteger, GLChartInitDirection) {
 // 指示器属性
 @property (nonatomic, assign) CGFloat              indicatorLineWidth;
 @property (nonatomic,   copy) NSString            *indicatorLineColor;
+@property (nonatomic, assign) CGFloat              indicatorLabelFontSize;
+@property (nonatomic,   copy) NSString            *indicatorLabelTextColor;
 
 // ======= 柱状图表 =======
 
