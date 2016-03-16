@@ -12,6 +12,8 @@
 
 - (void)parseData;
 
+- (void)checkData;
+
 - (void)initChart;
 
 - (void)drawChart;

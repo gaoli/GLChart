@@ -11,6 +11,11 @@
     [super parseData];
     
     [self getYValueRange];
+}
+
+- (void)checkData {
+    [super checkData];
+    
     [self getYValueGrade];
 }
 
