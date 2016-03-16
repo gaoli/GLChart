@@ -97,7 +97,9 @@ static CGFloat const kTipsRectH   = 4.0f;
     NSString *labelTextColor = self.chartData.labelTextColor;
     
     NSString *labelText = @"11:11";
-    CGSize    labelSize = [labelText sizeWithAttributes:@{@"NSFontAttributeName": [UIFont systemFontOfSize:labelFontSize]}];
+    CGSize    labelSize = [labelText sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:labelFontSize]}];
+    
+    CGFloat   numLabelX = 0.0f;
     CGFloat   tipsViewH = 0.0f;
     
     tipsViewH += kTipsPadding;
@@ -109,6 +111,7 @@ static CGFloat const kTipsRectH   = 4.0f;
     
     for (int i = 0; i < self.chartData.yValues.count; i++) {
         NSDictionary *dict  = self.chartData.yValues[i];
+        NSString     *alias = dict[@"alias"];
         NSArray      *value = dict[@"value"];
         UIColor      *color = [UIColor colorWithHexString:dict[@"color"]];
         
@@ -116,25 +119,60 @@ static CGFloat const kTipsRectH   = 4.0f;
             continue;
         }
         
-        CGRect   rectViewFrame = {{kTipsPadding, tipsViewH + (labelSize.height - kTipsRectH) / 2}, {kTipsRectW, kTipsRectH}};
-        CGRect   numLabelFrame = {{kTipsPadding * 2 + kTipsRectW, tipsViewH}, {0.0f, labelSize.height}};
+        CGRect numLabelFrame = CGRectZero;
         
-        tipsViewH += labelSize.height;
+        if (alias) {
+            NSString *aliasLabelText = alias;
+            CGSize    aliasLabelSize = [aliasLabelText sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:labelFontSize]}];
+            
+            CGRect   aliasLabelFrame = {{kTipsPadding, tipsViewH}, aliasLabelSize};
+            UILabel *aliasLabel      = [[UILabel alloc] initWithFrame:aliasLabelFrame];
+            
+            aliasLabel.text      = aliasLabelText;
+            aliasLabel.font      = [UIFont  systemFontOfSize  :labelFontSize];
+            aliasLabel.textColor = [UIColor colorWithHexString:labelTextColor];
+            
+            [self.tipsView addSubview:aliasLabel];
+            
+            if (numLabelX < kTipsPadding * 2 + aliasLabelSize.width) {
+                numLabelX = kTipsPadding * 2 + aliasLabelSize.width;
+            }
+            
+            numLabelFrame = CGRectMake(0.0f, tipsViewH, 0.0f, labelSize.height);
+        } else {
+            CGRect  rectViewFrame = {{kTipsPadding, tipsViewH + (labelSize.height - kTipsRectH) / 2}, {kTipsRectW, kTipsRectH}};
+            UIView *rectView      = [[UIView  alloc] initWithFrame:rectViewFrame];
+            
+            rectView.backgroundColor = color;
+            
+            [self.tipsView addSubview:rectView];
+            
+            if (numLabelX < kTipsPadding * 2 + kTipsRectW) {
+                numLabelX = kTipsPadding * 2 + kTipsRectW;
+            }
+            
+            numLabelFrame = CGRectMake(0.0f, tipsViewH, 0.0f, labelSize.height);
+        }
         
-        UIView  *rectView = [[UIView  alloc] initWithFrame:rectViewFrame];
         UILabel *numLabel = [[UILabel alloc] initWithFrame:numLabelFrame];
-        
-        rectView.backgroundColor = color;
         
         numLabel.font      = [UIFont  systemFontOfSize  :labelFontSize];
         numLabel.textColor = [UIColor colorWithHexString:labelTextColor];
         
         [self.numLabels addObject:numLabel];
-        [self.tipsView addSubview:rectView];
         [self.tipsView addSubview:numLabel];
+        
+        tipsViewH += labelSize.height;
     }
     
     tipsViewH += kTipsPadding;
+    
+    for (UILabel *numLabel in self.numLabels) {
+        numLabel.frame = CGRectMake(numLabelX,
+                                    numLabel.frame.origin.y,
+                                    numLabel.frame.size.width,
+                                    numLabel.frame.size.height);
+    }
     
     self.tipsView.frame = CGRectMake(0.0f, (self.frame.size.height - tipsViewH) / 2, 0.0f, tipsViewH);
     
@@ -216,13 +254,13 @@ static CGFloat const kTipsRectH   = 4.0f;
     NSNumber  *index = data[@"index"];
     NSArray   *value = data[@"value"];
     
-    CGFloat   labelMaxWidth = 0.0f;
+    CGFloat   tipsViewWidth = 0.0f;
     CGFloat   labelFontSize = self.chartData.labelFontSize;
     
     NSString *timeLabelText = self.chartData.xValues[index.integerValue];
-    CGSize    timeLabelSize = [timeLabelText sizeWithAttributes:@{@"NSFontAttributeName": [UIFont systemFontOfSize:labelFontSize]}];
+    CGSize    timeLabelSize = [timeLabelText sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:labelFontSize]}];
     
-    labelMaxWidth = timeLabelSize.width;
+    tipsViewWidth = timeLabelSize.width;
     
     self.timeLabel.frame = CGRectMake(self.timeLabel.frame.origin.x,
                                       self.timeLabel.frame.origin.y,
@@ -234,33 +272,29 @@ static CGFloat const kTipsRectH   = 4.0f;
     for (int i = 0; i < value.count; i++) {
         
         NSString *labelText = [[NSString alloc] initWithFormat:@"%@", value[i]];
-        CGSize    labelSize = [labelText sizeWithAttributes:@{@"NSFontAttributeName": [UIFont systemFontOfSize:labelFontSize]}];
-        
-        if (labelMaxWidth < labelSize.width) {
-            labelMaxWidth = labelSize.width;
-        }
+        CGSize    labelSize = [labelText sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:labelFontSize]}];
         
         UILabel *numLabel = self.numLabels[i];
         
-        numLabel.frame = CGRectMake(numLabel.frame.origin.x,
-                                    numLabel.frame.origin.y,
-                                    labelSize.width,
-                                    labelSize.height);
-        
         numLabel.text  = labelText;
+        numLabel.frame = CGRectMake(numLabel.frame.origin.x, numLabel.frame.origin.y, labelSize.width, labelSize.height);
+        
+        if (tipsViewWidth < numLabel.frame.origin.x + labelSize.width + kTipsRectW) {
+            tipsViewWidth = numLabel.frame.origin.x + labelSize.width + kTipsRectW;
+        }
     }
     
-    CGRect frame = self.tipsView.frame;
+    CGRect tipsViewFrame = self.tipsView.frame;
     
-    frame.size.width = kTipsPadding * 2 + kTipsRectW + labelMaxWidth;
+    tipsViewFrame.size.width = tipsViewWidth;
     
-    if (self.frame.size.width - x > frame.size.width) {
-        frame.origin.x = x + kTipsPadding;
+    if (self.frame.size.width - x > tipsViewFrame.size.width) {
+        tipsViewFrame.origin.x = x + kTipsPadding;
     } else {
-        frame.origin.x = x - kTipsPadding - frame.size.width;
+        tipsViewFrame.origin.x = x - kTipsPadding - tipsViewFrame.size.width;
     }
     
-    self.tipsView.frame = frame;
+    self.tipsView.frame = tipsViewFrame;
 }
 
 #pragma mark - UIGestureRecognizerDelegate
