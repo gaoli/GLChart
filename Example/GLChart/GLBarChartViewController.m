@@ -2,9 +2,13 @@
 #import "GLChartData.h"
 #import "GLBarChart.h"
 
-static NSString *const kBarChartCellIdentifier = @"GLBarChartCell";
+static NSString *const kHeWeatherAPI   = @"https://api.heweather.com/x3/weather?cityid=CN101210106&key=162e571b6ea446dba9c99d6d4cbbdf18";
+static NSString *const kCellIdentifier = @"GLCellIdentifier";
 
 @interface GLBarChartViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong) NSURLRequest  *request;
+@property (nonatomic, strong) NSMutableData *receivedData;
 
 @property (nonatomic, strong) GLChartData *chartData;
 @property (nonatomic, strong) GLBarChart  *barChart;
@@ -39,31 +43,36 @@ static NSString *const kBarChartCellIdentifier = @"GLBarChartCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.chartData.xValues = @[@"10:01", @"10:02", @"10:03", @"10:04", @"10:05", @"10:06", @"10:07",
-                               @"10:08", @"10:09", @"10:10", @"10:11", @"10:12", @"10:13", @"10:14",
-                               @"10:15", @"10:16", @"10:17", @"10:18", @"10:19", @"10:20", @"10:21"];
+    [NSURLConnection connectionWithRequest:self.request delegate:self];
+}
+
+#pragma mark - NSURLConnectionDataDelegate
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    [self.receivedData appendData:data];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    NSDictionary *data          = [NSJSONSerialization JSONObjectWithData:self.receivedData options:0 error:nil];
+    NSArray      *dailyForecast = data[@"HeWeather data service 3.0"][0][@"daily_forecast"];
     
-    self.chartData.yValues = @[@[@{@"value": @0,   @"color": @"#7CB5EC"}, @{@"value": @100, @"color": @"#F7A35C"}],
-                               @[@{@"value": @10,  @"color": @"#7CB5EC"}, @{@"value": @90,  @"color": @"#F7A35C"}],
-                               @[@{@"value": @20,  @"color": @"#7CB5EC"}, @{@"value": @80,  @"color": @"#F7A35C"}],
-                               @[@{@"value": @30,  @"color": @"#7CB5EC"}, @{@"value": @70,  @"color": @"#F7A35C"}],
-                               @[@{@"value": @40,  @"color": @"#7CB5EC"}, @{@"value": @60,  @"color": @"#F7A35C"}],
-                               @[@{@"value": @50,  @"color": @"#7CB5EC"}, @{@"value": @50,  @"color": @"#F7A35C"}],
-                               @[@{@"value": @60,  @"color": @"#7CB5EC"}, @{@"value": @40,  @"color": @"#F7A35C"}],
-                               @[@{@"value": @70,  @"color": @"#7CB5EC"}, @{@"value": @30,  @"color": @"#F7A35C"}],
-                               @[@{@"value": @80,  @"color": @"#7CB5EC"}, @{@"value": @20,  @"color": @"#F7A35C"}],
-                               @[@{@"value": @90,  @"color": @"#7CB5EC"}, @{@"value": @10,  @"color": @"#F7A35C"}],
-                               @[@{@"value": @100, @"color": @"#7CB5EC"}, @{@"value": @0,   @"color": @"#F7A35C"}],
-                               @[@{@"value": @90,  @"color": @"#7CB5EC"}, @{@"value": @10,  @"color": @"#F7A35C"}],
-                               @[@{@"value": @80,  @"color": @"#7CB5EC"}, @{@"value": @20,  @"color": @"#F7A35C"}],
-                               @[@{@"value": @70,  @"color": @"#7CB5EC"}, @{@"value": @30,  @"color": @"#F7A35C"}],
-                               @[@{@"value": @60,  @"color": @"#7CB5EC"}, @{@"value": @40,  @"color": @"#F7A35C"}],
-                               @[@{@"value": @50,  @"color": @"#7CB5EC"}, @{@"value": @50,  @"color": @"#F7A35C"}],
-                               @[@{@"value": @40,  @"color": @"#7CB5EC"}, @{@"value": @60,  @"color": @"#F7A35C"}],
-                               @[@{@"value": @30,  @"color": @"#7CB5EC"}, @{@"value": @70,  @"color": @"#F7A35C"}],
-                               @[@{@"value": @20,  @"color": @"#7CB5EC"}, @{@"value": @80,  @"color": @"#F7A35C"}],
-                               @[@{@"value": @10,  @"color": @"#7CB5EC"}, @{@"value": @90,  @"color": @"#F7A35C"}],
-                               @[@{@"value": @0,   @"color": @"#7CB5EC"}, @{@"value": @100, @"color": @"#F7A35C"}]];
+    NSMutableArray *tmp  = [NSMutableArray array];
+    NSMutableArray *date = [NSMutableArray array];
+    
+    for (NSDictionary *item in dailyForecast) {
+        CGFloat max = [item[@"tmp"][@"max"] floatValue];
+        CGFloat min = [item[@"tmp"][@"min"] floatValue];
+        
+        [tmp addObject:@[@{@"value": @(min),       @"color": @"#7CB5EC"},
+                         @{@"value": @(max - min), @"color": @"#F7A35C"}]];
+        
+        [date addObject:[item[@"date"] substringFromIndex:5]];
+    }
+    
+    self.chartData.xValues   = date;
+    self.chartData.yValues   = tmp;
+    self.chartData.barWidth  = 25.0f;
+    self.chartData.barMargin = 9.0f;
     
     self.barChart.chartData = self.chartData;
 }
@@ -95,10 +104,10 @@ static NSString *const kBarChartCellIdentifier = @"GLBarChartCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kBarChartCellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
     
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kBarChartCellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellIdentifier];
     }
     
     switch (indexPath.row) {
@@ -116,6 +125,22 @@ static NSString *const kBarChartCellIdentifier = @"GLBarChartCell";
 
 
 #pragma mark - getters and setters
+
+- (NSURLRequest *)request {
+    if (_request == nil) {
+        _request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:kHeWeatherAPI]];
+    }
+    
+    return _request;
+}
+
+- (NSMutableData *)receivedData {
+    if (_receivedData == nil) {
+        _receivedData = [NSMutableData data];
+    }
+    
+    return _receivedData;
+}
 
 - (GLChartData *)chartData {
     if (_chartData == nil) {
