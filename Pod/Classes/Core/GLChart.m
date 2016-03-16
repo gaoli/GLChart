@@ -151,7 +151,7 @@
         }
         
         NSString *labelText = [[NSString alloc] initWithFormat:@"%@", values[index]];
-        CGSize    labelSize = [labelText sizeWithAttributes:@{@"NSFontAttributeName": [UIFont systemFontOfSize:labelFontSize]}];
+        CGSize    labelSize = [labelText sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:labelFontSize]}];
         CGRect    labelRect = {{w / (step - 1) * i - labelSize.width / 2, h}, labelSize};
         
         label.frame           = labelRect;
@@ -181,7 +181,7 @@
         [self.yAxisLabels addObject:label];
         
         NSString *labelText = [[NSString alloc] initWithFormat:@"%g", value];
-        CGSize    labelSize = [labelText sizeWithAttributes:@{@"NSFontAttributeName": [UIFont systemFontOfSize:labelFontSize]}];
+        CGSize    labelSize = [labelText sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:labelFontSize]}];
         CGRect    labelRect = {{0.0f, h / step * i}, labelSize};
         
         label.frame           = labelRect;

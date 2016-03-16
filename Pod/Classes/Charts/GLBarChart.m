@@ -141,7 +141,7 @@
         [self.xAxisLabels addObject:label];
         
         NSString *labelText = [[NSString alloc] initWithFormat:@"%@", values[i]];
-        CGSize    labelSize = [labelText sizeWithAttributes:@{@"NSFontAttributeName": [UIFont systemFontOfSize:labelFontSize]}];
+        CGSize    labelSize = [labelText sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:labelFontSize]}];
         CGRect    labelRect = {{(barWidth + barMargin * 2) * i, h}, {barWidth + barMargin * 2, labelSize.height}};
         
         label.frame         = labelRect;
