@@ -2,7 +2,7 @@
 
 [![CI Status](http://img.shields.io/travis/gaoli/GLChart.svg?style=flat)](https://travis-ci.org/gaoli/GLChart)
 [![Version](https://img.shields.io/cocoapods/v/GLChart.svg?style=flat)](http://cocoapods.org/pods/GLChart)
-[![License](https://img.shields.io/cocoapods/l/GLChart.svg?style=flat)](http://cocoapods.org/pods/GLChart)
+[![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/gaoli/GLChart/master/LICENSE)
 [![Platform](https://img.shields.io/cocoapods/p/GLChart.svg?style=flat)](http://cocoapods.org/pods/GLChart)
 
 ## Screenshots
