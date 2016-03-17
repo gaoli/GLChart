@@ -54,6 +54,26 @@
     }
 }
 
+- (void)checkData {
+    [super checkData];
+    
+    NSArray *xValues = self.chartData.xValues;
+    NSArray *yValues = self.chartData.yValues;
+    
+    if (xValues.count && yValues.count) {
+        for (NSDictionary *dict in self.chartData.yValues) {
+            NSArray  *value = dict[@"value"];
+            NSString *color = dict[@"color"];
+            
+            if (value && color && value.count) {
+                self.chartData.noData = NO;
+            }
+        }
+    } else {
+        self.chartData.noData = YES;
+    }
+}
+
 - (void)initChart {
     [super initChart];
     
@@ -112,7 +132,7 @@
         NSArray *value = dict[@"value"];
         UIColor *color = [UIColor colorWithHexString:dict[@"color"]];
         
-        if (value == nil || color == nil) {
+        if (value == nil || color == nil || !value.count) {
             continue;
         }
         
@@ -163,7 +183,7 @@
 - (void)loadComponents {
     [super loadComponents];
     
-    if (self.chartData.isEnabledIndicator) {
+    if (self.chartData.isEnabledIndicator && !self.chartData.noData) {
         self.indicator.hidden    = NO;
         self.indicator.chartData = self.chartData;
     } else {

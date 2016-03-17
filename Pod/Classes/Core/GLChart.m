@@ -6,6 +6,7 @@
 
 @property (nonatomic, strong) CAShapeLayer *gridLayer;
 @property (nonatomic, strong) UIView       *yAxisView;
+@property (nonatomic, strong) UILabel      *tipsLabel;
 
 @end
 
@@ -44,7 +45,7 @@
         self.chartData.xStep = self.chartData.xValues.count;
     }
     
-    // 优化Y轴增量
+    // 优化纵轴增量
     if (self.chartData.max > 0) {
         NSUInteger scale = 1;
         
@@ -78,13 +79,15 @@
     
     CGFloat margin = self.chartData.margin;
     
-    CGRect  gridLayerFrame = {{margin, margin}, {w - margin * 2, h - margin * 2}};
-    CGRect  containerFrame = {{margin, margin}, {w - margin * 2, h - margin}};
-    CGRect  yAxisViewFrame = {{margin, margin}, {0.0f, h - margin * 2}};
+    CGRect gridLayerFrame = {{margin, margin}, {w - margin * 2, h - margin * 2}};
+    CGRect containerFrame = {{margin, margin}, {w - margin * 2, h - margin}};
+    CGRect yAxisViewFrame = {{margin, margin}, {0.0f, h - margin * 2}};
+    CGRect tipsLabelFrame = {{margin, margin}, {w - margin * 2, h - margin * 2}};
     
     self.gridLayer.frame = gridLayerFrame;
     self.container.frame = containerFrame;
     self.yAxisView.frame = yAxisViewFrame;
+    self.tipsLabel.frame = tipsLabelFrame;
     
     for (UILabel *label in self.xAxisLabels) {
         [label removeFromSuperview];
@@ -96,6 +99,14 @@
     
     self.xAxisLabels = [NSMutableArray array];
     self.yAxisLabels = [NSMutableArray array];
+    
+    [self.tipsLabel removeFromSuperview];
+    
+    if (self.chartData.noData) {
+        [self addSubview:self.tipsLabel];
+    } else {
+        _tipsLabel = nil;
+    }
 }
 
 - (void)drawChart {
@@ -126,8 +137,10 @@
 }
 
 - (void)drawAxis {
-    [self createXAxisLabels];
-    [self createYAxisLabels];
+    if (!self.chartData.noData) {
+        [self createXAxisLabels];
+        [self createYAxisLabels];
+    }
 }
 
 - (void)createXAxisLabels {
@@ -249,6 +262,19 @@
     }
     
     return _chartView;
+}
+
+- (UILabel *)tipsLabel {
+    if (_tipsLabel == nil) {
+        _tipsLabel = [[UILabel alloc] init];
+        
+        _tipsLabel.text          = self.chartData.noDataTips;
+        _tipsLabel.font          = [UIFont systemFontOfSize   :self.chartData.labelFontSize];
+        _tipsLabel.textColor     = [UIColor colorWithHexString:self.chartData.labelTextColor];
+        _tipsLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    
+    return _tipsLabel;
 }
 
 @end

@@ -16,7 +16,16 @@
 - (void)checkData {
     [super checkData];
     
+    NSArray *xValues = self.chartData.xValues;
+    NSArray *yValues = self.chartData.yValues;
+    
     [self getYValueGrade];
+    
+    if (xValues.count && yValues.count) {
+        self.chartData.noData = NO;
+    } else {
+        self.chartData.noData = YES;
+    }
 }
 
 - (void)initChart {

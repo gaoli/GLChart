@@ -33,6 +33,9 @@
         
         self.chartInitDirection      = GLChartInitDirectionLeft;
         
+        self.noData                  = YES;
+        self.noDataTips              = @"暂无数据可供展示";
+        
         // ======= 折线图表 =======
         
         self.lineWidth               = 0.5f;
