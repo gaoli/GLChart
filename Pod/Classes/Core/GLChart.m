@@ -167,7 +167,6 @@
 - (void)createYAxisLabels {
     CGFloat     h = self.gridLayer.frame.size.height;
     
-    CGFloat     min  = self.chartData.min;
     CGFloat     max  = self.chartData.max;
     NSUInteger  step = self.chartData.yStep;
     
