@@ -43,10 +43,14 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [NSURLConnection connectionWithRequest:self.request delegate:self];
+    [self requestData];
 }
 
 #pragma mark - NSURLConnectionDataDelegate
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    self.receivedData = [NSMutableData data];
+}
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     [self.receivedData appendData:data];
@@ -92,6 +96,8 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
             self.chartData.visibleRangeMaxNum = 0;
             self.chartData.chartInitDirection = GLChartInitDirectionLeft;
             self.chartData.isEnabledIndicator = NO;
+            
+            [self requestData];
             break;
             
         case 1:
@@ -111,6 +117,10 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
             self.chartData.visibleRangeMaxNum = 0;
             self.chartData.isEnabledIndicator = YES;
             break;
+            
+        case 5:
+            self.chartData.yValues = @[];
+            break;
     }
     
     self.lineChart.chartData = self.chartData;
@@ -123,7 +133,7 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -153,9 +163,19 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
         case 4:
             cell.textLabel.text = @"显示图表指标器";
             break;
+            
+        case 5:
+            cell.textLabel.text = @"清空所有的数据";
+            break;
     }
     
     return cell;
+}
+
+#pragma mark - private methods
+
+- (void)requestData {
+    [NSURLConnection connectionWithRequest:self.request delegate:self];
 }
 
 #pragma mark - getters and setters
@@ -166,14 +186,6 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
     }
     
     return _request;
-}
-
-- (NSMutableData *)receivedData {
-    if (_receivedData == nil) {
-        _receivedData = [NSMutableData data];
-    }
-    
-    return _receivedData;
 }
 
 - (GLChartData *)chartData {

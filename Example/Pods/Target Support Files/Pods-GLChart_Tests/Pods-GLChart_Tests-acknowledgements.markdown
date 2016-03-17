@@ -3,6 +3,8 @@ This application makes use of the following third party libraries:
 
 ## GLChart
 
+The MIT License (MIT)
+
 Copyright (c) 2016 gaoli <3071730@qq.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

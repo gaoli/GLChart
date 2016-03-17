@@ -43,10 +43,14 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [NSURLConnection connectionWithRequest:self.request delegate:self];
+    [self requestData];
 }
 
 #pragma mark - NSURLConnectionDataDelegate
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    self.receivedData = [NSMutableData data];
+}
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     [self.receivedData appendData:data];
@@ -83,10 +87,16 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
     switch (indexPath.row) {
         case 0:
             self.chartData.chartInitDirection = GLChartInitDirectionLeft;
+            
+            [self requestData];
             break;
             
         case 1:
             self.chartData.chartInitDirection = GLChartInitDirectionRight;
+            break;
+            
+        case 2:
+            self.chartData.yValues = @[];
             break;
     }
     
@@ -100,7 +110,7 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -118,11 +128,20 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
         case 1:
             cell.textLabel.text = @"设置初始化向右";
             break;
+            
+        case 2:
+            cell.textLabel.text = @"清空所有的数据";
+            break;
     }
     
     return cell;
 }
 
+#pragma mark - private methods
+
+- (void)requestData {
+    [NSURLConnection connectionWithRequest:self.request delegate:self];
+}
 
 #pragma mark - getters and setters
 
@@ -132,14 +151,6 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
     }
     
     return _request;
-}
-
-- (NSMutableData *)receivedData {
-    if (_receivedData == nil) {
-        _receivedData = [NSMutableData data];
-    }
-    
-    return _receivedData;
 }
 
 - (GLChartData *)chartData {
