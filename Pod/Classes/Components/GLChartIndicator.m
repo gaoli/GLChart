@@ -261,7 +261,7 @@ static CGFloat const kTipsRectH   = 4.0f;
     NSString *timeLabelText = self.chartData.xValues[index.integerValue];
     CGSize    timeLabelSize = [timeLabelText sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:labelFontSize]}];
     
-    tipsViewWidth = timeLabelSize.width;
+    tipsViewWidth = timeLabelSize.width + kTipsPadding * 2;
     
     self.timeLabel.frame = CGRectMake(self.timeLabel.frame.origin.x,
                                       self.timeLabel.frame.origin.y,
@@ -280,8 +280,8 @@ static CGFloat const kTipsRectH   = 4.0f;
         numLabel.text  = labelText;
         numLabel.frame = CGRectMake(numLabel.frame.origin.x, numLabel.frame.origin.y, labelSize.width, labelSize.height);
         
-        if (tipsViewWidth < numLabel.frame.origin.x + labelSize.width + kTipsRectW) {
-            tipsViewWidth = numLabel.frame.origin.x + labelSize.width + kTipsRectW;
+        if (tipsViewWidth < numLabel.frame.origin.x + labelSize.width + kTipsPadding) {
+            tipsViewWidth = numLabel.frame.origin.x + labelSize.width + kTipsPadding;
         }
     }
     
