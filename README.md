@@ -106,6 +106,12 @@ typedef NS_ENUM(NSUInteger, GLChartInitDirection) {
 // 初始方向
 @property (nonatomic, assign) GLChartInitDirection chartInitDirection;
 
+// 暂无图表数据标识
+@property (nonatomic, assign) BOOL                 noData;
+
+// 暂无图表数据提示文案
+@property (nonatomic,   copy) NSString            *noDataTips;
+
 // ======= 折线图表 =======
 
 // 折线图线宽
