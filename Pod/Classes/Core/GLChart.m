@@ -53,7 +53,7 @@
             scale = scale * 10;
         }
         
-        NSUInteger max = (NSUInteger)(self.chartData.max * scale);
+        NSUInteger max = ceilf(self.chartData.max * scale);
         NSUInteger len = [[[NSString alloc] initWithFormat:@"%lu", max] length];
         
         if (max > 0) {
@@ -64,11 +64,20 @@
                 max = max + (cha - mod);
             }
             
-            while ((max / 5) % cha != 0) {
-                max = max + cha;
+            NSUInteger customStep = self.chartData.yStep;
+            NSUInteger properStep = self.chartData.yStep;
+            
+            while ((max / properStep) % cha != 0) {
+                if (properStep > 4) {
+                    properStep--;
+                } else {
+                    max += cha;
+                    properStep = customStep;
+                }
             }
             
-            self.chartData.max = (CGFloat)max / (CGFloat)scale;
+            self.chartData.max   = (CGFloat)max / (CGFloat)scale;
+            self.chartData.yStep = properStep;
         }
     }
 }
