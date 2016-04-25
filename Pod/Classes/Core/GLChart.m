@@ -178,21 +178,32 @@
 }
 
 - (void)createYAxisLabels {
-    CGFloat     h = self.gridLayer.frame.size.height;
+    CGFloat    h = self.gridLayer.frame.size.height;
     
-    CGFloat     max  = self.chartData.max;
-    NSUInteger  step = self.chartData.yStep;
+    CGFloat    max  = self.chartData.max;
+    NSUInteger step = self.chartData.yStep;
     
-    CGFloat     labelFontSize  = self.chartData.labelFontSize;
-    NSString   *labelTextColor = self.chartData.labelTextColor;
+    CGFloat    labelFontSize  = self.chartData.labelFontSize;
+    NSString  *labelTextColor = self.chartData.labelTextColor;
     
     for (int i = 0; i < step; i++) {
-        UILabel *label = [[UILabel alloc] init];
-        CGFloat  value = max / step * (step - i);
+        UILabel  *label = [[UILabel alloc] init];
+        CGFloat   value = max / step * (step - i);
+        NSString *unit  = @"";
         
         [self.yAxisLabels addObject:label];
         
-        NSString *labelText = [[NSString alloc] initWithFormat:@"%g", value];
+        if (value >= 1000000) {
+            value = value / 1000000;
+            unit  = @"M";
+        }
+        
+        if (value >= 1000) {
+            value = value / 1000;
+            unit  = @"k";
+        }
+        
+        NSString *labelText = [[NSString alloc] initWithFormat:@"%g%@", value, unit];
         CGSize    labelSize = [labelText sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:labelFontSize]}];
         CGRect    labelRect = {{0.0f, h / step * i}, labelSize};
         
