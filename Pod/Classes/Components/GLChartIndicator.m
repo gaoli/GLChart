@@ -235,7 +235,7 @@ static CGFloat const kTipsRectH   = 4.0f;
         if (index < value.count) {
             UIBezierPath *path = [[UIBezierPath alloc] init];
             
-            [path addArcWithCenter:CGPointMake(x, h - [value[index] floatValue] * self.chartData.scale)
+            [path addArcWithCenter:CGPointMake(x, h - ([value[index] floatValue] - self.chartData.min) * self.chartData.scale)
                             radius:1.5f
                         startAngle:0.0f
                           endAngle:2 * M_PI

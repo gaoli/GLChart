@@ -45,41 +45,10 @@
         self.chartData.xStep = self.chartData.xValues.count;
     }
     
-    // 优化纵轴增量
-    if (self.chartData.max > 0) {
-        NSUInteger scale = 1;
-        
-        while (self.chartData.max * scale < 10) {
-            scale = scale * 10;
-        }
-        
-        NSUInteger max = ceilf(self.chartData.max * scale);
-        NSUInteger len = [[[NSString alloc] initWithFormat:@"%lu", max] length];
-        
-        if (max > 0) {
-            NSUInteger cha = 5 * pow(10, len - 2);
-            NSUInteger mod = max % cha;
-            
-            if (mod != 0) {
-                max = max + (cha - mod);
-            }
-            
-            NSUInteger customStep = self.chartData.yStep;
-            NSUInteger properStep = self.chartData.yStep;
-            
-            while ((max / properStep) % cha != 0) {
-                if (properStep > 4) {
-                    properStep--;
-                } else {
-                    max += cha;
-                    properStep = customStep;
-                }
-            }
-            
-            self.chartData.max   = (CGFloat)max / (CGFloat)scale;
-            self.chartData.yStep = properStep;
-        }
+    if (self.chartData.min >= 0 && self.chartData.max > 0) {
+        [self normalizeInterval];
     }
+    
 }
 
 - (void)initChart {
@@ -189,6 +158,7 @@
 - (void)createYAxisLabels {
     CGFloat    h = self.gridLayer.frame.size.height;
     
+    CGFloat    min  = self.chartData.min;
     CGFloat    max  = self.chartData.max;
     NSUInteger step = self.chartData.yStep;
     
@@ -197,7 +167,7 @@
     
     for (int i = 0; i < step; i++) {
         UILabel  *label = [[UILabel alloc] init];
-        CGFloat   value = max / step * (step - i);
+        CGFloat   value = min + (max - min) / step * (step - i);
         NSString *unit  = @"";
         
         [self.yAxisLabels addObject:label];
@@ -228,6 +198,36 @@
         
         [self.yAxisView addSubview:label];
     }
+}
+
+- (void)normalizeInterval {
+    CGFloat  min = self.chartData.min;
+    CGFloat  max = self.chartData.max;
+    
+    CGFloat     interval = (max - min) * (50.0f / self.frame.size.height);
+    CGFloat  retInterval = (max - min) * (50.0f / self.frame.size.height);
+    
+    CGFloat  magnitude = pow(10, floor(log(interval) / log(10)));
+    NSArray *multiples = @[@1, @2, @2.5, @5, @10];
+    
+       interval /= magnitude;
+    retInterval /= magnitude;
+    
+    for (int i = 0; i < multiples.count; i ++) {
+        CGFloat     multiple = [multiples[i] floatValue];
+        CGFloat nextMultiple = [multiples[i == multiples.count - 1 ? i : i + 1] floatValue];
+        
+        if (interval <= ((multiple + nextMultiple) / 2)) {
+            retInterval = multiple;
+            break;
+        }
+    }
+    
+    retInterval *= magnitude;
+    
+    self.chartData.min   = retInterval *  floorf(min / retInterval);
+    self.chartData.max   = retInterval * (floorf(max / retInterval) + 1);
+    self.chartData.yStep = (self.chartData.max - self.chartData.min) / retInterval;
 }
 
 #pragma mark - getters and setters

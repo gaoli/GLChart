@@ -126,7 +126,11 @@
 - (void)drawChart {
     [super drawChart];
     
-    self.chartData.scale = self.chartData.max == 0.0f ? 0.0f : self.chartView.frame.size.height / self.chartData.max;
+    if (self.chartData.max == 0.0f) {
+        self.chartData.scale = 0.0f;
+    } else {
+        self.chartData.scale = self.chartView.frame.size.height / (self.chartData.max - self.chartData.min);
+    }
     
     for (NSDictionary *dict in self.chartData.yValues) {
         NSArray *value = dict[@"value"];
@@ -192,10 +196,8 @@
 }
 
 - (CGPoint)getPointWithValue:(NSArray *)value index:(NSUInteger)index scale:(CGFloat)scale {
-    CGFloat w = self.chartView.frame.size.width;
-    CGFloat h = self.chartView.frame.size.height;
-    CGFloat x = w / (value.count - 1) * index;
-    CGFloat y = h - scale * [value[index] floatValue];
+    CGFloat x = self.chartView.frame.size.width  / (value.count - 1) * index;
+    CGFloat y = self.chartView.frame.size.height - ([value[index] floatValue] - self.chartData.min) * scale;
     
     return CGPointMake(x, y);
 }
