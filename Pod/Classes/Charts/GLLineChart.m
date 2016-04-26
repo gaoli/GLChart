@@ -52,6 +52,10 @@
             }
         }
     }
+    
+    if (self.chartData.isYAxisStartFromZero) {
+        self.chartData.min = 0.0f;
+    }
 }
 
 - (void)checkData {

@@ -10,6 +10,8 @@
 - (void)parseData {
     [super parseData];
     
+    self.chartData.min = 0.0f;
+    
     [self getYValueRange];
 }
 
@@ -95,10 +97,6 @@
         
         if (self.chartData.count == 0) {
             self.chartData.count = list.count;
-        }
-        
-        if (self.chartData.min > value) {
-            self.chartData.min = value;
         }
         
         if (self.chartData.max < value) {

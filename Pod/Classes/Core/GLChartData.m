@@ -31,10 +31,10 @@
         self.animated                = YES;
         self.duration                = 0.5;
         
-        self.chartInitDirection      = GLChartInitDirectionLeft;
-        
         self.noData                  = YES;
         self.noDataTips              = @"暂无数据可供展示";
+        
+        self.chartInitDirection      = GLChartInitDirectionLeft;
         
         // ======= 折线图表 =======
         
@@ -45,12 +45,13 @@
         self.isFill                  = YES;
         
         self.isEnabledIndicator      = NO;
-        
         self.indicatorLineWidth      = 0.5f;
         self.indicatorLineColor      = @"#999999";
         self.indicatorBorderColor    = @"#999999";
         self.indicatorLabelFontSize  = 9.0f;
         self.indicatorLabelTextColor = @"#999999";
+        
+        self.isYAxisStartFromZero    = YES;
         
         // ======= 柱状图表 =======
         
