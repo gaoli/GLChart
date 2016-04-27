@@ -225,8 +225,8 @@
     
     retInterval *= magnitude;
     
-    self.chartData.min   = retInterval *  floorf(min / retInterval);
-    self.chartData.max   = retInterval * (floorf(max / retInterval) + 1);
+    self.chartData.min   = retInterval * floorf(min / retInterval);
+    self.chartData.max   = retInterval * (ceilf(max / retInterval) + 1);
     self.chartData.yStep = (self.chartData.max - self.chartData.min) / retInterval;
 }
 
