@@ -207,8 +207,8 @@
     CGFloat     interval = (max - min) * (50.0f / self.frame.size.height);
     CGFloat  retInterval = (max - min) * (50.0f / self.frame.size.height);
     
-    CGFloat  magnitude = pow(10, floor(log(interval) / log(10)));
-    NSArray *multiples = @[@1, @2, @2.5, @5, @10];
+    CGFloat  magnitude = powf(10.0f, floorf(logf(interval) / logf(10.0f)));
+    NSArray *multiples = @[@1.0f, @2.0f, @2.5f, @5.0f, @10.0f];
     
        interval /= magnitude;
     retInterval /= magnitude;
