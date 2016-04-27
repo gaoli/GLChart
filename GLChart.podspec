@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "GLChart"
-  s.version          = "1.1.1"
+  s.version          = "1.1.2"
   s.summary          = "A beautiful chart library for iOS"
 
   s.description      = <<-DESC
