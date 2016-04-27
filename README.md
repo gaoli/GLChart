@@ -103,14 +103,14 @@ typedef NS_ENUM(NSUInteger, GLChartInitDirection) {
 @property (nonatomic, assign) BOOL                 animated;
 @property (nonatomic, assign) CFTimeInterval       duration;
 
-// 初始方向
-@property (nonatomic, assign) GLChartInitDirection chartInitDirection;
-
 // 暂无图表数据标识
 @property (nonatomic, assign) BOOL                 noData;
 
 // 暂无图表数据提示文案
 @property (nonatomic,   copy) NSString            *noDataTips;
+
+// 横向滚动的初始化方向
+@property (nonatomic, assign) GLChartInitDirection chartInitDirection;
 
 // ======= 折线图表 =======
 
@@ -132,6 +132,9 @@ typedef NS_ENUM(NSUInteger, GLChartInitDirection) {
 @property (nonatomic,   copy) NSString            *indicatorBorderColor;
 @property (nonatomic, assign) CGFloat              indicatorLabelFontSize;
 @property (nonatomic,   copy) NSString            *indicatorLabelTextColor;
+
+// 纵轴增量是否从零开始
+@property (nonatomic, assign) BOOL                 isYAxisStartFromZero;
 
 // ======= 柱状图表 =======
 
