@@ -92,10 +92,11 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case 0:
-            self.chartData.isFill             = YES;
-            self.chartData.visibleRangeMaxNum = 0;
-            self.chartData.chartInitDirection = GLChartInitDirectionLeft;
-            self.chartData.isEnabledIndicator = NO;
+            self.chartData.isFill               = YES;
+            self.chartData.visibleRangeMaxNum   = 0;
+            self.chartData.chartInitDirection   = GLChartInitDirectionLeft;
+            self.chartData.isEnabledIndicator   = NO;
+            self.chartData.isYAxisStartFromZero = YES;
             
             [self requestData];
             break;
@@ -112,13 +113,17 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
         case 3:
             self.chartData.chartInitDirection = GLChartInitDirectionRight;
             break;
-            
+        
         case 4:
+            self.chartData.isYAxisStartFromZero = NO;
+            break;
+            
+        case 5:
             self.chartData.visibleRangeMaxNum = 0;
             self.chartData.isEnabledIndicator = YES;
             break;
             
-        case 5:
+        case 6:
             self.chartData.yValues = @[];
             break;
     }
@@ -133,7 +138,7 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 6;
+    return 7;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -161,10 +166,14 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
             break;
             
         case 4:
-            cell.textLabel.text = @"显示图表指标器";
+            cell.textLabel.text = @"设置起始值非零";
             break;
             
         case 5:
+            cell.textLabel.text = @"显示图表指标器";
+            break;
+            
+        case 6:
             cell.textLabel.text = @"清空所有的数据";
             break;
     }
@@ -210,7 +219,7 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] init];
         
-        _tableView.frame          = CGRectMake(0, 200.0f, self.view.frame.size.width, self.view.frame.size.height - 200.0f);
+        _tableView.frame          = CGRectMake(0, 200.0f, self.view.frame.size.width, self.view.frame.size.height - 264.0f);
         _tableView.delegate       = self;
         _tableView.dataSource     = self;
         _tableView.rowHeight      = 50.0f;

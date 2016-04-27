@@ -175,7 +175,7 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] init];
         
-        _tableView.frame          = CGRectMake(0, 200.0f, self.view.frame.size.width, self.view.frame.size.height - 200.0f);
+        _tableView.frame          = CGRectMake(0, 200.0f, self.view.frame.size.width, self.view.frame.size.height - 264.0f);
         _tableView.delegate       = self;
         _tableView.dataSource     = self;
         _tableView.rowHeight      = 50.0f;
