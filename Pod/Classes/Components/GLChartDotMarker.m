@@ -1,13 +1,71 @@
 #import "GLChartDotMarker.h"
+#import "GLChartData.h"
+#import "UIColor+Helper.h"
 
 @implementation GLChartDotMarker
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (id)init {
+    self = [super init];
+    
+    if (self) {
+        
+    }
+    
+    return self;
 }
-*/
+
+#pragma mark - private methods
+
+- (void)resetComponent {
+    self.layer.sublayers = nil;
+}
+
+- (CGFloat)getPointX:(NSUInteger)index {
+    return self.frame.size.width / (self.chartData.xValues.count - 1) * index;
+}
+
+- (CGFloat)getPointY:(CGFloat)position {
+    return self.frame.size.height * (1 - position);
+}
+
+- (void)drawDots:(NSArray *)values color:(UIColor *)color size:(CGFloat)size position:(CGFloat)position {
+    CGFloat x = 0.0f;
+    CGFloat y = [self getPointY:position];
+    
+    UIBezierPath *path      = [UIBezierPath bezierPath];
+    CAShapeLayer *pathLayer = [CAShapeLayer layer];
+    
+    for (NSString *value in values) {
+        CGPoint    point = {x, y};
+        NSUInteger index = [self.chartData.xValues indexOfObject:value];
+        
+        point.x = [self getPointX:index];
+        
+        [path addArcWithCenter:point radius:size / 2 startAngle:0.0f endAngle:M_PI * 2 clockwise:YES];
+    }
+    
+    pathLayer.path      = path.CGPath;
+    pathLayer.fillColor = color.CGColor;
+    pathLayer.lineWidth = 0.0f;
+    
+    [self.layer addSublayer:pathLayer];
+}
+
+#pragma mark - getters and setters
+
+- (void)setChartData:(GLChartData *)chartData {
+    _chartData = chartData;
+    
+    [self resetComponent];
+    
+    for (NSDictionary *item in chartData.dots) {
+        NSArray *value    = item[@"value"];
+        UIColor *color    = [UIColor colorWithHexString:item[@"color"]];
+        CGFloat  size     = [item[@"size"]     floatValue];
+        CGFloat  position = [item[@"position"] floatValue];
+        
+        [self drawDots:value color:color size:size position:position];
+    }
+};
 
 @end
