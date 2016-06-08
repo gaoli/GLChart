@@ -51,6 +51,8 @@
         self.indicatorLabelFontSize  = 9.0f;
         self.indicatorLabelTextColor = @"#999999";
         
+        self.dots                    = [NSArray array];
+        
         self.isYAxisStartFromZero    = YES;
         
         // ======= 柱状图表 =======

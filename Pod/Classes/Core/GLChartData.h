@@ -66,6 +66,16 @@ typedef NS_ENUM(NSUInteger, GLChartInitDirection) {
 @property (nonatomic, assign) CGFloat              indicatorLabelFontSize;
 @property (nonatomic,   copy) NSString            *indicatorLabelTextColor;
 
+/* 圆点标记属性
+ * @[
+ *      @{@"value"   : @[@"07-17", @"07-18", ...], // 纵轴对应数值
+ *        @"color"   : @"#F7A35C",                 // 圆点标记颜色
+ *        @"size"    : @8.0f,                      // 圆点标记直径
+ *        @"position": @1.0f}                      // 横轴相对位置，0.0f ~ 1.0f
+ *  ]
+ */
+@property (nonatomic,   copy) NSArray             *dots;
+
 // 纵轴增量是否从零开始
 @property (nonatomic, assign) BOOL                 isYAxisStartFromZero;
 
