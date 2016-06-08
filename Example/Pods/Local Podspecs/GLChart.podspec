@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|
   s.name             = "GLChart"
-  s.version          = "1.1.2"
+  s.version          = "1.2.0"
   s.summary          = "A beautiful chart library for iOS"
 
   s.description      = <<-DESC
-                        GLChart is A beautiful chart library for iOS
+                        GLChart is a beautiful chart library for iOS
                        DESC
 
-  s.homepage         = "https://github.com/gaoli/GLChart.git"
+  s.homepage         = "https://github.com/gaoli/GLChart"
   s.license          = 'MIT'
   s.author           = { "gaoli" => "3071730@qq.com" }
   s.source           = { :git => "https://github.com/gaoli/GLChart.git", :tag => s.version.to_s }

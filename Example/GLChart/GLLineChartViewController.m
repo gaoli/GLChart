@@ -81,6 +81,7 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
         @"color": @"#7CB5EC",
         @"alias": @"最低温度"
     }];
+    
     self.chartData.xStep     = 7;
     self.chartData.lineWidth = 1.0f;
     
@@ -92,6 +93,7 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case 0:
+            self.chartData.dots                 = @[];
             self.chartData.isFill               = YES;
             self.chartData.visibleRangeMaxNum   = 0;
             self.chartData.chartInitDirection   = GLChartInitDirectionLeft;
@@ -124,6 +126,18 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
             break;
             
         case 6:
+            self.chartData.dots = @[@{@"value"   : @[self.chartData.xValues[1], self.chartData.xValues[2]],
+                                      @"color"   : @"#F7A35C",
+                                      @"size"    : @8.0f,
+                                      @"position": @1.0f},
+                                    @{@"value"   : @[self.chartData.xValues[4], self.chartData.xValues[5]],
+                                      @"color"   : @"#7CB5EC",
+                                      @"size"    : @8.0f,
+                                      @"position": @0.5f}];
+            break;
+            
+        case 7:
+            self.chartData.dots    = @[];
             self.chartData.yValues = @[];
             break;
     }
@@ -138,7 +152,7 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 7;
+    return 8;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -174,7 +188,11 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
             break;
             
         case 6:
-            cell.textLabel.text = @"清空所有的数据";
+            cell.textLabel.text = @"显示圆点标记";
+            break;
+            
+        case 7:
+            cell.textLabel.text = @"清空所有数据";
             break;
     }
     
