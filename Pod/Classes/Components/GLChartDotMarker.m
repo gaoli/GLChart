@@ -39,9 +39,14 @@
         CGPoint    point = {x, y};
         NSUInteger index = [self.chartData.xValues indexOfObject:value];
         
-        point.x = [self getPointX:index];
-        
-        [path addArcWithCenter:point radius:size / 2 startAngle:0.0f endAngle:M_PI * 2 clockwise:YES];
+        if (index < self.chartData.xValues.count) {
+            
+            // 更新圆点坐标
+            point.x = [self getPointX:index];
+            
+            // 绘制圆点标记
+            [path addArcWithCenter:point radius:size / 2 startAngle:0.0f endAngle:M_PI * 2 clockwise:YES];
+        }
     }
     
     pathLayer.path      = path.CGPath;
