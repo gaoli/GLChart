@@ -76,9 +76,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
+				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				17BBE5DA41915FBBC128D570 /* libPods-GLChart_Example.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -364,10 +364,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6003F59A195388D20070C39A /* main.m in Sources */,
 				6003F59E195388D20070C39A /* GLAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* GLViewController.m in Sources */,
 				F18870CA1C7C02CC007C0A28 /* GLLineChartViewController.m in Sources */,
-				6003F59A195388D20070C39A /* main.m in Sources */,
 				F18870CD1C7C0860007C0A28 /* GLBarChartViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
