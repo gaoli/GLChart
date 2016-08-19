@@ -213,7 +213,7 @@
 }
 
 - (CGPoint)getPointWithValue:(NSArray *)value index:(NSUInteger)index scale:(CGFloat)scale {
-    CGFloat x = self.chartView.frame.size.width  / (value.count - 1) * index;
+    CGFloat x = self.chartView.frame.size.width  / ((value.count >= 2 ? value.count : 2) - 1) * index;
     CGFloat y = self.chartView.frame.size.height - ([value[index] floatValue] - self.chartData.min) * scale;
     
     return CGPointMake(x, y);

@@ -42,7 +42,7 @@
 
 - (void)checkData {
     if (self.chartData.xStep > self.chartData.xValues.count) {
-        self.chartData.xStep = self.chartData.xValues.count;
+        self.chartData.xStep = self.chartData.xValues.count >= 2 ? self.chartData.xValues.count : 2;
     }
     
     if (self.chartData.min >= 0 && self.chartData.max > 0) {

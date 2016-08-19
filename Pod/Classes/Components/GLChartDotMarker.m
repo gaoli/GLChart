@@ -21,7 +21,9 @@
 }
 
 - (CGFloat)getPointX:(NSUInteger)index {
-    return self.frame.size.width / (self.chartData.xValues.count - 1) * index;
+    NSUInteger count = self.chartData.xValues.count;
+    
+    return self.frame.size.width / ((count >= 2 ? count : 2) - 1) * index;
 }
 
 - (CGFloat)getPointY:(CGFloat)position {

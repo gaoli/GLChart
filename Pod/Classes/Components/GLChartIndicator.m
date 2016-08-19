@@ -58,7 +58,7 @@ static CGFloat const kTipsRectH   = 4.0f;
         x = x > w ? w : x;
         
         NSUInteger count = self.chartData.count;
-        CGFloat    width = w / (count - 1);
+        CGFloat    width = w / ((count >= 2 ? count : 2) - 1);
         NSUInteger index = x / width;
         
         if (index < count) {
