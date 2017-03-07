@@ -7,110 +7,94 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		06A6B1D534DC751CB9D11499DD05E562 /* UIColor+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = EB3C814FA59ECF15E45CE9AD0903A952 /* UIColor+Helper.m */; };
+		0390F5D7A65E7F68C288D00C34C14425 /* GLChart.h in Headers */ = {isa = PBXBuildFile; fileRef = D9A4B3D27CA1820D853779692FFBA3EC /* GLChart.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05998CD1A2B467642D0EA448D14B2751 /* GLBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = C4616130A4E02624E150EF4D031AAC26 /* GLBarChart.m */; };
+		13E9239651937A2F19619CE3B91F051B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
 		14FCE41892E132AFE525640D8EF6E964 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
-		21F682F57448A6430B61D3129E67C7BD /* GLChartData.h in Headers */ = {isa = PBXBuildFile; fileRef = 8945BF5289AF610172F178AEB4321B48 /* GLChartData.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2BF6196A9627585462112DCC23407943 /* GLLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D871B746821DBCBD3182BAD7B4A562 /* GLLineChart.m */; };
-		2DAFE1A0D9C428ECAC935F8107CB47BB /* UIColor+Helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AA6F7C286A77892BC758EB0563C2B6A /* UIColor+Helper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2E695516DCD92ADC5AE816A6DBB0163A /* GLChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4AFF5F92D5F1A58539A9FA3B9EBE53 /* GLChart.m */; };
-		383C7FB748BF276532820169424A3278 /* GLBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B4457DD9C1AD31FC3550027930CE5CA1 /* GLBar.m */; };
-		44A37F7C57B61A29C5C63E1145F43DB5 /* GLChartDotMarker.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DA8124C69966C191A9649F41BF303BB /* GLChartDotMarker.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4A42DEBD3E98B38A6AB13EB77DFF2B51 /* GLChartData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F237B977FD41DBF53EE0BEBB8A66634 /* GLChartData.m */; };
-		6BBAF1895795F451010BF8A965514E0F /* GLBarChart.h in Headers */ = {isa = PBXBuildFile; fileRef = CCDD8957BC4E24628CB2166116F935F5 /* GLBarChart.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71059E642AEFB7408EBD2ECB6EBC9569 /* GLChartIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA5FC310635BFAF66B510BC29B6A10B /* GLChartIndicator.m */; };
-		7629DC688806455B1313CDF6EF6B5960 /* GLChartIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 54D43612B8AE2771176A5DDDD1CD7216 /* GLChartIndicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C98780A3A8D73D4C2271B818B2AF4E2 /* GLBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A94E767B982E80B6B7774D34C8D37AE /* GLBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		93E8F9A03A2BE2293E8DEF0122CB5245 /* GLChart.h in Headers */ = {isa = PBXBuildFile; fileRef = 91862A678B457CE1EFD163809256D32B /* GLChart.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1CB493EAAD786BE5F75CC94A76A72E25 /* GLLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C867D68D918A54009A0EBDC3434867B /* GLLineChart.m */; };
+		29EF0DC95B44B7E5CDAEA2BCCA86EE7D /* GLBar.h in Headers */ = {isa = PBXBuildFile; fileRef = A5C5A55F67249BC0ED5EBD9560BCD4EB /* GLBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34004FB56E1ABCE710E5A1387A4DD7C6 /* UIColor+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B1B840DCC2964C049BF8E66E030DEC /* UIColor+Helper.m */; };
+		3824536BFF60B614C14CB7D37B6A0BCD /* GLChartIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD014A07913448E3A3CA945FB8F710D /* GLChartIndicator.m */; };
+		5B69DAA07F0F196C5D2E1F2043F6E656 /* GLChartData.h in Headers */ = {isa = PBXBuildFile; fileRef = 70FBF785CC14AAB17449052ED3B07CEA /* GLChartData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6DDBB4CCCEC112CB1EC901EEF97BCB8C /* GLChart-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 34BC4E9B1BAF8690F261BDF409D34022 /* GLChart-dummy.m */; };
+		78B7CAEF4BB27B6929C8CC4BE9C62DE6 /* GLChartDotMarker.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A04C76D72A6B104A4C0BED915AA63D6 /* GLChartDotMarker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		910650CF4AAAE19A7C5C0BD4EE896B77 /* UIColor+Helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 95DAA574027A08A603951D701FAE1551 /* UIColor+Helper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		97543314A649DF0F1FC52CDD20FA37BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
-		9DC36B91C7A3FCB5E69B2156E4046730 /* GLChart-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A36B195BA3D70BDD059C5BD13AA4412A /* GLChart-dummy.m */; };
+		A0F16750E620F9F09CAE7417531192BC /* GLChartIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 082B71D82B210019D071CB8D3A3F9A2A /* GLChartIndicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A570644875B7D1EA65B4379D5202020C /* GLLineChart.h in Headers */ = {isa = PBXBuildFile; fileRef = 6264EF013A0911236E691D3C8190D07A /* GLLineChart.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADB0C117B862C4CD3B1273391F86F185 /* Pods-GLChart_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 64969DFE358647E448BB52267DC453BB /* Pods-GLChart_Example-dummy.m */; };
-		B6E3D569D02436CD7629B878B47CAC37 /* GLLineChart.h in Headers */ = {isa = PBXBuildFile; fileRef = E9477DE3C6D7AC486949C016BF05BF96 /* GLLineChart.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B7816861E5521C8E695B1094246EBB81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		CFC9F38DB06053F86CD20B44563D7BEE /* GLChartDotMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A0FC8B14AE8AE6B6F0AFA6437F2714 /* GLChartDotMarker.m */; };
 		D0AD9BF09CCDD33A50DD4482C797F484 /* Pods-GLChart_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FB128075336ED8BE3AB417FD7A18AA /* Pods-GLChart_Tests-dummy.m */; };
-		F03B0BE7A6638D56CBD634004F987D68 /* GLChartDotMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D725E30ABB2C084E6C9A1EF100EEC20 /* GLChartDotMarker.m */; };
-		F50242090F08FB5E1586D0F3BE73A242 /* GLBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 531F8921E1A9154DB8F4CB613AF4FB8F /* GLBarChart.m */; };
+		E0E3D044E8AE7CA9AB6DC600E9CA4B34 /* GLBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C76BDE573E5A2B59FEBC839022ED22 /* GLBar.m */; };
+		EC2ABB4C6AC46585EC6C5B19D7C72BBD /* GLChartData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DFF39EE0DDA15623C524DC66F818E03 /* GLChartData.m */; };
+		F3132D6D7B24AAE57FA121AD63DA9DBE /* GLChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E61091A671C9D2DEB3F49DF599D6552 /* GLChart.m */; };
+		FE253B527F94672E75721A93ABE83325 /* GLBarChart.h in Headers */ = {isa = PBXBuildFile; fileRef = 305C21F14565E747330D64DD678731F0 /* GLBarChart.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		43682D527D98B3C9F2990EC6243916D4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6398B409957E1D511B6A80174985A3D6;
-			remoteInfo = "GLChart-GLChart";
-		};
 		5E63BB172F1D679E5BCADE7CE8D04A02 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 088F327A4ABF74B4045C2B7A3076CC92;
+			remoteGlobalIDString = 8FE83632FCC944D889D9F2A2B4096C80;
 			remoteInfo = GLChart;
 		};
 		CA3F809A0CB305EDAD490C1152504BB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 088F327A4ABF74B4045C2B7A3076CC92;
+			remoteGlobalIDString = 8FE83632FCC944D889D9F2A2B4096C80;
 			remoteInfo = GLChart;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		06FB128075336ED8BE3AB417FD7A18AA /* Pods-GLChart_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GLChart_Tests-dummy.m"; sourceTree = "<group>"; };
-		0D725E30ABB2C084E6C9A1EF100EEC20 /* GLChartDotMarker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = GLChartDotMarker.m; sourceTree = "<group>"; };
-		1F5E3304F1E20FFC671EA56F764B5887 /* GLChart.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = GLChart.bundle; path = GLChart.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		082B71D82B210019D071CB8D3A3F9A2A /* GLChartIndicator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = GLChartIndicator.h; sourceTree = "<group>"; };
+		09B1B840DCC2964C049BF8E66E030DEC /* UIColor+Helper.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Helper.m"; sourceTree = "<group>"; };
 		1FE57166C57F5C4E04448A6EA17F2930 /* Pods-GLChart_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-GLChart_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		2A94E767B982E80B6B7774D34C8D37AE /* GLBar.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = GLBar.h; sourceTree = "<group>"; };
-		2FA5FC310635BFAF66B510BC29B6A10B /* GLChartIndicator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = GLChartIndicator.m; sourceTree = "<group>"; };
+		21A0FC8B14AE8AE6B6F0AFA6437F2714 /* GLChartDotMarker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = GLChartDotMarker.m; sourceTree = "<group>"; };
+		278F654B6B09A188A3498C46428B3CA5 /* libPods-GLChart_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-GLChart_Tests.a"; path = "libPods-GLChart_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CD014A07913448E3A3CA945FB8F710D /* GLChartIndicator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = GLChartIndicator.m; sourceTree = "<group>"; };
+		305C21F14565E747330D64DD678731F0 /* GLBarChart.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = GLBarChart.h; sourceTree = "<group>"; };
 		347A969EEFF0B9C42D8803CB3214A4B5 /* Pods-GLChart_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GLChart_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		4A4AFF5F92D5F1A58539A9FA3B9EBE53 /* GLChart.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = GLChart.m; sourceTree = "<group>"; };
-		4AA6F7C286A77892BC758EB0563C2B6A /* UIColor+Helper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIColor+Helper.h"; sourceTree = "<group>"; };
+		34BC4E9B1BAF8690F261BDF409D34022 /* GLChart-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GLChart-dummy.m"; sourceTree = "<group>"; };
 		4AC4BCDA6777ACE4E28C717808D37F9D /* Pods-GLChart_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-GLChart_Example-frameworks.sh"; sourceTree = "<group>"; };
-		4ACA23B9531EDE9380D8C825F448779B /* GLChart.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GLChart.xcconfig; sourceTree = "<group>"; };
-		4DA8124C69966C191A9649F41BF303BB /* GLChartDotMarker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = GLChartDotMarker.h; sourceTree = "<group>"; };
 		525E36C4DA8E187191DFCC86EC4DDCD9 /* Pods-GLChart_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-GLChart_Tests-frameworks.sh"; sourceTree = "<group>"; };
-		531F8921E1A9154DB8F4CB613AF4FB8F /* GLBarChart.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = GLBarChart.m; sourceTree = "<group>"; };
-		54D43612B8AE2771176A5DDDD1CD7216 /* GLChartIndicator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = GLChartIndicator.h; sourceTree = "<group>"; };
 		5BCA751A6EF1786ED0311B05290AE9A9 /* Pods-GLChart_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GLChart_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		5DFF39EE0DDA15623C524DC66F818E03 /* GLChartData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = GLChartData.m; sourceTree = "<group>"; };
+		6264EF013A0911236E691D3C8190D07A /* GLLineChart.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = GLLineChart.h; sourceTree = "<group>"; };
 		64969DFE358647E448BB52267DC453BB /* Pods-GLChart_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GLChart_Example-dummy.m"; sourceTree = "<group>"; };
-		6B2AB5F8D52F4C770E9D5887DBBB3610 /* GLChart-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GLChart-prefix.pch"; sourceTree = "<group>"; };
-		6C14A2A0F01D245BE4500E9A6F60E43E /* ResourceBundle-GLChart-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-GLChart-Info.plist"; sourceTree = "<group>"; };
+		6A04C76D72A6B104A4C0BED915AA63D6 /* GLChartDotMarker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = GLChartDotMarker.h; sourceTree = "<group>"; };
+		70FBF785CC14AAB17449052ED3B07CEA /* GLChartData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = GLChartData.h; sourceTree = "<group>"; };
 		7BDF16A5DB74AC630F1255A196446B7E /* Pods-GLChart_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GLChart_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		7C1B2369FD609FDF500FD9E82162BA12 /* libGLChart.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libGLChart.a; path = libGLChart.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		80423BBED5E6D83BAEF72FA40AF20275 /* Pods-GLChart_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-GLChart_Example-resources.sh"; sourceTree = "<group>"; };
-		8945BF5289AF610172F178AEB4321B48 /* GLChartData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = GLChartData.h; sourceTree = "<group>"; };
 		8C5E949DDEC999403D8AD189F649FBEB /* Pods-GLChart_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-GLChart_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		91862A678B457CE1EFD163809256D32B /* GLChart.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = GLChart.h; sourceTree = "<group>"; };
+		8DA139D37FCE4D9DEED5D91A3562FBA2 /* libGLChart.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libGLChart.a; path = libGLChart.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E61091A671C9D2DEB3F49DF599D6552 /* GLChart.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = GLChart.m; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		95DAA574027A08A603951D701FAE1551 /* UIColor+Helper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIColor+Helper.h"; sourceTree = "<group>"; };
 		9BAC92ED876F5DA4B2F7C5A1A8FC3808 /* Pods-GLChart_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GLChart_Example.release.xcconfig"; sourceTree = "<group>"; };
-		9DC1823EB4991C05FB3D3F5B0D3FDFAD /* libPods-GLChart_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-GLChart_Example.a"; path = "libPods-GLChart_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9EAFA74CE0EDAE19AA6E397C15828417 /* libPods-GLChart_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-GLChart_Tests.a"; path = "libPods-GLChart_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9F237B977FD41DBF53EE0BEBB8A66634 /* GLChartData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = GLChartData.m; sourceTree = "<group>"; };
-		A36B195BA3D70BDD059C5BD13AA4412A /* GLChart-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GLChart-dummy.m"; sourceTree = "<group>"; };
-		B4457DD9C1AD31FC3550027930CE5CA1 /* GLBar.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = GLBar.m; sourceTree = "<group>"; };
+		9C867D68D918A54009A0EBDC3434867B /* GLLineChart.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = GLLineChart.m; sourceTree = "<group>"; };
+		A31BEA6764E37039C1BBC33BE2111D83 /* GLChart.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GLChart.xcconfig; sourceTree = "<group>"; };
+		A5C5A55F67249BC0ED5EBD9560BCD4EB /* GLBar.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = GLBar.h; sourceTree = "<group>"; };
 		B64D910158A5632BB0C8D12B80F509EF /* Pods-GLChart_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-GLChart_Tests-resources.sh"; sourceTree = "<group>"; };
 		C22D00CD39DDAD007B76A9F5DDC98EBB /* Pods-GLChart_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GLChart_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		C3D871B746821DBCBD3182BAD7B4A562 /* GLLineChart.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = GLLineChart.m; sourceTree = "<group>"; };
+		C4616130A4E02624E150EF4D031AAC26 /* GLBarChart.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = GLBarChart.m; sourceTree = "<group>"; };
 		CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		CCDD8957BC4E24628CB2166116F935F5 /* GLBarChart.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = GLBarChart.h; sourceTree = "<group>"; };
+		D50B401E7633B9E04E1D878D880EF8F2 /* libPods-GLChart_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-GLChart_Example.a"; path = "libPods-GLChart_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8E5A662FBE6AEDC268F229A9F3C3762 /* Pods-GLChart_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GLChart_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		E9477DE3C6D7AC486949C016BF05BF96 /* GLLineChart.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = GLLineChart.h; sourceTree = "<group>"; };
-		EB3C814FA59ECF15E45CE9AD0903A952 /* UIColor+Helper.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Helper.m"; sourceTree = "<group>"; };
+		D90704404A7000E5C2CC137AEF207624 /* GLChart-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GLChart-prefix.pch"; sourceTree = "<group>"; };
+		D9A4B3D27CA1820D853779692FFBA3EC /* GLChart.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = GLChart.h; sourceTree = "<group>"; };
+		F6C76BDE573E5A2B59FEBC839022ED22 /* GLBar.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = GLBar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		8FC30334FFFF1FF12E9428114D94FE6C /* Frameworks */ = {
+		3FBAE27707D2ABF63976260300207C23 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A80F3D8E7D430AFB0B214B3A11941C3E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B7816861E5521C8E695B1094246EBB81 /* Foundation.framework in Frameworks */,
+				13E9239651937A2F19619CE3B91F051B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,68 +117,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0ECDB11E5A8761819EB4FEE6D3A1FF22 /* Support Files */ = {
+		1BFEEE15275BC9EA03D52D672A976A83 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				4ACA23B9531EDE9380D8C825F448779B /* GLChart.xcconfig */,
-				A36B195BA3D70BDD059C5BD13AA4412A /* GLChart-dummy.m */,
-				6B2AB5F8D52F4C770E9D5887DBBB3610 /* GLChart-prefix.pch */,
-				6C14A2A0F01D245BE4500E9A6F60E43E /* ResourceBundle-GLChart-Info.plist */,
+				A5E983CD71341AEDD67EB38E2F7AAE26 /* Classes */,
 			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/GLChart";
+			name = Pod;
+			path = Pod;
 			sourceTree = "<group>";
 		};
-		1E10202027BD3CC7CEE389361030EA8F /* Classes */ = {
+		2AF15A426B17D6EE8CF2497442531969 /* Charts */ = {
 			isa = PBXGroup;
 			children = (
-				D4402E060BEDA9A80CB15B823C113F2D /* Charts */,
+				1BFEEE15275BC9EA03D52D672A976A83 /* Pod */,
 			);
-			name = Classes;
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		1E365D1BB380BA77643203BBDC65C089 /* GLChart */ = {
-			isa = PBXGroup;
-			children = (
-				D4B3A564283AC0E35D2FC56191488FBD /* Charts */,
-				6DD2373A879C7D3949F047F962B72FCA /* Components */,
-				BA1BC2AFF540BE65F0064748EE3386E2 /* Core */,
-				0ECDB11E5A8761819EB4FEE6D3A1FF22 /* Support Files */,
-			);
-			name = GLChart;
-			path = ../..;
-			sourceTree = "<group>";
-		};
-		26391B3366FB796F1E505B20B253BF8A /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				4BE9811664809A18F70F337BEBE9B4B7 /* Core */,
-			);
-			name = Classes;
-			path = Classes;
+			name = Charts;
 			sourceTree = "<group>";
 		};
 		383570F7E2467FBFCADE819B5CCDC27C /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				1E365D1BB380BA77643203BBDC65C089 /* GLChart */,
+				FB42DD8AB72A2136F59C95060D6F3AD8 /* GLChart */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
 		};
-		4BE9811664809A18F70F337BEBE9B4B7 /* Core */ = {
+		3E396E4DF1A3FC1FE23BC45981DF7B65 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				91862A678B457CE1EFD163809256D32B /* GLChart.h */,
-				4A4AFF5F92D5F1A58539A9FA3B9EBE53 /* GLChart.m */,
-				8945BF5289AF610172F178AEB4321B48 /* GLChartData.h */,
-				9F237B977FD41DBF53EE0BEBB8A66634 /* GLChartData.m */,
-				4AA6F7C286A77892BC758EB0563C2B6A /* UIColor+Helper.h */,
-				EB3C814FA59ECF15E45CE9AD0903A952 /* UIColor+Helper.m */,
+				5BFFE648A05F80CFA8B944CCFE14693E /* Components */,
 			);
-			name = Core;
-			path = Core;
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		5BFFE648A05F80CFA8B944CCFE14693E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				6A04C76D72A6B104A4C0BED915AA63D6 /* GLChartDotMarker.h */,
+				21A0FC8B14AE8AE6B6F0AFA6437F2714 /* GLChartDotMarker.m */,
+				082B71D82B210019D071CB8D3A3F9A2A /* GLChartIndicator.h */,
+				2CD014A07913448E3A3CA945FB8F710D /* GLChartIndicator.m */,
+			);
+			name = Components;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		5C1EF7AAA677055FDE143E0F7C7C6AD8 /* Pods-GLChart_Example */ = {
@@ -212,23 +178,13 @@
 			path = "Target Support Files/Pods-GLChart_Example";
 			sourceTree = "<group>";
 		};
-		619E9879FDECC393D67C9D5E77019513 /* Products */ = {
+		751287F696635179D19D315C1327AD0C /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				1F5E3304F1E20FFC671EA56F764B5887 /* GLChart.bundle */,
-				7C1B2369FD609FDF500FD9E82162BA12 /* libGLChart.a */,
-				9DC1823EB4991C05FB3D3F5B0D3FDFAD /* libPods-GLChart_Example.a */,
-				9EAFA74CE0EDAE19AA6E397C15828417 /* libPods-GLChart_Tests.a */,
+				3E396E4DF1A3FC1FE23BC45981DF7B65 /* Classes */,
 			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		6DD2373A879C7D3949F047F962B72FCA /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				7FC0D6ED9A93976E04FA17EA259FEA62 /* Pod */,
-			);
-			name = Components;
+			name = Pod;
+			path = Pod;
 			sourceTree = "<group>";
 		};
 		7531C8F8DE19F1AA3C8A7AC97A91DC29 /* iOS */ = {
@@ -254,48 +210,57 @@
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				383570F7E2467FBFCADE819B5CCDC27C /* Development Pods */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				619E9879FDECC393D67C9D5E77019513 /* Products */,
+				F27941F2662CFE223A931F11E3847979 /* Products */,
 				7818CB7BF77AA459AA6321DBCBD6CBD4 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		7FC0D6ED9A93976E04FA17EA259FEA62 /* Pod */ = {
+		81D1496E55A13877EC75D99CFF703387 /* Charts */ = {
 			isa = PBXGroup;
 			children = (
-				9A1F0902A15ACC2614B470EE52C2CD1F /* Classes */,
+				A5C5A55F67249BC0ED5EBD9560BCD4EB /* GLBar.h */,
+				F6C76BDE573E5A2B59FEBC839022ED22 /* GLBar.m */,
+				305C21F14565E747330D64DD678731F0 /* GLBarChart.h */,
+				C4616130A4E02624E150EF4D031AAC26 /* GLBarChart.m */,
+				6264EF013A0911236E691D3C8190D07A /* GLLineChart.h */,
+				9C867D68D918A54009A0EBDC3434867B /* GLLineChart.m */,
 			);
-			name = Pod;
-			path = Pod;
+			name = Charts;
+			path = Charts;
 			sourceTree = "<group>";
 		};
-		817C8C26121FECCF6A0C2E5BD6C24BAC /* Pod */ = {
+		8375F024CABB5F186504F017243A1521 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				26391B3366FB796F1E505B20B253BF8A /* Classes */,
+				A31BEA6764E37039C1BBC33BE2111D83 /* GLChart.xcconfig */,
+				34BC4E9B1BAF8690F261BDF409D34022 /* GLChart-dummy.m */,
+				D90704404A7000E5C2CC137AEF207624 /* GLChart-prefix.pch */,
 			);
-			name = Pod;
-			path = Pod;
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/GLChart";
 			sourceTree = "<group>";
 		};
-		9A1F0902A15ACC2614B470EE52C2CD1F /* Classes */ = {
+		A5E983CD71341AEDD67EB38E2F7AAE26 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A30AB6EBF7373B0CE995238728A26F37 /* Components */,
+				81D1496E55A13877EC75D99CFF703387 /* Charts */,
 			);
 			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		A30AB6EBF7373B0CE995238728A26F37 /* Components */ = {
+		AC204E5BCEED823BB35D034174331C55 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				4DA8124C69966C191A9649F41BF303BB /* GLChartDotMarker.h */,
-				0D725E30ABB2C084E6C9A1EF100EEC20 /* GLChartDotMarker.m */,
-				54D43612B8AE2771176A5DDDD1CD7216 /* GLChartIndicator.h */,
-				2FA5FC310635BFAF66B510BC29B6A10B /* GLChartIndicator.m */,
+				D9A4B3D27CA1820D853779692FFBA3EC /* GLChart.h */,
+				8E61091A671C9D2DEB3F49DF599D6552 /* GLChart.m */,
+				70FBF785CC14AAB17449052ED3B07CEA /* GLChartData.h */,
+				5DFF39EE0DDA15623C524DC66F818E03 /* GLChartData.m */,
+				95DAA574027A08A603951D701FAE1551 /* UIColor+Helper.h */,
+				09B1B840DCC2964C049BF8E66E030DEC /* UIColor+Helper.m */,
 			);
-			name = Components;
-			path = Components;
+			name = Core;
+			path = Core;
 			sourceTree = "<group>";
 		};
 		AD63947A32CD4EF928F0BF1E5A7761E1 /* Pods-GLChart_Tests */ = {
@@ -313,12 +278,12 @@
 			path = "Target Support Files/Pods-GLChart_Tests";
 			sourceTree = "<group>";
 		};
-		BA1BC2AFF540BE65F0064748EE3386E2 /* Core */ = {
+		BBB6A35E711FA1D7BEDDA6DCD54ABE72 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				817C8C26121FECCF6A0C2E5BD6C24BAC /* Pod */,
+				751287F696635179D19D315C1327AD0C /* Pod */,
 			);
-			name = Core;
+			name = Components;
 			sourceTree = "<group>";
 		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
@@ -329,93 +294,75 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		BF0EFD5A75FF96D8504B467E627C0127 /* Pod */ = {
+		C271094E40008B33D3B569547964477B /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				1E10202027BD3CC7CEE389361030EA8F /* Classes */,
+				AC204E5BCEED823BB35D034174331C55 /* Core */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		F27941F2662CFE223A931F11E3847979 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DA139D37FCE4D9DEED5D91A3562FBA2 /* libGLChart.a */,
+				D50B401E7633B9E04E1D878D880EF8F2 /* libPods-GLChart_Example.a */,
+				278F654B6B09A188A3498C46428B3CA5 /* libPods-GLChart_Tests.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F84ED3EC05905EA4F34F1FE54FC9600A /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				C271094E40008B33D3B569547964477B /* Classes */,
 			);
 			name = Pod;
 			path = Pod;
 			sourceTree = "<group>";
 		};
-		D4402E060BEDA9A80CB15B823C113F2D /* Charts */ = {
+		F9E3D7739B8286DFCC9B5F4E8E935D64 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				2A94E767B982E80B6B7774D34C8D37AE /* GLBar.h */,
-				B4457DD9C1AD31FC3550027930CE5CA1 /* GLBar.m */,
-				CCDD8957BC4E24628CB2166116F935F5 /* GLBarChart.h */,
-				531F8921E1A9154DB8F4CB613AF4FB8F /* GLBarChart.m */,
-				E9477DE3C6D7AC486949C016BF05BF96 /* GLLineChart.h */,
-				C3D871B746821DBCBD3182BAD7B4A562 /* GLLineChart.m */,
+				F84ED3EC05905EA4F34F1FE54FC9600A /* Pod */,
 			);
-			name = Charts;
-			path = Charts;
+			name = Core;
 			sourceTree = "<group>";
 		};
-		D4B3A564283AC0E35D2FC56191488FBD /* Charts */ = {
+		FB42DD8AB72A2136F59C95060D6F3AD8 /* GLChart */ = {
 			isa = PBXGroup;
 			children = (
-				BF0EFD5A75FF96D8504B467E627C0127 /* Pod */,
+				2AF15A426B17D6EE8CF2497442531969 /* Charts */,
+				BBB6A35E711FA1D7BEDDA6DCD54ABE72 /* Components */,
+				F9E3D7739B8286DFCC9B5F4E8E935D64 /* Core */,
+				8375F024CABB5F186504F017243A1521 /* Support Files */,
 			);
-			name = Charts;
+			name = GLChart;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		8184C2A86489EEE911EC025800F9DEAC /* Headers */ = {
+		786EFD3C006AF11460D7043BB6F4EF09 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C98780A3A8D73D4C2271B818B2AF4E2 /* GLBar.h in Headers */,
-				6BBAF1895795F451010BF8A965514E0F /* GLBarChart.h in Headers */,
-				93E8F9A03A2BE2293E8DEF0122CB5245 /* GLChart.h in Headers */,
-				21F682F57448A6430B61D3129E67C7BD /* GLChartData.h in Headers */,
-				44A37F7C57B61A29C5C63E1145F43DB5 /* GLChartDotMarker.h in Headers */,
-				7629DC688806455B1313CDF6EF6B5960 /* GLChartIndicator.h in Headers */,
-				B6E3D569D02436CD7629B878B47CAC37 /* GLLineChart.h in Headers */,
-				2DAFE1A0D9C428ECAC935F8107CB47BB /* UIColor+Helper.h in Headers */,
+				29EF0DC95B44B7E5CDAEA2BCCA86EE7D /* GLBar.h in Headers */,
+				FE253B527F94672E75721A93ABE83325 /* GLBarChart.h in Headers */,
+				0390F5D7A65E7F68C288D00C34C14425 /* GLChart.h in Headers */,
+				5B69DAA07F0F196C5D2E1F2043F6E656 /* GLChartData.h in Headers */,
+				78B7CAEF4BB27B6929C8CC4BE9C62DE6 /* GLChartDotMarker.h in Headers */,
+				A0F16750E620F9F09CAE7417531192BC /* GLChartIndicator.h in Headers */,
+				A570644875B7D1EA65B4379D5202020C /* GLLineChart.h in Headers */,
+				910650CF4AAAE19A7C5C0BD4EE896B77 /* UIColor+Helper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		088F327A4ABF74B4045C2B7A3076CC92 /* GLChart */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C226F28F5AAE60F6F8926017EEF586EC /* Build configuration list for PBXNativeTarget "GLChart" */;
-			buildPhases = (
-				5D85B4A96D56600C3F91B3828B12B853 /* Sources */,
-				A80F3D8E7D430AFB0B214B3A11941C3E /* Frameworks */,
-				8184C2A86489EEE911EC025800F9DEAC /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0FA81FA53F6EEEDE1702FEFCEAF1E9B7 /* PBXTargetDependency */,
-			);
-			name = GLChart;
-			productName = GLChart;
-			productReference = 7C1B2369FD609FDF500FD9E82162BA12 /* libGLChart.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		6398B409957E1D511B6A80174985A3D6 /* GLChart-GLChart */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2C9F78462FE8EDF3D8003E7C523C1FFD /* Build configuration list for PBXNativeTarget "GLChart-GLChart" */;
-			buildPhases = (
-				D510D3EBBAAA39D55204A5BD054F176B /* Sources */,
-				8FC30334FFFF1FF12E9428114D94FE6C /* Frameworks */,
-				DDD22ADC5C36B9C88A3DDA5F07301757 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "GLChart-GLChart";
-			productName = "GLChart-GLChart";
-			productReference = 1F5E3304F1E20FFC671EA56F764B5887 /* GLChart.bundle */;
-			productType = "com.apple.product-type.bundle";
-		};
 		6861063FA23D5DD06F4CD4163BFE25D1 /* Pods-GLChart_Example */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1FADB40197EF878286A2D75B8362B356 /* Build configuration list for PBXNativeTarget "Pods-GLChart_Example" */;
@@ -430,7 +377,24 @@
 			);
 			name = "Pods-GLChart_Example";
 			productName = "Pods-GLChart_Example";
-			productReference = 9DC1823EB4991C05FB3D3F5B0D3FDFAD /* libPods-GLChart_Example.a */;
+			productReference = D50B401E7633B9E04E1D878D880EF8F2 /* libPods-GLChart_Example.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		8FE83632FCC944D889D9F2A2B4096C80 /* GLChart */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C361C96590D5A8099E6367E477568B0 /* Build configuration list for PBXNativeTarget "GLChart" */;
+			buildPhases = (
+				76CD1ED199335E7542D1761671F43741 /* Sources */,
+				3FBAE27707D2ABF63976260300207C23 /* Frameworks */,
+				786EFD3C006AF11460D7043BB6F4EF09 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GLChart;
+			productName = GLChart;
+			productReference = 8DA139D37FCE4D9DEED5D91A3562FBA2 /* libGLChart.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		E6CD4328DAB1BAA396B66868D973F859 /* Pods-GLChart_Tests */ = {
@@ -447,7 +411,7 @@
 			);
 			name = "Pods-GLChart_Tests";
 			productName = "Pods-GLChart_Tests";
-			productReference = 9EAFA74CE0EDAE19AA6E397C15828417 /* libPods-GLChart_Tests.a */;
+			productReference = 278F654B6B09A188A3498C46428B3CA5 /* libPods-GLChart_Tests.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -467,27 +431,16 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 619E9879FDECC393D67C9D5E77019513 /* Products */;
+			productRefGroup = F27941F2662CFE223A931F11E3847979 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				088F327A4ABF74B4045C2B7A3076CC92 /* GLChart */,
-				6398B409957E1D511B6A80174985A3D6 /* GLChart-GLChart */,
+				8FE83632FCC944D889D9F2A2B4096C80 /* GLChart */,
 				6861063FA23D5DD06F4CD4163BFE25D1 /* Pods-GLChart_Example */,
 				E6CD4328DAB1BAA396B66868D973F859 /* Pods-GLChart_Tests */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		DDD22ADC5C36B9C88A3DDA5F07301757 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		57B0DB90E7F3953D1BB2FA63086BA573 /* Sources */ = {
@@ -506,26 +459,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5D85B4A96D56600C3F91B3828B12B853 /* Sources */ = {
+		76CD1ED199335E7542D1761671F43741 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				383C7FB748BF276532820169424A3278 /* GLBar.m in Sources */,
-				F50242090F08FB5E1586D0F3BE73A242 /* GLBarChart.m in Sources */,
-				9DC36B91C7A3FCB5E69B2156E4046730 /* GLChart-dummy.m in Sources */,
-				2E695516DCD92ADC5AE816A6DBB0163A /* GLChart.m in Sources */,
-				4A42DEBD3E98B38A6AB13EB77DFF2B51 /* GLChartData.m in Sources */,
-				F03B0BE7A6638D56CBD634004F987D68 /* GLChartDotMarker.m in Sources */,
-				71059E642AEFB7408EBD2ECB6EBC9569 /* GLChartIndicator.m in Sources */,
-				2BF6196A9627585462112DCC23407943 /* GLLineChart.m in Sources */,
-				06A6B1D534DC751CB9D11499DD05E562 /* UIColor+Helper.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D510D3EBBAAA39D55204A5BD054F176B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				E0E3D044E8AE7CA9AB6DC600E9CA4B34 /* GLBar.m in Sources */,
+				05998CD1A2B467642D0EA448D14B2751 /* GLBarChart.m in Sources */,
+				6DDBB4CCCEC112CB1EC901EEF97BCB8C /* GLChart-dummy.m in Sources */,
+				F3132D6D7B24AAE57FA121AD63DA9DBE /* GLChart.m in Sources */,
+				EC2ABB4C6AC46585EC6C5B19D7C72BBD /* GLChartData.m in Sources */,
+				CFC9F38DB06053F86CD20B44563D7BEE /* GLChartDotMarker.m in Sources */,
+				3824536BFF60B614C14CB7D37B6A0BCD /* GLChartIndicator.m in Sources */,
+				1CB493EAAD786BE5F75CC94A76A72E25 /* GLLineChart.m in Sources */,
+				34004FB56E1ABCE710E5A1387A4DD7C6 /* UIColor+Helper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,19 +481,13 @@
 		0B02AA4EDE68CDD1D4F2D5D06EB7AAE1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = GLChart;
-			target = 088F327A4ABF74B4045C2B7A3076CC92 /* GLChart */;
+			target = 8FE83632FCC944D889D9F2A2B4096C80 /* GLChart */;
 			targetProxy = CA3F809A0CB305EDAD490C1152504BB7 /* PBXContainerItemProxy */;
-		};
-		0FA81FA53F6EEEDE1702FEFCEAF1E9B7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "GLChart-GLChart";
-			target = 6398B409957E1D511B6A80174985A3D6 /* GLChart-GLChart */;
-			targetProxy = 43682D527D98B3C9F2990EC6243916D4 /* PBXContainerItemProxy */;
 		};
 		FCC700F8894CFD9FA7E9488345EA3B58 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = GLChart;
-			target = 088F327A4ABF74B4045C2B7A3076CC92 /* GLChart */;
+			target = 8FE83632FCC944D889D9F2A2B4096C80 /* GLChart */;
 			targetProxy = 5E63BB172F1D679E5BCADE7CE8D04A02 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -576,9 +516,9 @@
 			};
 			name = Debug;
 		};
-		18DA351A0F13DEACA400698355DFC3A4 /* Debug */ = {
+		5755259C8BC776FB7B27D9EC166474AA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4ACA23B9531EDE9380D8C825F448779B /* GLChart.xcconfig */;
+			baseConfigurationReference = A31BEA6764E37039C1BBC33BE2111D83 /* GLChart.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -596,40 +536,6 @@
 				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		5AED61039E5845C84A37681A6AE7D16D /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4ACA23B9531EDE9380D8C825F448779B /* GLChart.xcconfig */;
-			buildSettings = {
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/GLChart";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/GLChart/ResourceBundle-GLChart-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = GLChart;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
-		624E25BB1C22135F8097AECFAF6EBB61 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4ACA23B9531EDE9380D8C825F448779B /* GLChart.xcconfig */;
-			buildSettings = {
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/GLChart";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/GLChart/ResourceBundle-GLChart-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = GLChart;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
 		};
@@ -679,6 +585,29 @@
 			};
 			name = Release;
 		};
+		D150339095E17E6AAAC40394AFB279FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A31BEA6764E37039C1BBC33BE2111D83 /* GLChart.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/GLChart/GLChart-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		D1DF5D16D790F11CEA13F239461602C5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -722,29 +651,6 @@
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
-		};
-		E9CFBB8F439C1977B0899254118DA1DD /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4ACA23B9531EDE9380D8C825F448779B /* GLChart.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/GLChart/GLChart-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
 		};
 		F1CA82D6331924C8A2D7347DBEE885A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -821,15 +727,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2C9F78462FE8EDF3D8003E7C523C1FFD /* Build configuration list for PBXNativeTarget "GLChart-GLChart" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				624E25BB1C22135F8097AECFAF6EBB61 /* Debug */,
-				5AED61039E5845C84A37681A6AE7D16D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -839,11 +736,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C226F28F5AAE60F6F8926017EEF586EC /* Build configuration list for PBXNativeTarget "GLChart" */ = {
+		4C361C96590D5A8099E6367E477568B0 /* Build configuration list for PBXNativeTarget "GLChart" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				18DA351A0F13DEACA400698355DFC3A4 /* Debug */,
-				E9CFBB8F439C1977B0899254118DA1DD /* Release */,
+				5755259C8BC776FB7B27D9EC166474AA /* Debug */,
+				D150339095E17E6AAAC40394AFB279FE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

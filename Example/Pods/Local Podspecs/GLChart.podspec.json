@@ -1,6 +1,6 @@
 {
   "name": "GLChart",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "summary": "A beautiful chart library for iOS",
   "description": "GLChart is a beautiful chart library for iOS",
   "homepage": "https://github.com/gaoli/GLChart",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/gaoli/GLChart.git",
-    "tag": "1.2.2"
+    "tag": "1.2.3"
   },
   "platforms": {
     "ios": "7.0"
@@ -21,11 +21,6 @@
     "Components",
     "Charts"
   ],
-  "resource_bundles": {
-    "GLChart": [
-      "Pod/Assets/*.png"
-    ]
-  },
   "subspecs": [
     {
       "name": "Core",
