@@ -191,7 +191,7 @@
         label.font            = [UIFont systemFontOfSize   :labelFontSize];
         label.textColor       = [UIColor colorWithHexString:labelTextColor];
         label.textAlignment   = NSTextAlignmentCenter;
-        label.backgroundColor = [UIColor colorWithRed:255.0f green:255.0f blue:255.0f alpha:0.5f];
+        label.backgroundColor = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.5f];
         
         label.layer.cornerRadius  = 2.0f;
         label.layer.masksToBounds = YES;
