@@ -37,8 +37,4 @@ Pod::Spec.new do |s|
     charts.dependency 'GLChart/Components'
 
   end
-
-  s.resource_bundles = {
-    'GLChart' => ['Pod/Assets/*.png']
-  }
 end
