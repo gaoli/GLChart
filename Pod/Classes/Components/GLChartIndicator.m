@@ -26,6 +26,7 @@ static CGFloat const kTipsRectH   = 4.0f;
     self = [super init];
     
     if (self) {
+        
         // 添加子类视图
         [self addSubview:self.wrapView];
         [self addSubview:self.tipsView];
@@ -41,21 +42,25 @@ static CGFloat const kTipsRectH   = 4.0f;
 
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer {
     CGFloat w = self.frame.size.width;
+    CGFloat h = self.frame.size.height;
     
     // 拖拽已经开始
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         self.wrapView.hidden = NO;
         self.tipsView.hidden = NO;
         
-        // 拖拽正在进行
+    // 拖拽正在进行
     } else if (recognizer.state == UIGestureRecognizerStateChanged) {
         
         // 获取偏移数值
         CGFloat x = [recognizer locationInView:self].x;
+        CGFloat y = [recognizer locationInView:self].y;
         
         // 纠正偏移数值
         x = x < 0 ? 0 : x;
         x = x > w ? w : x;
+        y = y < 0 ? 0 : y;
+        y = y > h ? h : y;
         
         NSUInteger count = self.chartData.count;
         CGFloat    width = w / ((count >= 2 ? count : 2) - 1);
@@ -64,11 +69,11 @@ static CGFloat const kTipsRectH   = 4.0f;
         if (index < count) {
             x = index * width;
             
-            [self drawLine:x index:index];
-            [self drawDots:x index:index];
+            [self drawLine:CGPointMake(x, y) index:index];
+            [self drawDots:CGPointMake(x, y) index:index];
         }
         
-        // 拖拽已经结束
+    // 拖拽已经结束
     } else if (recognizer.state == UIGestureRecognizerStateEnded) {
         self.wrapView.hidden = YES;
         self.tipsView.hidden = YES;
@@ -207,18 +212,18 @@ static CGFloat const kTipsRectH   = 4.0f;
     }
 }
 
-- (void)drawLine:(CGFloat)x index:(NSUInteger)index {
+- (void)drawLine:(CGPoint)point index:(NSUInteger)index {
     CGFloat h = self.frame.size.height;
     
     UIBezierPath *path = [[UIBezierPath alloc] init];
     
-    [path moveToPoint:CGPointMake(x, 0.0f)];
-    [path addLineToPoint:CGPointMake(x, h)];
+    [path moveToPoint:CGPointMake(point.x, 0.0f)];
+    [path addLineToPoint:CGPointMake(point.x, h)];
     
     self.lineLayer.path = path.CGPath;
 }
 
-- (void)drawDots:(CGFloat)x index:(NSUInteger)index {
+- (void)drawDots:(CGPoint)point index:(NSUInteger)index {
     CGFloat h = self.frame.size.height;
     
     NSMutableArray *array = [NSMutableArray array];
@@ -235,7 +240,7 @@ static CGFloat const kTipsRectH   = 4.0f;
         if (index < value.count) {
             UIBezierPath *path = [[UIBezierPath alloc] init];
             
-            [path addArcWithCenter:CGPointMake(x, h - ([value[index] floatValue] - self.chartData.min) * self.chartData.scale)
+            [path addArcWithCenter:CGPointMake(point.x, h - ([value[index] floatValue] - self.chartData.min) * self.chartData.scale)
                             radius:1.5f
                         startAngle:0.0f
                           endAngle:2 * M_PI
@@ -247,11 +252,10 @@ static CGFloat const kTipsRectH   = 4.0f;
         }
     }
     
-    [self drawTipsWithData:@{@"index": @(index), @"value": array}
-                         x:x];
+    [self drawTipsWithData:@{@"index": @(index), @"value": array} point:point];
 }
 
-- (void)drawTipsWithData:(NSDictionary *)data x:(CGFloat)x {
+- (void)drawTipsWithData:(NSDictionary *)data point:(CGPoint)point {
     NSNumber  *index = data[@"index"];
     NSArray   *value = data[@"value"];
     
@@ -289,10 +293,16 @@ static CGFloat const kTipsRectH   = 4.0f;
     
     tipsViewFrame.size.width = tipsViewWidth;
     
-    if (self.frame.size.width - x > tipsViewFrame.size.width) {
-        tipsViewFrame.origin.x = x + kTipsPadding;
+    if (point.x < self.frame.size.width - tipsViewFrame.size.width) {
+        tipsViewFrame.origin.x = point.x + kTipsPadding;
     } else {
-        tipsViewFrame.origin.x = x - kTipsPadding - tipsViewFrame.size.width;
+        tipsViewFrame.origin.x = point.x - kTipsPadding - tipsViewFrame.size.width;
+    }
+    
+    if (point.y < kTipsPadding + tipsViewFrame.size.height) {
+        tipsViewFrame.origin.y = kTipsPadding;
+    } else {
+        tipsViewFrame.origin.y = point.y - kTipsPadding - tipsViewFrame.size.height;
     }
     
     self.tipsView.frame = tipsViewFrame;
