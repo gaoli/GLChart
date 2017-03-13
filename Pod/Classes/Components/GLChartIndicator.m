@@ -3,8 +3,8 @@
 #import "UIColor+Helper.h"
 
 static CGFloat const kTipsPadding = 5.0f;
-static CGFloat const kTipsRectW   = 4.0f;
-static CGFloat const kTipsRectH   = 8.0f;
+static CGFloat const kTipsRectW   = 2.0f;
+static CGFloat const kTipsRectH   = 7.0f;
 
 @interface GLChartIndicator () <UIGestureRecognizerDelegate>
 
@@ -141,7 +141,14 @@ static CGFloat const kTipsRectH   = 8.0f;
             NSString *aliasLabelText = alias;
             CGSize    aliasLabelSize = [aliasLabelText sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:labelFontSize]}];
             
-            CGRect   aliasLabelFrame = {{kTipsRectW + kTipsPadding * 2, tipsViewH}, aliasLabelSize};
+            CGFloat aliasLabelW = aliasLabelSize.width;
+            CGFloat aliasLabelH = aliasLabelSize.height;
+            
+            if (aliasLabelW > self.chartData.indicatorAliasLabelMaxWidth && self.chartData.indicatorAliasLabelMaxWidth != 0) {
+                aliasLabelW = self.chartData.indicatorAliasLabelMaxWidth;
+            }
+            
+            CGRect   aliasLabelFrame = {{kTipsRectW + kTipsPadding * 2, tipsViewH}, {aliasLabelW, aliasLabelH}};
             UILabel *aliasLabel      = [[UILabel alloc] initWithFrame:aliasLabelFrame];
             
             aliasLabel.text      = aliasLabelText;
@@ -150,8 +157,8 @@ static CGFloat const kTipsRectH   = 8.0f;
             
             [self.tipsView addSubview:aliasLabel];
             
-            if (numLabelX < kTipsRectW + aliasLabelSize.width + kTipsPadding * 3) {
-                numLabelX = kTipsRectW + aliasLabelSize.width + kTipsPadding * 3;
+            if (numLabelX < kTipsRectW + aliasLabelW + kTipsPadding * 3) {
+                numLabelX = kTipsRectW + aliasLabelW + kTipsPadding * 3;
             }
         }
         
