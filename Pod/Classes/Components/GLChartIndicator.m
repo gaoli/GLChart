@@ -3,8 +3,8 @@
 #import "UIColor+Helper.h"
 
 static CGFloat const kTipsPadding = 5.0f;
-static CGFloat const kTipsRectW   = 8.0f;
-static CGFloat const kTipsRectH   = 4.0f;
+static CGFloat const kTipsRectW   = 4.0f;
+static CGFloat const kTipsRectH   = 8.0f;
 
 @interface GLChartIndicator () <UIGestureRecognizerDelegate>
 
@@ -124,13 +124,24 @@ static CGFloat const kTipsRectH   = 4.0f;
             continue;
         }
         
-        CGRect numLabelFrame = CGRectZero;
+        if (color) {
+            CGRect  rectViewFrame = {{kTipsPadding, tipsViewH + (labelSize.height - kTipsRectH) / 2}, {kTipsRectW, kTipsRectH}};
+            UIView *rectView      = [[UIView  alloc] initWithFrame:rectViewFrame];
+            
+            rectView.backgroundColor = color;
+            
+            [self.tipsView addSubview:rectView];
+            
+            if (numLabelX < kTipsRectW + kTipsPadding * 2) {
+                numLabelX = kTipsRectW + kTipsPadding * 2;
+            }
+        }
         
         if (alias) {
             NSString *aliasLabelText = alias;
             CGSize    aliasLabelSize = [aliasLabelText sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:labelFontSize]}];
             
-            CGRect   aliasLabelFrame = {{kTipsPadding, tipsViewH}, aliasLabelSize};
+            CGRect   aliasLabelFrame = {{kTipsRectW + kTipsPadding * 2, tipsViewH}, aliasLabelSize};
             UILabel *aliasLabel      = [[UILabel alloc] initWithFrame:aliasLabelFrame];
             
             aliasLabel.text      = aliasLabelText;
@@ -139,27 +150,13 @@ static CGFloat const kTipsRectH   = 4.0f;
             
             [self.tipsView addSubview:aliasLabel];
             
-            if (numLabelX < kTipsPadding * 2 + aliasLabelSize.width) {
-                numLabelX = kTipsPadding * 2 + aliasLabelSize.width;
+            if (numLabelX < kTipsRectW + aliasLabelSize.width + kTipsPadding * 3) {
+                numLabelX = kTipsRectW + aliasLabelSize.width + kTipsPadding * 3;
             }
-            
-            numLabelFrame = CGRectMake(0.0f, tipsViewH, 0.0f, labelSize.height);
-        } else {
-            CGRect  rectViewFrame = {{kTipsPadding, tipsViewH + (labelSize.height - kTipsRectH) / 2}, {kTipsRectW, kTipsRectH}};
-            UIView *rectView      = [[UIView  alloc] initWithFrame:rectViewFrame];
-            
-            rectView.backgroundColor = color;
-            
-            [self.tipsView addSubview:rectView];
-            
-            if (numLabelX < kTipsPadding * 2 + kTipsRectW) {
-                numLabelX = kTipsPadding * 2 + kTipsRectW;
-            }
-            
-            numLabelFrame = CGRectMake(0.0f, tipsViewH, 0.0f, labelSize.height);
         }
         
-        UILabel *numLabel = [[UILabel alloc] initWithFrame:numLabelFrame];
+        CGRect   numLabelFrame = {{0.0f, tipsViewH}, {0.0f, labelSize.height}};
+        UILabel *numLabel      = [[UILabel alloc] initWithFrame:numLabelFrame];
         
         numLabel.font      = [UIFont  systemFontOfSize  :labelFontSize];
         numLabel.textColor = [UIColor colorWithHexString:labelTextColor];
