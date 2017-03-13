@@ -132,6 +132,7 @@ typedef NS_ENUM(NSUInteger, GLChartInitDirection) {
 @property (nonatomic,   copy) NSString            *indicatorBorderColor;
 @property (nonatomic, assign) CGFloat              indicatorLabelFontSize;
 @property (nonatomic,   copy) NSString            *indicatorLabelTextColor;
+@property (nonatomic, assign) CGFloat              indicatorAliasLabelMaxWidth;
 
 /* 圆点标记属性
  * @[
