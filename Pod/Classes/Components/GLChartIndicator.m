@@ -2,9 +2,10 @@
 #import "GLChartData.h"
 #import "UIColor+Helper.h"
 
-static CGFloat const kTipsPadding = 5.0f;
 static CGFloat const kTipsRectW   = 2.0f;
 static CGFloat const kTipsRectH   = 7.0f;
+static CGFloat const kTipsPadding = 5.0f;
+static CGFloat const kTipsYOffset = 24.0f;
 
 @interface GLChartIndicator () <UIGestureRecognizerDelegate>
 
@@ -303,10 +304,10 @@ static CGFloat const kTipsRectH   = 7.0f;
         tipsViewFrame.origin.x = point.x - kTipsPadding - tipsViewFrame.size.width;
     }
     
-    if (point.y < kTipsPadding + tipsViewFrame.size.height) {
+    if (point.y < kTipsPadding + tipsViewFrame.size.height + kTipsYOffset) {
         tipsViewFrame.origin.y = kTipsPadding;
     } else {
-        tipsViewFrame.origin.y = point.y - kTipsPadding - tipsViewFrame.size.height;
+        tipsViewFrame.origin.y = point.y - kTipsPadding - tipsViewFrame.size.height - kTipsYOffset;
     }
     
     self.tipsView.frame = tipsViewFrame;
