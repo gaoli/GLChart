@@ -2,14 +2,16 @@
 #import "GLChartData.h"
 #import "UIColor+Helper.h"
 #import "GLChartDotMarker.h"
+#import "GLChartLineMarker.h"
 #import "GLChartIndicator.h"
 
 @interface GLLineChart ()
 
-@property (nonatomic, strong) UIView           *maskLView;
-@property (nonatomic, strong) UIView           *maskRView;
-@property (nonatomic, strong) GLChartDotMarker *dotMarker;
-@property (nonatomic, strong) GLChartIndicator *indicator;
+@property (nonatomic, strong) UIView            *maskLView;
+@property (nonatomic, strong) UIView            *maskRView;
+@property (nonatomic, strong) GLChartDotMarker  *dotMarker;
+@property (nonatomic, strong) GLChartLineMarker *lineMarker;
+@property (nonatomic, strong) GLChartIndicator  *indicator;
 
 @end
 
@@ -22,6 +24,7 @@
         [self           addSubview:self.maskLView];
         [self           addSubview:self.maskRView];
         [self.container addSubview:self.dotMarker];
+        [self.container addSubview:self.lineMarker];
         [self           addSubview:self.indicator];
     }
     
@@ -89,16 +92,18 @@
     
     CGFloat margin = self.chartData.margin;
     
-    CGRect  containerFrame = {{0.0f,         0.0f}, {w,              h}};
-    CGRect  maskLViewFrame = {{0.0f,         0.0f}, {margin,         h - margin}};
-    CGRect  maskRViewFrame = {{w - margin,   0.0f}, {margin,         h - margin}};
-    CGRect  dotMarkerFrame = {{0.0f,         0.0f}, {w - margin * 2, h - margin * 2}};
-    CGRect  indicatorFrame = {{margin,     margin}, {w - margin * 2, h - margin * 2}};
+    CGRect  containerFrame  = {{0.0f,         0.0f}, {w,              h}};
+    CGRect  maskLViewFrame  = {{0.0f,         0.0f}, {margin,         h - margin}};
+    CGRect  maskRViewFrame  = {{w - margin,   0.0f}, {margin,         h - margin}};
+    CGRect  dotMarkerFrame  = {{0.0f,         0.0f}, {w - margin * 2, h - margin * 2}};
+    CGRect  lineMarkerFrame = {{0.0f,         0.0f}, {w - margin * 2, h - margin * 2}};
+    CGRect  indicatorFrame  = {{margin,     margin}, {w - margin * 2, h - margin * 2}};
     
     self.maskLView.frame        = maskLViewFrame;
     self.maskRView.frame        = maskRViewFrame;
     self.indicator.frame        = indicatorFrame;
     self.dotMarker.frame        = dotMarkerFrame;
+    self.lineMarker.frame       = lineMarkerFrame;
     self.container.frame        = containerFrame;
     self.container.contentInset = UIEdgeInsetsMake(margin, margin, margin, margin);
     
@@ -110,6 +115,7 @@
         
         self.chartView.frame       = frame;
         self.dotMarker.frame       = frame;
+        self.lineMarker.frame      = frame;
         self.container.contentSize = frame.size;
         
         if (self.chartData.chartInitDirection == GLChartInitDirectionLeft) {
@@ -204,6 +210,13 @@
         self.dotMarker.hidden = YES;
     }
     
+    if (self.chartData.lines.count) {
+        self.lineMarker.hidden    = NO;
+        self.lineMarker.chartData = self.chartData;
+    } else {
+        self.lineMarker.hidden = YES;
+    }
+    
     if (self.chartData.isEnabledIndicator && !self.chartData.noData) {
         self.indicator.hidden    = NO;
         self.indicator.chartData = self.chartData;
@@ -293,6 +306,14 @@
     }
     
     return _dotMarker;
+}
+
+- (GLChartLineMarker *)lineMarker {
+    if (_lineMarker == nil) {
+        _lineMarker = [[GLChartLineMarker alloc] init];
+    }
+    
+    return _lineMarker;
 }
 
 - (GLChartIndicator *)indicator {

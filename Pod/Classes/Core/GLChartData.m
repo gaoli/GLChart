@@ -53,6 +53,7 @@
         self.indicatorAliasLabelMaxWidth = 0.0f;
         
         self.dots                        = [NSArray array];
+        self.lines                       = [NSArray array];
         
         self.isYAxisStartFromZero        = YES;
         

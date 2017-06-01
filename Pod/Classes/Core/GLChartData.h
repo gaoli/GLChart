@@ -77,6 +77,15 @@ typedef NS_ENUM(NSUInteger, GLChartInitDirection) {
  */
 @property (nonatomic,   copy) NSArray             *dots;
 
+/* 线条标记属性
+ * @[
+ *      @{@"value"   : @[@"07-17", @"07-18", ...], // 纵轴对应数值
+ *        @"color"   : @"#F7A35C",                 // 线条标记颜色
+ *        @"width"   : @1.0f}                      // 线条标记宽度
+ *  ]
+ */
+@property (nonatomic,   copy) NSArray             *lines;
+
 // 纵轴增量是否从零开始
 @property (nonatomic, assign) BOOL                 isYAxisStartFromZero;
 
