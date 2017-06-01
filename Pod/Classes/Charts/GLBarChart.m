@@ -5,6 +5,16 @@
 
 @implementation GLBarChart
 
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    
+    if (self) {
+        [self.container addSubview:self.chartView];
+    }
+    
+    return self;
+}
+
 #pragma mark - private methods
 
 - (void)parseData {

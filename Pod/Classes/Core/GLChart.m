@@ -259,8 +259,6 @@
     if (_container == nil) {
         _container = [[UIScrollView alloc] init];
         
-        [_container addSubview:self.chartView];
-        
         _container.showsHorizontalScrollIndicator = NO;
         _container.showsVerticalScrollIndicator   = NO;
     }

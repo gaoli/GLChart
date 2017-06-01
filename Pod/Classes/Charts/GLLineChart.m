@@ -23,8 +23,9 @@
     if (self) {
         [self           addSubview:self.maskLView];
         [self           addSubview:self.maskRView];
-        [self.container addSubview:self.dotMarker];
         [self.container addSubview:self.lineMarker];
+        [self.container addSubview:self.chartView];
+        [self.container addSubview:self.dotMarker];
         [self           addSubview:self.indicator];
     }
     
