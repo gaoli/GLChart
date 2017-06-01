@@ -94,6 +94,7 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
     switch (indexPath.row) {
         case 0:
             self.chartData.dots                 = @[];
+            self.chartData.lines                = @[];
             self.chartData.isFill               = YES;
             self.chartData.visibleRangeMaxNum   = 0;
             self.chartData.chartInitDirection   = GLChartInitDirectionLeft;
@@ -137,7 +138,17 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
             break;
             
         case 7:
+            self.chartData.lines = @[@{@"value": @[self.chartData.xValues[1], self.chartData.xValues[2]],
+                                       @"color": @"#F7A35C",
+                                       @"width": @1.0f},
+                                     @{@"value": @[self.chartData.xValues[4], self.chartData.xValues[5]],
+                                       @"color": @"#7CB5EC",
+                                       @"width": @1.0f}];
+            break;
+            
+        case 8:
             self.chartData.dots    = @[];
+            self.chartData.lines   = @[];
             self.chartData.yValues = @[];
             break;
     }
@@ -152,7 +163,7 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 8;
+    return 9;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -192,6 +203,10 @@ static NSString *const kCellIdentifier = @"GLCellIdentifier";
             break;
             
         case 7:
+            cell.textLabel.text = @"显示线条标记";
+            break;
+            
+        case 8:
             cell.textLabel.text = @"清空所有数据";
             break;
     }
